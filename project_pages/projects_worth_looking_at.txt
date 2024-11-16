@@ -1,0 +1,21 @@
+-- 2023 --
+https://devpost.com/software/the-royal-trader (winner 2023)
+https://devpost.com/software/optiver_team17 (has yt video)
+https://devpost.com/software/optiver-stock-dominators (has explanation video of their strategy)
+https://devpost.com/software/marvelous-market-management (has a clear video of the AWS coding environment and optiver API)
+https://devpost.com/software/team-058 (dual listing is a good strategy) (winner 2023)
+https://devpost.com/software/hackamoneyboys (they have a video on their strategies: arbitrage + quoting + tf-idf + logistic regression)
+https://devpost.com/software/sensitrade (they fine-tuned BERT for analysis)
+Notebook from one group in the 2023 competition (not a good group though): https://github.com/ibrahimey/hackaTUM2023/blob/main/fani_algorithm.ipynb
+They used RL/ StableBaselines3 and build a Gym Env (the algo learned a little bit but was terrible): https://github.com/constiwitzleben/trAIders
+One of the presentations (not that interesting though..): https://sharelatex.tum.de/project/6559047daf09282e69268ea4
+They explain the dual-listing exploit strategy: https://devpost.com/software/team-name-p73y0t
+They explain their parallel (3-threaded) strategy (sentiment analysis thread + dual listings thread): https://devpost.com/software/optiverchallenge-6rfduy 
+
+-- 2022 --
+(!) Look at this one -> market making, do not create a hedging opportunity for others (they explain their strategy and won in the leaderboard in 2022): https://devpost.com/software/optiver-algorithmic-trading-bot
+(!) They also explain their strategy: https://devpost.com/software/optiver-optibook_team_041
+They also explain their strategy, includes avoiding self-trades: https://devpost.com/software/optiver-vwoej4
+Look at their strategy: https://devpost.com/software/team-uwe
+They explain their strategy and were leaderboard winners (first) at some point: https://devpost.com/software/i-triple-w
+They say that there were a lot of resets of the env (read to understand the setup): https://devpost.com/software/marketmakerbot

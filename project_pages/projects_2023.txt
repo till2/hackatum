@@ -1,0 +1,1041 @@
+The Royal Trader (Winner 1/2 2023)
+Trade bright like a diamond!
+Team: 057 Filename: ~/environment/sentiment_analysis/sol_notebook_final.ipynb
+Inspiration
+
+Optiver's challenge was a great match for us, as we were looking for a challenge to gain a deeper insight into algorithmic trading and test both our quantitative and programming skills.
+What it does
+
+We built a strategy to integrate sentiment analysis into an existing market-making strategy.
+How we built it
+
+There were 2 main layers to our strategy:
+
+    Market making: This was already provided to us. However, we decided to constrain it to only the instruments that did not show positive or negative sentiments. If that was not the case, we decided to execute the sentiment analysis strategy
+    Sentiment analysis: An all-in approach was used here. If the sentiment, for instance, was classified as positive, we decided to first delete all the existing asks, and buy the max limit of stocks of the respective instrument. We would then wait 25s, and sell all of those stocks. Once the order information is obtained in the main loop every 2s, we decided to create a separate thread that will execute the bid and ask for orders independently.
+
+Challenges we ran into
+
+Understanding the market-making strategy and definitely debugging the algorithm
+Accomplishments that we're proud of
+
+    Coming up with a unique and profitable strategy in just 2 days
+    Being part of hackaTUM2023
+
+What we learned
+
+This was a great opportunity for us to learn about market-making, as we were quite new to this domain. We were successfully able to build a strategy for sentiment analysis and incorporate it to improve the existing trading bot.
+What's next for The Royal Trader
+
+We would like to further optimize our strategy. We would like to further experiment with the classifiers for sentiment analysis, potentially train it to social_feeds data set, as well as improve its classification time.
+Built With
+
+    amazon-web-services
+    python
+
+Try it out
+
+    eu-central-1.console.aws.amazon.com
+
+---
+
+Opteiver
+Buy high sell low
+
+Inspiration
+What it does
+
+We dont know, but we are losing money... Classifying news headlines, match them to a stock if possible. Then either close out position, ignore or gradually selling of. Rolling Variance to narrow down corridor for bid and ask settings
+How we built it
+
+lots of cursing and screaming, and using python
+Challenges we ran into
+
+only one person being able to use the jupyter notebook exchange function at a time
+Accomplishments that we're proud of
+
+writing the most horrendeous code that has ever been seen
+What we learned
+
+organize better and earlier
+What's next for Opteiver
+
+Winning
+Just run the Basic Quoter jupyter notebook in sentiment analysis
+Built With
+
+    python
+
+Try it out
+
+    eu-central-1.console.aws.amazon.com
+
+---
+
+
+sentiment_trading
+Sentiment analysis informed trading strategies.
+
+Inspiration
+
+We like competitions
+What it does
+
+Tries to beat other market makers by
+
+    Running sentiment analysis model on news
+    Taking an aggressive order with a new target price deduced by the sentiment and then stay out of the market for a few seconds (don't cancel orders)
+    Check cross exchange spread for arbitrage opportunities
+    Guardrails for soft position limit -> rebalancing if needed
+
+file: sentiment_analysis/run_trading_bot.ipynb
+How we built it
+
+Optibook ENV + transformers library for sentiment analysis + some pure python code for determining strategies
+Challenges we ran into
+
+Understanding desired price movements, trying to improve sentiment analysis model
+Accomplishments that we're proud of
+
+Finally making a profit
+What we learned
+
+Intuition is not enough, trading is hard and knowledge is key
+What's next for sentiment_trading
+Built With
+
+    python
+    transformers
+
+---
+
+
+Stonks
+Stonks.
+We developed a multi-strategy trading algorithm interacting with Optiver's virtual exchange Optibook - our implementation used Python and employed Natural Language Processing to react to (simulated) news events.
+Built With
+
+    python
+
+---
+
+
+Optiver_Team17
+Shine bright
+
+Inspiration
+
+hey
+What it does
+How we built it
+Challenges we ran into
+Accomplishments that we're proud of
+What we learned
+What's next for Optiver_Team17
+
+We run the main.ipynb jupyter notebook in sentiment_analysis/main.ipynb folder
+
+sentiment_analysis/main.ipynb
+Built With
+
+    python
+
+---
+
+
+Team Optimal | 064
+Bringing you the best money making strategy
+nspiration
+
+The will to win
+What it does
+
+Make money
+How we built it
+
+Using code
+Challenges we ran into
+
+Getting the algorithm to do what we wanted
+Accomplishments that we're proud of
+
+Getting the algorithm to do what we wanted
+What we learned
+
+How do do stuff with minimal sleep
+What's next for Optiver-Hack-064
+
+The win
+
+Tutorial: Entry Point is sentiment_analysis/main.py. There are a lot of additional files corresponding to all out other tries e.g. to make trading run in parallel but we run main.py in the final event.
+Built With
+
+    optibook
+    python
+
+Try it out
+
+    GitHub Repo (private)
+
+---
+
+
+Optiver Stock Dominators
+We will use dual listing, sentiment analysis and combine them in a clever way to get the most profit we can while still being smart about the decisions.
+Inspiration
+Interest in finance 
+
+What it does 
+How we built it 
+With the provided Optibook platform and access to the facebook classification API. 
+
+Challenges we ran into
+Computing the regression function
+Clashes between dual-listing and sentiment analysis
+Optimizing sentiment analysis for performance
+Balance dual listing trades
+
+Accomplishments that we're proud of
+staying on top for 24 hours 🙂
+
+What we learned
+a lot of team work and collaboration
+market making and dual listing
+machine learning and sentiment analysis
+
+IMPORTANT
+
+all important files are in the "big_stonks" folder the algorithm can be run with "python3 main.py"
+Built With
+
+    python
+
+---
+
+
+Sentiment Trader
+A trading algorithm applying news sentiment classification.
+Team Number: 79 My notebook name: Trader.ipynb
+
+My algorithm attempts to capitalize on the Dual Listing Problem. However, it does so while predicting future movements. 
+I.e., I compare the prices of the same instrument on different exchanges after adjusting these prices for my future predictions 
+to then decide if and in which direction there is an arbitrage opportunity.
+
+My algorithm also integrates sentiment prediction for individual stocks. I first created the most relevant words 
+for each stock via tf-idf scores from given training media data. I then check for a media post if there is enough overlap 
+between these words of a company and the words in the media post. If yes, I consider this post for the current company. 
+I then apply a sentiment classification by assigning classification probabilities to the media post for the words "profit" and "loss" 
+(instead of e.g. "good" and "bad" as this is more specific to the world of trading). 
+The score of the highest probability must be above a threshold (0.8), otherwise it is considered noise and ignored. 
+I then predict a 2 % (based on own experiences) price increase/decrease for a profit/loss post and adjust (multiply) these 2% by the classification score.
+Built With
+
+    python
+
+---
+
+
+Cashcaval
+Yet another sentiment analysis and dual stock trading algorithm
+Team Number: 37 Main file: sentiment_analysis/submission.ipynb Video link: https://drive.google.com/file/d/1eH5bUa7TviNZgYflWdE0zL6RGcvrG3Dh/view?usp=sharing
+What it does
+
+The algorithm executes an endless loop, which does the following:
+
+    The news titles are queried and from them, we check whether a relevant company name is present and assess the sentiment of the title using the BART model.
+    If relevant news exist, we greedily buy (if sentiment positive) or sell (negative) as many stocks as we are allowed using IOC. This stock is then disabled for some seconds (unless it appears in other news), and then it can be used again.
+    Then we check whether the remaining stocks and their dual contain discrepancies which we can exploit. We then buy and sell them with the given prices until the discrepancy disappears or we reached our limits.
+    The remaining stocks are traded normally with the base algorithm.
+
+Challenges we ran into
+
+    Tuning the parameters correctly in order to swiftly buy/sell and have good profits after the pause.
+    Executing the code as fast as possible in order to be ahead of the competitors.
+
+Accomplishments that we're proud of
+
+    Managing to have all of the logics run correctly
+    Leading the market, when not everyone is active :D
+    Writing clean code
+
+What's next for Cashcaval
+
+    Improve sentiment analysis to get a metric for the strength of the sentiment
+    Improve the speed overall to manage to buy faster then competitors
+
+Built With
+
+    optibook
+    python
+
+Try it out
+
+    eu-central-1.console.aws.amazon.com
+
+---
+
+
+Scaredy-cat bot (team-040)
+Scaredy-cat bot is a trading algorithm that hates risk
+
+Inspiration
+
+As Mathematics students, Optiver's challenge was the perfect fit for us, as it allowed us to put both our mathematical and programming skills to the test!
+What it does
+
+Powered by Optiver's platform, our algorithm models market dynamics in a simulated environment. It fetches real-time data, strategically adjusting positions to capitalise on potential market inefficiencies. By examining volume asymmetries and other traders' positions, our algorithm anticipates and reacts to market movements, determining optimal price points. Our focus was to react to market news and withdraw from trading during volatile market conditions to reduce risk exposure.
+How we built it
+
+Using Python, our algorithm interacts with Optiver's platform through an integrated API.
+Challenges we ran into
+
+Given that our goal was to exit asap when things get too heated, we found it difficult to constantly provide updated instrument prices as well as react to market news at the same time without slowing our algorithm down too much. We also faced a challenge when training our algorithm to interpret news feeds.
+Accomplishments that we're proud of
+
+We are quite pleased with our performance. We successfully managed to implement an exit strategy which reacts quickly to market news. Additionally, using text classification models, we managed to train our algorithm to read news feeds and understand which company it concerns, if it's good, neutral or bad news and how impactful the information will be.
+What we learned
+
+As Mathematics students we greatly improved our knowledge of market making as well as programming skills. We succesfully implemented text classification models for the first time as well as understanding multi-threading in Python.
+What's next for Scaredy-cat Bot
+
+We would want to continue developing our algorithm and developing proactive trading strategies instead of purely focusing on market making.
+Built With
+
+    python
+
+Try it out
+
+    eu-central-1.console.aws.amazon.com
+
+---
+
+
+Marvelous Market Management
+can haz free money
+
+Inspiration
+
+Learn about the basics of algorithmic trading
+What it does
+
+combine the scanning the news, exploiting the dual listing and the standard quoting strategy
+How we built it
+
+We each optimized on strategy and then tried to combine them
+Challenges we ran into
+
+Timing the amount of request, Finding correct parameters, Combining strategies without interfering
+Accomplishments that we're proud of
+
+We fast (but wrong)
+What we learned
+
+algo trading basics, teamwork, how to code with sleep deprivation
+What's next for Marvelous Market Management
+
+bankruptcy
+Code for Execution
+
+client_et.1.py
+Demo Video
+
+https://home.in.tum.de/~vollert/hackatum/20231119_083244.mp4
+Built With
+
+    python
+
+Try it out
+
+    eu-central-1.console.aws.amazon.com
+
+---
+
+
+Optiver - optibook_team_003
+simply the best
+
+
+Sentimental analysis, arbitrage opportunities, black sorcery... How do these factors affect a trading algorithm...? That's what we tried to find out in this exciting challenge posed to us by the Optiver team. Aside from two sleepless nights (and a lot of redbull), we had a lot of fun implementing this algorithm. Our sentimental analysis model is based on a binary classification of an enhanced dataset, while continuously fetching the latest information to plug it into our wonderful risk calculation.
+
+Script name: combined.py
+
+By Tomas Barbosa, Vicente Almeida, Manuel Carvalho and Tomas Soares
+
+video link:https://clipchamp.com/watch/eXyrOQv8Mh8 (not working)
+Built With
+
+    python
+
+---
+
+optiver_020
+here is our video, have a look. Just keep in mind, we did NOT sleep for a long time.... a very long time :D --removed--
+
+Here is the link to the c9 env (https://eu-central-1.console.aws.amazon.com/cloud9/ide/e692e55ad8f24db0a4dcb82decae7803?region=eu-central-1#). I hope you can access it, if not just try to contact us :)
+
+Description of our algorythm: Our algorythm is mostly made out of two major parts. First of all our news handler, it checks if there are any new news and runs it through our own selfdeveloped NLP model for classification. To improve latency we extract the stocknames by an algorythm and our custom model predicts if it goes up or down. This way we can achieve as much speed as possible. Ones we know which stock is affected by the news we trade on it accordingly once and then lock it. This means it will not be traded until the price of the stock stabilizes. Secondly, we use a market maker which is a optimized version of the provided one, to make some money on the side and to stay inside of the position limits. Theses to parts are executed one after another. -> Check for news -> trade stock 1 -> check for news -> trade stock 2 -> .... This gives the best average reaction time on any new news. We decided against using dual stock trading because it is very unlike to work reliably with minimal risk involved (Even more when 40 algorythms try the same thing). In addition, we decided to trade only on exchange A. This is because it allows us to increase our speed on the ones we do trade.
+
+Repo Overview: algo = our main algorythm (algo/algo.py) news = custom NLP model useful tools = scrips that helped us along the way backup = past iterations of code or scripts without any usage anymore
+
+Thank you so much for hosting this. It was really fun <3
+Built With
+
+    python
+
+Try it out
+
+    eu-central-1.console.aws.amazon.com
+
+---
+
+StockOverflow (Winner 2/2 2023)
+Markets are made by the fastest: We analyze news and the market way faster than a large language model ever could.
+
+
+After countless late-night coding sessions fueled by caffeine and determination, our team proudly presents a market-making solution that is both very simple and effective.
+
+In a world where risk-taking is the norm, we decided to play it smart by operating in the background, orchestrating the market to churn out profits. Our main strategy is as straightforward as it gets—we aim to be the Usain Bolt of trading, the fastest in the game.
+
+Our bread and butter? Arbitrage from dual-listed stocks. We've fine-tuned a simple approach that cuts through the noise, allowing us to ride the waves of market discrepancies with precision. No fancy language models here—those take up too much precious time and performance. Instead, we opted for well-tuned classic machine learning algorithms, quick and efficient like a well-oiled machine.
+
+How did we pull it off? Picture a motivated, sleep-deprived team of four, each laser-focused on their part of the puzzle. We dived into a sea of experiments, optimizing and tuning our simple algorithm until it was as sharp as a razor's edge. Along the way, we explored various ML approaches, discarding the complex ones for the sweet spot of performance and speed.
+
+Challenges? Oh, we had our fair share. Perfecting the ML model was like walking on a tightrope—little training data, big expectations. Testing our market simulation theories in a constantly changing landscape added another layer of complexity. But hey, challenges are just opportunities in disguise, right?
+
+Our proudest accomplishment? We're almost always holding no stock at all. We're not risking it all; we're making the market itself.
+
+What did we learn? Market making and quantitative trading became our second language. We also learned the art of persistence in a cutthroat environment. Never giving up became our mantra, and it paid off.
+Built With
+
+    python
+
+---
+
+MoneyLoop | Team 080
+Aiming for the best HFT algorithm for the Optiver challenge.
+
+MoneyLoop
+The Loop
+
+Our orders are made in the for-loop of the main.py file. Here the money is made, hence our project's name being MoneyLoop. After each loop we wait for 0.05 seconds before the next one.
+Arbitrage
+
+If the same instrument is listed on two different exchanges and the lowest ask price on exchange A is lower than the highest bid price on B, we perform arbitrage. We not only go from A to B, but also from B to A. The following snipped determines the volume of our order:
+
+# Calculate the maximum volume we can trade
+max_volume = min(
+    book_a.asks[0].volume,
+    book_b.bids[0].volume,
+    dynamic_volume(potential_profit_per_share),
+    POSITION_LIMIT - positions_a,
+    POSITION_LIMIT + positions_b,
+)
+
+The dynamic volume ensures, that we increase our positions more if there is more to earn per share:
+
+def dynamic_volume(profit_per_stock: float):
+    if profit_per_stock < 0.3:
+        return 10
+    if profit_per_stock < 0.4:
+        return 30
+    if profit_per_stock < 0.6:
+        return 60
+    return 70
+
+Now we can submit our orders:
+
+# Trade the maximum volume at the best prices
+exchange.insert_order(
+    instrument_id=instrument_a.instrument_id,
+    price=lowest_ask_a,
+    volume=max_volume,
+    side="bid",
+    order_type="ioc",
+)
+exchange.insert_order(
+    instrument_id=instrument_b.instrument_id,
+    price=highest_bid_b,
+    volume=max_volume,
+    side="ask",
+    order_type="ioc",
+)
+
+Quoting
+
+We start by grouping instruments that represent the same financial instrument on different exchanges. The theoretical price of the instrument is then calculated as the average of the best bid and ask prices of the two instruments. The spread is calculated as the difference between the best bid and ask prices of the two instruments.
+Volatiles
+
+If an instrument is talked about on social media, we classify it as volatile for the next 18 seconds. For a volatile, we store the time until it is released again, the probability of the sentiment being positive, and the impact. During that time, we do the follwing:
+
+overcompensation_amount = int(OVERCOMPENSATION_AMOUNT * impact_factor)
+
+# ...
+
+
+# we own stock in A and assume it will fall:
+if position_a > 0 and prob_pos < 0.45:
+    exchange.insert_order(
+        instrument_id=instrument_a.instrument_id,
+        price=instrument_order_book_a.bids[0].price - instrument_a.tick_size * OFFSET_TICKS,
+        volume=position_a + overcompensation_amount,
+        side="ask",
+        order_type="ioc",
+    )
+    print(f'Inserted BUY order for {instrument_a.instrument_id} at price {instrument_order_book_a.bids[0].price}')
+    time.sleep(0.01)
+
+# we own negative stock A and assume it will increase:
+if position_a < 0 and prob_pos > 0.55:
+    exchange.insert_order(
+        instrument_id=instrument_a.instrument_id,
+        price=instrument_order_book_a.asks[0].price + instrument_a.tick_size * OFFSET_TICKS,
+        volume=-position_a + overcompensation_amount,
+        side="bid",
+        order_type="ioc",
+    )
+    print(f'Inserted BUY order for {instrument_a.instrument_id} at price {instrument_order_book_a.asks[0].price}')
+    time.sleep(0.01)
+
+# we own stock in B and assume it will fall:
+if position_b > 0 and prob_pos < 0.45:
+    exchange.insert_order(
+        instrument_id=instrument_b.instrument_id,
+        price=instrument_order_book_b.bids[0].price - instrument_a.tick_size * OFFSET_TICKS,
+        volume=position_b + overcompensation_amount,
+        side="ask",
+        order_type="ioc",
+    )
+    print(f'Inserted BUY order for {instrument_b.instrument_id} at price {instrument_order_book_b.bids[0].price}')
+    time.sleep(0.01)
+
+# we own negative stock B and assume it will increase
+if position_b < 0 and prob_pos > 0.55:
+    exchange.insert_order(
+        instrument_id=instrument_b.instrument_id,
+        price=instrument_order_book_b.asks[0].price + instrument_a.tick_size * OFFSET_TICKS,
+        volume=-position_b + overcompensation_amount,
+        side="bid",
+        order_type="ioc",
+    )
+    print(f'Inserted BUY order for {instrument_b.instrument_id} at price {instrument_order_book_b.asks[0].price}')
+    time.sleep(0.01)
+
+Impact
+
+Based on the provided training.csv, we calculated how impactful a social media post from a given source will be. For that we grouped the table by the different sources (the @tags) and calculated the absolute average impact they had on the instruments. Then we sorted the table in ascending order and set all zero values to the lowest value above zero, then normalized the entries and stored them in a new csv file impact_per_source.csv. In the money loop, we gather all the relevant news sources and get their impact on the market from the table, for further calcuations, we map the impact to 1 if its in the top 15% of the table, to 0.5 if its in the top 40% and 0.2 otherwise.
+Matching Posts and Instruments
+
+To identify financial instruments mentioned in posts, we implemented a two-step process. Initially, we generated TF-IDF vectors for all posts and instruments, supplemented by word count features for each post. For instance, the word count features for the financial instrument 'ING' specifically highlighted the co-occurrence of terms like 'ing' and 'bank'.
+
+Subsequently, we trained a logistic regression model to predict the specific instrument referenced in a given post. To address the imbalance between mentions of various instruments and posts where no instrument was mentioned, our training focused exclusively on posts that referenced an instrument.
+
+In the prediction phase, we applied the trained model to each post. If the model assigned a probability of 0.5 or higher to an instrument, we identified that instrument as being mentioned in the post. In cases where the probability fell below this threshold, we categorized the post under 'no instrument mentioned.' This approach ensures a more precise and balanced identification of financial instruments in textual data.
+Sentiment Analysis
+
+To ensure profitable trading decisions, accurate prediction of post sentiment is crucial. A key attribute of our model is its calibration, designed to express high uncertainty in cases where it might be inaccurate. To achieve this, we employed a bootstrap ensemble approach, utilizing ten logistic regression models. Each model in this ensemble was trained on distinct subsets of the training data, combining TF-IDF and word count features to promote diversity. Additionally, we augmented our dataset with various sentiment analysis datasets specifically tailored for financial data. This strategy not only enhances the robustness of our predictions but also significantly improves our model's reliability in sentiment analysis for trading applications.
+
+The highly calibrated sentiment predictions we've developed play a crucial role in assessing the market impact of social media posts. Thanks to the precise calibration of our model, we can make informed decisions about adjusting our stock positions. If a post exhibits positive sentiment, we may consider increasing our investment in the related stock. Conversely, negative sentiment signals might prompt us to reduce or cancel our positions. This approach allows us to strategically respond to the ever-changing sentiments expressed in social media, aligning our investment strategies with real-time market influences.
+Built With
+
+    optibook
+    python
+
+---
+
+
+SensiTrade
+A trading bot for the Optiver Challenge
+
+Info
+Team Number: 26
+trading algorithm file: sentiment_analysis/trader_working.1.py
+What it does: Following a traditional trading strategy (dual listing is combined into one stock) at the same time monitoring the news with a language model and reacting to them by bying & selling bigger amounts with predicted prices.
+Inspiration:
+
+The inspiration behind SensiTrade stems from the Optiver Challenge, where the objective is to design an efficient trading algorithm to navigate the complexities of financial markets. Drawing inspiration from the challenge, we aimed to create a trading bot that not only maximizes profits but also demonstrates adaptability to the dual listing situation and reacting to news.
+What it does:
+
+SensiTrade is a sophisticated trading bot designed to operate seamlessly within the Optiver Challenge framework. Leveraging advanced algorithms and the real-time exchange, SensiTrade executes strategic trades, aiming to optimize returns while managing risk using hedging. The bot is equipped with features to analyze market trends, identify potential opportunities, and execute trades.
+How we built it:
+
+SensiTrade was built using a combination of NLP technologies and some financial modeling techniques. We utilized Python for ease of integration with the trading framework. The bot relies on machine learning models to analyze news data and make predictions about market trends. Additionally, we incorporated risk management strategies to ensure the bot's resilience in the face of market volatility.
+Challenges we ran into:
+
+Building SensiTrade posed several challenges, including adapting and selecting parameters, model fine-tuning, and the need to optimize for the right trading frequency execution between exploiting knowledge about news and traditional trading.
+Accomplishments that we're proud of:
+
+SensiTrade successfully navigates the Optiver Challenge environment, consistently making strategic trades and demonstrating competitive performance. We are proud of achieving a balance between risk and reward.
+What we learned:
+
+We learned a lot about traiding and finance in general, where we did not had ny prior experience.
+Built With
+
+    python
+
+---
+
+
+Optiver trading bot
+Building a bot based on sentiment analysis and given framework
+
+Inspiration
+
+We wanted to create a program which is capable to master difficult situation by using machine learning.
+What it does
+
+It improves market making by using social media posts and news which are analysed by a LLM
+How we built it
+
+Using a pretrained model based on insert name of model
+Challenges we ran into
+
+Integration of the information provided by the model.
+Accomplishments that we're proud of
+What we learned
+What's next for Optiver trading bot
+
+https://eu-central-1.console.aws.amazon.com/console/home?region=eu-central-1#
+Built With
+
+    python
+
+---
+
+
+Optiver Challenge
+Making Markets and iPhones
+What it does
+
+It makes us fake money (hopefully)
+How we built it
+
+We used a bag of words / ngram model to predict price movements from news snippets.
+Challenges we ran into
+
+We had a large black swan event where we lost 30k in one trade. After that we introduced some safety measures to prevent similar trades from executing in the future.
+Accomplishments that we're proud of
+
+Before that one bad trade we where actually doing pretty well.
+What we learned
+
+We learned the mechanics of order books and the importance of having good safeguards when deploying a live system.
+Built With
+
+    amazon-web-services
+    brains
+    python
+
+Try it out
+
+    3.70.11.173
+
+---
+
+
+Optiver Challenge - Team 005
+We built a trading algorithm.
+
+About
+
+We are team-005 of the Optiver challenge of HackaTUM 2023.
+What it does
+
+We built a trading algorithm that competes on Optibook.
+Accomplishments that we're proud of
+
+We are proud of having developed an algorithm that is profitable for the final run, and that was 2nd place in hourly PnL for a few hours shortly before the final run.
+What we learned
+
+We learned how market-making works and the challenges associated with it. We learned that it is important to spend enough time just looking at the market to understand exactly what is going on, before writing any code. We learned a ton about risk management, and that perfectly riding the edge of your risk constraints is key. Finally, we learned that in many cases, simplicity beats complexity.
+Built With
+
+    python
+
+---
+
+
+Team 042
+Using mind to make money out of the air
+
+Inspiration
+
+The market-making quoting strategy: great on paper, isn't that straightforward in practice.
+
+Idea:
+
+    interpret news and place informed market orders,
+    take advantage of dual listed stocks,
+    combine both approaches.
+
+Approach
+
+We leverage various strategies within our bot:
+
+    we adapt the baseline quotation mechanism,
+    we process incoming news to detect how it affects the behavior of each stock to be able to react aggressively upon potential price spikes or drops,
+    we always choose favorable positions within both listings of each stock to minimize risk.
+
+How we built it
+
+We implemented a multithreaded application to run different tasks in parallel on top of Optibook's API and the provided baseline project.
+Challenges
+
+Unstable, chaotic market participants and a lot of ambiguous news, making our decision-making noisier; however, we think that we did our best to make use of all the information we had.
+Accomplishments
+
+    consistently profitable news-based decisions,
+    multi-threaded implementation that allows for scalability. A lot of dedication was needed to implement seemingly not hard ideas - we are proud of executing many of them.
+
+What we learned
+
+How to make money out of thin air?
+What's next for Team 042
+
+Next is Coca-Cola with ice, and some steaks with burgers.
+Built With
+
+    optibook
+    python
+
+Try it out
+
+    eu-central-1.console.aws.amazon.com
+
+---
+
+Optiver funny blurb
+We are cool traders coming up from -30 million.
+Inspiration
+
+Every day we receive enormous amounts of information, some of which may affect us more or less. This does not only happen to us but also it affects stock market. And, if we have the capability to react on these news, why shouldn't we take advantage of it?
+What it does
+
+We have created an algorithm that processes the news about companies in the stock market and identifies whether it will affect the market in a positive or negative way. Also, we take advantage of dual listed stocks, in order to obtain a gain from price differences.
+How we built it
+
+We wrote an algorithm using first as base the given algorithm. Then we added functionalities to take advantage of price difference when an instrument is listed in two different markets.
+Challenges we ran into
+
+The biggest challenge was to understand how good we can predict shake from the news title. As long as it was done we just needed to adapt to it
+Accomplishments that we're proud of
+
+We proud of that mistakes did not brake us. We keep good team spirit and accomplished this hard task
+What we learned
+
+You need to be mindful about orders you put in the book. Always check the edge cases when working with the money!
+What's next for Optiver
+
+Speed up the solution to utilize sentiment analisys faster, take into account risk control
+Built With
+
+    huggingface
+    jyputer
+    python
+
+Try it out
+
+    GitHub Repo
+
+---
+
+OptimusTrade
+optimal trading algorithm
+
+Inspiration
+
+our trading algorithm is optimal based on KNOWLEDGE
+What it does
+
+Once a positive or negative headline is identified for a given instrument, we spawn a new thread, that handles all the logic. we use statistical modeling to predict the impact that the message will have on the market and use dollar cost average selling to minimize risk while maximizing delta.
+How we built it
+
+With sweat and tears (buddy coding in jupyter notebooks)
+Challenges we ran into
+
+Ourselves
+Accomplishments that we're proud of
+
+Usage of awesome LLM
+What we learned
+
+Stonks
+What's next for OptimusTrade
+
+Death
+Built With
+
+    python
+
+---
+
+trAIders
+Capitalising on the availability of great RL algorithms to revolutionise free money making.
+
+Inspiration
+
+Applying RL algos models to build innovative mehtods
+What it does
+
+Uses PPO to learn how to make free money
+How we built it
+
+Using the available code base from Optiver, OpenAI gym and Stablebaselines3 We implement a custom environment using the Optiver commands
+Challenges we ran into
+
+RL takes long to learn and is doing incredibly silly things at the start. Things like self trades, selling things for like 3 cents when the price is 45.00. Definitely no free money...
+Accomplishments that we're proud of
+
+The team spirit. Getting the RL algo learning. Eventhough the model is terrible we are able to use benefit of the doubt as an excuse. The model 'totally' would've been amazing if it had a little more time to learn.
+What we learned
+
+Lots about quantitative trading
+What's next for trAIders
+
+Making sure never to use this algorithm on the real market...
+Built With
+
+    gym
+    opeai
+    python
+    stablebaselines3
+
+Try it out
+
+    GitHub Repo
+
+---
+
+
+MirkDüllerPremiumFong
+We develop a strategy to analyse the sentiment of news, act accordingly and trade the living hell out of the Optibook market by additionally 
+exploiting arbitrage profits.
+
+
+Inspiration
+
+Inspired by a local german fund manager, who shall remain unnamed, we are trying to do things not the way he does. That means, we actually want to make profit with our algorithm
+What it does
+
+Get the Spread and Trade: The algorithm identifies arbitrage opportunities by monitoring the price spread between related stock pairs. When it finds a significant spread, it executes simultaneous buy and sell trades to profit from the price differences.
+
+Respond to News: It also analyzes news affecting stock prices. Based on the news sentiment, the algorithm adjusts its positions and trading strategy, meaning if the conventional arbitrage opportunities do not work out as desired the algorithm exploits this by selling or buying according to the news. This allows performance and risk management at the same time.
+
+Sell All to Manage Risks: Periodically, the algorithm liquidates all positions to cut opportunity costs. This strategy minimizes potential losses from holding positions too long and frees up capital for new trading opportunities.
+How we built it
+
+We used Optiver's very neat Optibook and the Online IDE of Cloud9 running on Amazon Web Services in combination with our years of python experience to build the (hopefully) best algorithm.
+Challenges we ran into
+
+One of the primary challenges we encountered was the Optiver team's frequent changes to parameters of the simulated market exchange, which required us to continuously adapt our strategies and approaches. However this kept us alert and motivated us tu further improve and reevaluate our code.
+Accomplishments that we're proud of
+
+While working on the project in a very constructive, friendly and relaxed attitude within our team, we still managed to establish a reputable name for ourselves on the first day. In addition to that we had the luck of randomly meeting at dinner and the kickoff-workshop on the first day which allowed us to form this team in the first place and to build new friendships over the weekend.
+What we learned
+
+We learned that profiting from spreads can be surprisingly straightforward, offering a clear path to generating revenue in certain market conditions.
+Short Video of the Project
+
+Link: https://youtu.be/L69HCh0q8KE
+Pitch Presentation
+
+https://sharelatex.tum.de/read/cvkgsywvmpxf
+Built With
+
+    amazon-web-services
+    cloud9
+    optibook
+    python
+
+Try it out
+
+    eu-central-1.console.aws.amazon.com
+    youtu.be
+    sharelatex.tum.de
+
+---
+
+
+Optiver Sharks (Team 28)
+We'll do something really cool. Super duper cool.
+
+Who we are
+
+We are a team of four motivated Master's students at TUM specializing in various informatics programs, including M.Sc. Robotics, Cognition, Intelligence, M.Sc. Computer Science, and M.Sc. Biomedical Computing.
+Inspiration
+
+Eager for a challenge, we embarked on this project to go into a relatively new and unexplored topic. Our goal was to leverage and apply our diverse knowledge in informatics to create something innovative and impactful.
+What it does
+
+Our project involves the implementation of a trading strategy in Python. This strategy dynamically determines, whether to buy or sell based on the anticipated market behavior, drawing insights from news headlines obtained through a centralized feed. The emphasis on sentiment analysis in daily trading underscores the significance of information interpretation. Additionally, our system employs a dual-market strategy for enhanced trading efficiency.
+How we built it
+
+Encountering various challenges during development tested our problem-solving skills and resilience, contributing to the refinement of our project.
+Challenges we ran into
+
+Throughout the development journey, we encountered various challenges that tested our problem-solving skills and resilience. Overcoming these hurdles contributed significantly to the refinement of our project.
+Accomplishments that we're proud of
+
+One of our most gratifying achievements was witnessing success in the stock market after deploying our algorithm. Seeing positive results increased our confidence in the efficacy of our trading strategy :)
+What we learned
+
+Our journey provided valuable insights into stock market dynamics on a smaller scale, enhancing our analytical skills and providing hands-on experience in algorithmic trading.
+What's next for Optiver Sharks (Team 28)
+
+Our future goals include maintaining our tech enthusiasm and continuous self-improvement across all aspects of our lives. Enjoying life remains a priority. 🚀
+Built With
+
+    python
+
+---
+
+
+Stratton Oakmont
+Buy high, sell low!
+
+Team-068
+Inspiration
+
+Our project, inspired by "The Wolf of Wall Street," aims to leverage sentiment analysis from social media feeds to make informed decisions in stock trading.
+What it does
+
+The application calculates a probability distribution for sentiment analysis from incoming social media data. Based on the analysis outcomes, strategic decisions are made to buy or sell stocks.
+How we built it
+
+Our model is constructed using the pre-trained Language Model (LLM) from Distilbert due to its outstanding performance, providing us with a competitive advantage. The training dataset received from Optiver was carefully transformed to be labeled as negative, neutral, or positive. The predictions are then integrated into a Python bot script for executing stock transactions.
+Challenges we ran into
+
+Several challenges tested our team's resilience, including the competitiveness of dual stock trading, determining the optimal neural network architecture, selecting an effective trading strategy, collaborative coding in a shared virtual machine, and achieving a positive Profit and Loss (PnL).
+Accomplishments that we're proud of
+
+We take pride in achieving a positive PnL, the efficiency and accuracy of our sentiment analysis model, successful teamwork, and the creation of an engaging video for the project. (We hope you enjoy)
+What we learned
+
+Throughout the project, we gained valuable insights into financial markets, deepened our understanding of neural networks, especially in the context of transfer learning, and acquired essential skills for participating in hackathons.
+What's next for Stratton Oakmont
+
+Probably Bankruptcy lol...
+
+The bot we used during the live challenge was in 00_s_trader.py
+Built With
+
+    python
+
+Try it out
+
+    eu-central-1.console.aws.amazon.com
+
+---
+
+Stratton Oakmont
+Buy high, sell low!
+Our project, inspired by "The Wolf of Wall Street," aims to leverage sentiment analysis from social media feeds to make informed decisions in stock trading.
+What it does
+
+The application calculates a probability distribution for sentiment analysis from incoming social media data. Based on the analysis outcomes, strategic decisions are made to buy or sell stocks.
+How we built it
+
+Our model is constructed using the pre-trained Language Model (LLM) from Distilbert due to its outstanding performance, providing us with a competitive advantage. The training dataset received from Optiver was carefully transformed to be labeled as negative, neutral, or positive. The predictions are then integrated into a Python bot script for executing stock transactions.
+Challenges we ran into
+
+Several challenges tested our team's resilience, including the competitiveness of dual stock trading, determining the optimal neural network architecture, selecting an effective trading strategy, collaborative coding in a shared virtual machine, and achieving a positive Profit and Loss (PnL).
+Accomplishments that we're proud of
+
+We take pride in achieving a positive PnL, the efficiency and accuracy of our sentiment analysis model, successful teamwork, and the creation of an engaging video for the project. (We hope you enjoy)
+What we learned
+
+Throughout the project, we gained valuable insights into financial markets, deepened our understanding of neural networks, especially in the context of transfer learning, and acquired essential skills for participating in hackathons.
+What's next for Stratton Oakmont
+
+Probably Bankruptcy lol...
+
+The bot we used during the live challenge was in 00_s_trader.py
+Built With
+
+    python
+
+Try it out
+
+    eu-central-1.console.aws.amazon.com
+
+---
+
+optiparty
+a party of optiver, we are making cashhh
+
+Hi :)
+
+Our code is entirely in /home/ec2-user/environment. The main script that we execute is dual_listing.py. It imports stuff from Recommendation.py (which includes classes used to interface with the new processing algorithm) and analyser_news.py, which contains the new analyzing algorithm.
+
+We try to analyze news as well as exploit the dual-listing situation. For the former, we did not succeed in training our own network to give good predictions, so our algorithm consist of a long lookup table that associates adjectives with a "positivity score". The latter is considered in the amount of lots that we buy or sell. If an instrument's dual partner is cheaper, we only sell lots (instead of the usual buy and sell). Conversely, if the dual is more expensive, we only buy lots of the instrument, but sell none.
+Built With
+
+    python
+
+---
+
+Market Vision
+Mind reading. Mystic visions. The forces of spirits and the market combined. This trading bot is magic (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
+
+Inspiration
+
+We didn't just want to build a standard sentiment analyzer - instead, we wanted our bot to properly understand the statements!
+What it does
+
+Our approach for the sentiment analyzer involves a Recursive Neural Network (RNN) that takes the message or post as an input and outputs a vector containing numeric values that correspond to the available stocks. If the value at the index of a certain stock is negative or positive, we either sell or buy the stock respectively according to the breaking news. Basically, instead of just evaluating the sentiment of a news headline, we calculate its relevance to the individual stocks.
+How we built it
+
+We used the platform Optibook to visually check market movements and its API to gain access to the exchange, both provided by Optiver. Our neural network uses the tensorflow library.
+Challenges we ran into
+
+Our AWS instance had some errors we couldn't solve, so we had to get new credentials and lost some time. Furthermore, it's quite tough to correctly train a neural network with so little training data.
+Accomplishments that we're proud of
+
+Not only making losses, and having quite a lot of success in comparatively little time.
+What we learned
+
+How to get stonks which specifically for us is learning more about trading at a stock exchange and getting a better understanding of NNs.
+What's next for this project
+
+Getting a bigger training data set and refining the architecture of our NN.
+Team Number
+
+We participated on optibook as team-061
+Running the Project
+
+All of our changes build directly on the Basic Quoter.ipynb file. Running it will activate all of our additional programs.
+Built With
+
+    amazon-web-services
+    cloud9
+    optibook
+    python
+    tensorflow
+
+Try it out
+
+    eu-central-1.console.aws.amazon.com
+
+---
+
+OptiverChallenge
+Optivers Challenge
+
+
+Followed a three-threaded architecture.
+
+Main thread: Did not change the main strategy but tried to prevent it from losing money by using the other two threads, as they can cancel outstanding orders if the criteria for this action are fulfilled.
+
+Sentiment analysis thread: This thread analyzes the news from the news feed and checks if the news are relevant to our stocks. If they are, it assesses the possible impact of the news and creates orders to act early enough before the price changes based on the news.
+
+Dual Listings Thread: This thread checks the price difference between the same stock listed on different exchanges. If the price difference is greater than a certain value, it creates opposite-sided orders to benefit from this price difference and stay neutral while doing so.
+
+All threads run simultaneously.
+Built With
+
+    python
+
+Try it out
+
+    35.158.100.203
+    3.70.255.193
+
