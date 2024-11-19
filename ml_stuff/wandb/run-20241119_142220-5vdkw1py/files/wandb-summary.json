@@ -1,1 +1,0 @@
-{"Validation Loss":4.462313669743404e-05,"_wandb":{"runtime":32},"Accuracy":1,"_runtime":32.350373272,"_step":14,"loss":9.45460851653479e-05,"_timestamp":1.7320261717598033e+09,"image_pred":{"filenames":["media/images/image_pred_13_42ef0c54b026033bc3b7.png"],"_type":"images/separated","width":5120,"height":480,"format":"png","count":1}}
