@@ -1,0 +1,30 @@
+[2024-11-19 14:13:39,355][train_rotation][INFO] - Updated log_loss_frequency from 2 (images) to 1 (steps).
+[2024-11-19 14:13:39,355][train_rotation][INFO] - Updated validation_frequency from 10 (images) to 1 (steps).
+[2024-11-19 14:13:39,355][train_rotation][INFO] - Updated save_checkpoint_frequency from 10 (images) to 1 (steps).
+[2024-11-19 14:13:39,439][train_rotation][INFO] - Device: cuda:1, CPU Count: 32
+[2024-11-19 14:13:39,512][timm.models._builder][INFO] - Loading pretrained weights from Hugging Face hub (timm/resnet18.a1_in1k)
+[2024-11-19 14:13:39,664][timm.models._hub][INFO] - [timm/resnet18.a1_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+[2024-11-19 14:13:39,670][timm.models._builder][INFO] - Missing keys (fc.weight, fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+[2024-11-19 14:13:41,201][train_rotation][INFO] - [Starting Epoch 0]
+[2024-11-19 14:13:44,145][train_rotation][INFO] - Best Checkpoint saved with score: 0.6542561650276184
+[2024-11-19 14:13:45,457][train_rotation][INFO] - [Starting Epoch 1]
+[2024-11-19 14:13:47,390][train_rotation][INFO] - Best Checkpoint saved with score: 0.4343937337398529
+[2024-11-19 14:13:50,172][train_rotation][INFO] - Best Checkpoint saved with score: 0.4174966812133789
+[2024-11-19 14:13:50,221][train_rotation][INFO] - [Starting Epoch 2]
+[2024-11-19 14:13:52,701][train_rotation][INFO] - Best Checkpoint saved with score: 0.16974253952503204
+[2024-11-19 14:13:55,582][train_rotation][INFO] - Best Checkpoint saved with score: 0.1421838402748108
+[2024-11-19 14:13:55,651][train_rotation][INFO] - [Starting Epoch 3]
+[2024-11-19 14:13:57,734][train_rotation][INFO] - Best Checkpoint saved with score: 0.04483923688530922
+[2024-11-19 14:13:59,318][train_rotation][INFO] - Best Checkpoint saved with score: 0.021390512585639954
+[2024-11-19 14:14:00,894][train_rotation][INFO] - Best Checkpoint saved with score: 0.0015444242162629962
+[2024-11-19 14:14:00,952][train_rotation][INFO] - [Starting Epoch 4]
+[2024-11-19 14:14:04,612][train_rotation][INFO] - Best Checkpoint saved with score: 0.0006309452001005411
+[2024-11-19 14:14:06,239][train_rotation][INFO] - Best Checkpoint saved with score: 0.00014779811317566782
+[2024-11-19 14:14:06,302][train_rotation][INFO] - [Starting Epoch 5]
+[2024-11-19 14:14:11,100][train_rotation][INFO] - [Starting Epoch 6]
+[2024-11-19 14:14:15,750][train_rotation][INFO] - Best Checkpoint saved with score: 3.367641284057754e-06
+[2024-11-19 14:14:15,806][train_rotation][INFO] - [Starting Epoch 7]
+[2024-11-19 14:14:20,510][train_rotation][INFO] - Best Checkpoint saved with score: 2.9802320611338473e-08
+[2024-11-19 14:14:20,568][train_rotation][INFO] - [Starting Epoch 8]
+[2024-11-19 14:14:25,210][train_rotation][INFO] - Best Checkpoint saved with score: 0.0
+[2024-11-19 14:14:25,276][train_rotation][INFO] - [Starting Epoch 9]

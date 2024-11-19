@@ -1,0 +1,49 @@
+defaults:
+  - _self_ # paste content from this file before loading the defaults
+  - dataset: default
+  - model: resnext
+
+hparams:
+
+#--- Note: All frequencies are in number of images ---#
+
+# General Dataset Parameters
+
+  img_size: 224
+
+  # Data Loading
+
+  debug: true
+  batch_size: 8
+  num_epochs: 30
+  num_workers: 32
+  device: cuda:1
+
+  # Loss
+
+  loss_name: crossentropy
+
+  # Optimizer and LR-Scheduler params
+
+  max_lr: 1e-3
+  weight_decay: 1e-4
+  # exponential_lr_decay: 0.99 # 0.99 for debug, 0.8 for full training
+  clip_grad_norm: 1.0
+
+  # Checkpointing
+
+  save_weights: true
+  save_checkpoint_frequency: 10
+
+  finetune_pretrained_model: false
+  checkpoint_path: /path/to/checkpoint
+
+  # Logging
+
+  log_loss_frequency: 2
+  validation_frequency: 10
+  run_validation_loop: true
+
+hydra:
+  job:
+    chdir: false

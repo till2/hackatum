@@ -1,0 +1,16 @@
+{"time":"2024-11-19T14:09:43.524583443Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-19T14:09:43.524592961Z","level":"INFO","msg":"created symlink","path":"/home/agesp/hackatum/ml_stuff/wandb/run-20241119_140943-ierbq7j7/logs/debug-core.log"}
+{"time":"2024-11-19T14:09:43.627164813Z","level":"INFO","msg":"created new stream","id":"ierbq7j7"}
+{"time":"2024-11-19T14:09:43.627180683Z","level":"INFO","msg":"stream: started","id":"ierbq7j7"}
+{"time":"2024-11-19T14:09:43.627218454Z","level":"INFO","msg":"writer: Do: started","stream_id":"ierbq7j7"}
+{"time":"2024-11-19T14:09:43.627234424Z","level":"INFO","msg":"handler: started","stream_id":"ierbq7j7"}
+{"time":"2024-11-19T14:09:43.627257627Z","level":"INFO","msg":"sender: started","stream_id":"ierbq7j7"}
+{"time":"2024-11-19T14:09:43.942608239Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-19T14:09:54.074592352Z","level":"INFO","msg":"stream: closing","id":"ierbq7j7"}
+{"time":"2024-11-19T14:09:54.074612661Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-19T14:09:54.074998504Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-19T14:09:56.345806373Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-19T14:09:56.591389287Z","level":"INFO","msg":"handler: closed","stream_id":"ierbq7j7"}
+{"time":"2024-11-19T14:09:56.591430364Z","level":"INFO","msg":"sender: closed","stream_id":"ierbq7j7"}
+{"time":"2024-11-19T14:09:56.591418521Z","level":"INFO","msg":"writer: Close: closed","stream_id":"ierbq7j7"}
+{"time":"2024-11-19T14:09:56.591486489Z","level":"INFO","msg":"stream: closed","id":"ierbq7j7"}

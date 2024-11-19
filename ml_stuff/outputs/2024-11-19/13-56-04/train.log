@@ -1,0 +1,7 @@
+[2024-11-19 13:56:04,817][train_rotation][INFO] - Updated log_loss_frequency from 2 (images) to 1 (steps).
+[2024-11-19 13:56:04,817][train_rotation][INFO] - Updated log_images_frequency from 10 (images) to 1 (steps).
+[2024-11-19 13:56:04,817][train_rotation][INFO] - Updated save_checkpoint_frequency from 30000 (images) to 3750 (steps).
+[2024-11-19 13:56:04,901][train_rotation][INFO] - Device: cuda:1, CPU Count: 32
+[2024-11-19 13:56:04,971][timm.models._builder][INFO] - Loading pretrained weights from Hugging Face hub (timm/resnet18.a1_in1k)
+[2024-11-19 13:56:05,335][timm.models._hub][INFO] - [timm/resnet18.a1_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+[2024-11-19 13:56:05,341][timm.models._builder][INFO] - Missing keys (fc.weight, fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.

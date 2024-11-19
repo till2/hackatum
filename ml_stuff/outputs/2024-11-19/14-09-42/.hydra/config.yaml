@@ -1,0 +1,24 @@
+hparams:
+  img_size: 224
+  debug: false
+  batch_size: 8
+  num_epochs: 30
+  num_workers: 32
+  device: cuda:1
+  loss_name: crossentropy
+  max_lr: 0.001
+  weight_decay: 0.0001
+  clip_grad_norm: 1.0
+  save_weights: true
+  save_checkpoint_frequency: 10
+  finetune_pretrained_model: false
+  checkpoint_path: /path/to/checkpoint
+  log_loss_frequency: 2
+  validation_frequency: 10
+  run_validation_loop: true
+dataset:
+  name: cat_dog
+  root_dir: ./cat_dog
+model:
+  name: resnet
+  nb_classes: 2

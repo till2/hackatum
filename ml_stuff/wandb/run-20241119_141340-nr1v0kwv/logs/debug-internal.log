@@ -1,0 +1,11 @@
+{"time":"2024-11-19T14:13:40.786988739Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-19T14:13:40.787012604Z","level":"INFO","msg":"created symlink","path":"/home/agesp/hackatum/ml_stuff/wandb/run-20241119_141340-nr1v0kwv/logs/debug-core.log"}
+{"time":"2024-11-19T14:13:40.889530075Z","level":"INFO","msg":"created new stream","id":"nr1v0kwv"}
+{"time":"2024-11-19T14:13:40.88955386Z","level":"INFO","msg":"stream: started","id":"nr1v0kwv"}
+{"time":"2024-11-19T14:13:40.889578797Z","level":"INFO","msg":"writer: Do: started","stream_id":"nr1v0kwv"}
+{"time":"2024-11-19T14:13:40.889589577Z","level":"INFO","msg":"sender: started","stream_id":"nr1v0kwv"}
+{"time":"2024-11-19T14:13:40.889613833Z","level":"INFO","msg":"handler: started","stream_id":"nr1v0kwv"}
+{"time":"2024-11-19T14:13:41.132412587Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-19T14:14:27.20757961Z","level":"INFO","msg":"stream: closing","id":"nr1v0kwv"}
+{"time":"2024-11-19T14:14:27.207599908Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-19T14:14:27.207966787Z","level":"INFO","msg":"Stopped system monitor"}

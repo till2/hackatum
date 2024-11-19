@@ -1,0 +1,326 @@
+[2024-11-19 14:13:41,201][train_rotation][INFO] - [Starting Epoch 0]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.42s/it]
+ 33%|█████████████████████████████████████████████████████████████████████████████████▋                                                                                                                                                                   | 1/3 [00:01<00:03,  1.93s/it]
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+[2024-11-19 14:13:44,145][train_rotation][INFO] - Best Checkpoint saved with score: 0.6542561650276184
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+[2024-11-19 14:13:45,457][train_rotation][INFO] - [Starting Epoch 1]
+  0%|                                                                                                                                                                                                                                                             | 0/3 [00:00<?, ?it/s]
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+[2024-11-19 14:13:47,390][train_rotation][INFO] - Best Checkpoint saved with score: 0.4343937337398529
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+[2024-11-19 14:13:50,172][train_rotation][INFO] - Best Checkpoint saved with score: 0.4174966812133789
+[2024-11-19 14:13:50,221][train_rotation][INFO] - [Starting Epoch 2]
+  0%|                                                                                                                                                                                                                                                             | 0/3 [00:00<?, ?it/s]
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+[2024-11-19 14:13:52,701][train_rotation][INFO] - Best Checkpoint saved with score: 0.16974253952503204
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+[2024-11-19 14:13:55,582][train_rotation][INFO] - Best Checkpoint saved with score: 0.1421838402748108
+[2024-11-19 14:13:55,651][train_rotation][INFO] - [Starting Epoch 3]
+  0%|                                                                                                                                                                                                                                                             | 0/3 [00:00<?, ?it/s]
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+[2024-11-19 14:13:57,734][train_rotation][INFO] - Best Checkpoint saved with score: 0.04483923688530922
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+[2024-11-19 14:13:59,318][train_rotation][INFO] - Best Checkpoint saved with score: 0.021390512585639954
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+[2024-11-19 14:14:00,894][train_rotation][INFO] - Best Checkpoint saved with score: 0.0015444242162629962
+[2024-11-19 14:14:00,952][train_rotation][INFO] - [Starting Epoch 4]
+  0%|                                                                                                                                                                                                                                                             | 0/3 [00:00<?, ?it/s]
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+[2024-11-19 14:14:04,612][train_rotation][INFO] - Best Checkpoint saved with score: 0.0006309452001005411
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+[2024-11-19 14:14:06,239][train_rotation][INFO] - Best Checkpoint saved with score: 0.00014779811317566782
+[2024-11-19 14:14:06,302][train_rotation][INFO] - [Starting Epoch 5]
+  0%|                                                                                                                                                                                                                                                             | 0/3 [00:00<?, ?it/s]
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+[2024-11-19 14:14:11,100][train_rotation][INFO] - [Starting Epoch 6]
+  0%|                                                                                                                                                                                                                                                             | 0/3 [00:00<?, ?it/s]
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+[2024-11-19 14:14:15,750][train_rotation][INFO] - Best Checkpoint saved with score: 3.367641284057754e-06
+[2024-11-19 14:14:15,806][train_rotation][INFO] - [Starting Epoch 7]
+  0%|                                                                                                                                                                                                                                                             | 0/3 [00:00<?, ?it/s]
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+[2024-11-19 14:14:20,510][train_rotation][INFO] - Best Checkpoint saved with score: 2.9802320611338473e-08
+[2024-11-19 14:14:20,568][train_rotation][INFO] - [Starting Epoch 8]
+  0%|                                                                                                                                                                                                                                                             | 0/3 [00:00<?, ?it/s]Exception ignored in: <function _releaseLock at 0x7f3290a59280>
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([8, 2])
+torch.Size([8])
+torch.Size([8])
+torch.Size([4, 2])
+torch.Size([4])
+torch.Size([4])
+[2024-11-19 14:14:25,210][train_rotation][INFO] - Best Checkpoint saved with score: 0.0
+[2024-11-19 14:14:25,276][train_rotation][INFO] - [Starting Epoch 9]
+Traceback (most recent call last):                                                                                                                                                                                                                                | 0/3 [00:00<?, ?it/s]
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/logging/__init__.py", line 227, in _releaseLock
+    def _releaseLock():
+KeyboardInterrupt:
+  0%|                                                                                                                                                                                                                                                             | 0/3 [00:01<?, ?it/s]
+Traceback (most recent call last):                                                                                                                                                                                                                                                      
+  File "/home/agesp/hackatum/ml_stuff/train.py", line 335, in <module>
+  File "/home/agesp/hackatum/ml_stuff/train.py", line 307, in train
+    if cfg.hparams.save_weights:
+  File "/home/agesp/hackatum/ml_stuff/train.py", line 205, in val_step
+    for i, (img, label) in enumerate(tqdm(val_loader, leave=False)):
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/site-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 633, in __next__
+    data = self._next_data()
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1328, in _next_data
+    idx, data = self._get_data()
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1294, in _get_data
+    success, data = self._try_get_data()
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1132, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/multiprocessing/queues.py", line 113, in get
+    if not self._poll(timeout):
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/multiprocessing/connection.py", line 257, in poll
+    return self._poll(timeout)
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/multiprocessing/connection.py", line 424, in _poll
+    r = wait([self], timeout)
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/multiprocessing/connection.py", line 931, in wait
+    ready = selector.select(timeout)
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/selectors.py", line 416, in select
+    fd_event_list = self._selector.poll(timeout)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/home/agesp/hackatum/ml_stuff/train.py", line 335, in <module>
+  File "/home/agesp/hackatum/ml_stuff/train.py", line 307, in train
+    if cfg.hparams.save_weights:
+  File "/home/agesp/hackatum/ml_stuff/train.py", line 205, in val_step
+    for i, (img, label) in enumerate(tqdm(val_loader, leave=False)):
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/site-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 633, in __next__
+    data = self._next_data()
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1328, in _next_data
+    idx, data = self._get_data()
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1294, in _get_data
+    success, data = self._try_get_data()
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1132, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/multiprocessing/queues.py", line 113, in get
+    if not self._poll(timeout):
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/multiprocessing/connection.py", line 257, in poll
+    return self._poll(timeout)
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/multiprocessing/connection.py", line 424, in _poll
+    r = wait([self], timeout)
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/multiprocessing/connection.py", line 931, in wait
+    ready = selector.select(timeout)
+  File "/home/agesp/miniconda3/envs/hackatum/lib/python3.9/selectors.py", line 416, in select
+    fd_event_list = self._selector.poll(timeout)
+KeyboardInterrupt

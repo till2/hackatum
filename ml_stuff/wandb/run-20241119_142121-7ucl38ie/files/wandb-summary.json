@@ -1,0 +1,1 @@
+{"image_pred":{"format":"png","count":1,"filenames":["media/images/image_pred_14_6ad4c925d34a9d3f568d.png"],"_type":"images/separated","width":5120,"height":480},"Validation Loss":0.009383497759699821,"Accuracy":6.666666666666667,"_runtime":32.716188316,"_step":14,"loss":0.009804400615394115,"_timestamp":1.7320261137355692e+09,"_wandb":{"runtime":32}}

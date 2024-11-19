@@ -1,0 +1,23 @@
+[2024-11-19 14:22:19,043][train][INFO] - Updated log_loss_frequency from 2 (images) to 1 (steps).
+[2024-11-19 14:22:19,044][train][INFO] - Updated validation_frequency from 10 (images) to 1 (steps).
+[2024-11-19 14:22:19,044][train][INFO] - Updated save_checkpoint_frequency from 10 (images) to 1 (steps).
+[2024-11-19 14:22:19,133][train][INFO] - Device: cuda:1, CPU Count: 32
+[2024-11-19 14:22:19,205][timm.models._builder][INFO] - Loading pretrained weights from Hugging Face hub (timm/resnet18.a1_in1k)
+[2024-11-19 14:22:19,561][timm.models._hub][INFO] - [timm/resnet18.a1_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+[2024-11-19 14:22:19,567][timm.models._builder][INFO] - Missing keys (fc.weight, fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+[2024-11-19 14:22:21,043][train][INFO] - [Starting Epoch 0]
+[2024-11-19 14:22:24,568][train][INFO] - Best Checkpoint saved with score: 0.6542507112026215
+[2024-11-19 14:22:26,510][train][INFO] - [Starting Epoch 1]
+[2024-11-19 14:22:29,041][train][INFO] - Best Checkpoint saved with score: 0.43820470571517944
+[2024-11-19 14:22:31,071][train][INFO] - Best Checkpoint saved with score: 0.43312913179397583
+[2024-11-19 14:22:33,267][train][INFO] - Best Checkpoint saved with score: 0.3899126350879669
+[2024-11-19 14:22:33,315][train][INFO] - [Starting Epoch 2]
+[2024-11-19 14:22:35,921][train][INFO] - Best Checkpoint saved with score: 0.17124392092227936
+[2024-11-19 14:22:38,077][train][INFO] - Best Checkpoint saved with score: 0.15704889595508575
+[2024-11-19 14:22:40,163][train][INFO] - Best Checkpoint saved with score: 0.13452725112438202
+[2024-11-19 14:22:40,218][train][INFO] - [Starting Epoch 3]
+[2024-11-19 14:22:42,839][train][INFO] - Best Checkpoint saved with score: 0.033218901604413986
+[2024-11-19 14:22:44,939][train][INFO] - Best Checkpoint saved with score: 0.007913447916507721
+[2024-11-19 14:22:47,184][train][INFO] - Best Checkpoint saved with score: 0.0012435147073119879
+[2024-11-19 14:22:47,243][train][INFO] - [Starting Epoch 4]
+[2024-11-19 14:22:51,749][train][INFO] - Best Checkpoint saved with score: 0.0002511025231797248

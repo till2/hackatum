@@ -1,0 +1,4 @@
+[2024-11-19 13:55:14,510][train_rotation][INFO] - Updated log_loss_frequency from 2 (images) to 1 (steps).
+[2024-11-19 13:55:14,510][train_rotation][INFO] - Updated log_images_frequency from 10 (images) to 1 (steps).
+[2024-11-19 13:55:14,510][train_rotation][INFO] - Updated save_checkpoint_frequency from 30000 (images) to 3750 (steps).
+[2024-11-19 13:55:14,596][train_rotation][INFO] - Device: cuda:1, CPU Count: 32
