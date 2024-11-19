@@ -1,9 +1,11 @@
 .accordion {
+    text-align: center;
     max-width: 600px;
     margin: 2rem auto;
+    min-width: 600px;
 }
 
-.accordion-title {
+.accordion-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -12,19 +14,22 @@
     /* background-color: var(--secondary-color);*/
 }
 
+.accordion-header.accdordion-status:hover {
+    text-decoration: none !important;
+}
 
-.accordion-title:hover {
+.accordion-header:hover .accordion-title {
     /* background-color: #242424; */
     text-decoration: underline;
 }
 
-.accordion-status {
+.accordion-header .accordion-status {
     text-decoration: none !important;
 }
 
-.accordion-title,
+.accordion-header,
 .accordion-content {
-    padding: 1rem;
+    padding: 10px;
 }
 
 .accordion-content {
