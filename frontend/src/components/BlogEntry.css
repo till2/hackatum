@@ -1,0 +1,19 @@
+.blogEntry {
+    background-color: var(--third-color);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.blogContent {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.blogTitle {
+    color: var(--text-color);
+    padding: 0px;
+    margin: 0px;
+    box-sizing: content-box;
+}

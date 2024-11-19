@@ -11,7 +11,7 @@
     justify-content: space-between;
     cursor: pointer;
     border-bottom: 1px solid white;
-    /* background-color: var(--secondary-color);*/
+    /* background-color: var(--second-color);*/
 }
 
 .accordion-header.accdordion-status:hover {
@@ -33,7 +33,7 @@
 }
 
 .accordion-content {
-    background-color: #39b9d2;
+    background-color: var(--third-color);
 }
 
 @media screen and (max-width: 700px) {

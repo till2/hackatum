@@ -1,0 +1,15 @@
+.logo {
+    margin-right: 40px;
+    margin-left: 40px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.logoContainer {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+    padding: 0px;
+}
