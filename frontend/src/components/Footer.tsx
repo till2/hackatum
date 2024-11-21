@@ -6,8 +6,12 @@ import "./Footer.css";
 const Footer = () => {
     return (
         <div className="footer">
-            <Logo src={ETHLogo} width="200px" />
-            <Logo src={HPILogo} width="100px" />
+            <a href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer">
+                <Logo src={ETHLogo} width="200px" />
+            </a>
+            <a href="https://hpi.de/en/" target="_blank" rel="noopener noreferrer">
+                <Logo src={HPILogo} width="100px" />
+            </a>
         </div>
     );
 };
