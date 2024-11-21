@@ -2,10 +2,23 @@ import "./Home.css";
 import "./components/Accordion.css";
 import Accordion from "./components/Accordion";
 import Template from "./Template";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Loading from "./components/Loading";
 
 function Home() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const handleButtonClick = () => {
+        setIsLoading(true);
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 5400);
+    };
+
+    if (isLoading) {
+        return <Loading />;
+    }
 
     return (
         <Template>
@@ -17,7 +30,7 @@ function Home() {
                     <img src="http://127.0.0.1:8000/demo" alt="Cat Image" />
                 </div>
                 <div className="centering">
-                    <button className="button">Test</button>
+                    <button className="button" onClick={handleButtonClick}>Test</button>
                 </div>
                 <div className="accordion">
                     <Accordion 
