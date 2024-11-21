@@ -35,3 +35,26 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+/* Animation for invalid file drops */
+.invalid-drop {
+    animation: blinkRed 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes blinkRed {
+    0% {
+        border-color: #ffffff;
+        background-color: #cc2a2a;
+        transform: scale(1);
+    }
+    50% {
+        border-color: #ffffff;
+        background-color: #282222;
+        transform: scale(0.95);
+    }
+    100% {
+        border-color: #ffffff;
+        background-color: #0f0f0f;
+        transform: scale(1);
+    }
+}

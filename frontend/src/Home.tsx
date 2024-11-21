@@ -17,6 +17,8 @@ function Home() {
     const [outputImage, setOutputImage] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
+    const [invalidDrop, setInvalidDrop] = useState<boolean>(false);
+
     const handleButtonClick = () => {
         setIsLoading(true);
         setTimeout(() => {
@@ -96,7 +98,12 @@ function Home() {
         e.stopPropagation();
         const files = e.dataTransfer.files;
         if (files && files[0]) {
-            handleFileChange(files[0]);
+            if (files[0].type.startsWith('image/')) {
+                handleFileChange(files[0]);
+            } else {
+                setInvalidDrop(true);
+                setTimeout(() => setInvalidDrop(false), 1000);
+            }
         }
     };
 
@@ -128,7 +135,7 @@ function Home() {
                             type="text"
                             value={inputText}
                             onChange={(e) => setInputText(e.target.value)}
-                            placeholder="Enter prompt for AI"
+                            placeholder="Enter prompt for AI 🔥"
                         />
                         <button 
                             type="submit" 
@@ -141,16 +148,32 @@ function Home() {
                 </div>
                 <div className="centering upload-section">
                     <div 
-                        className="drag-drop-area" 
-                        onDragOver={handleDragOver} 
-                        onDrop={handleDrop}
+                        className={`drag-drop-area ${invalidDrop ? 'invalid-drop' : ''}`} 
+                        onDragOver={(e) => {
+                            e.preventDefault();
+                            const items = e.dataTransfer.items;
+                            if (items && items[0] && items[0].type.startsWith('image/')) {
+                                handleDragOver(e);
+                            }
+                        }}
+                        onDrop={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const files = e.dataTransfer.files;
+                            if (files && files[0] && files[0].type.startsWith('image/')) {
+                                handleDrop(e);
+                            } else {
+                                setInvalidDrop(true);
+                                setTimeout(() => setInvalidDrop(false), 1000);
+                            }
+                        }}
                         onClick={() => fileInputRef.current?.click()}
                     >
                         <p>Drag and drop an image here, or click to select a file</p>
                     </div>
                     <input 
                         type="file" 
-                        accept="image/*" 
+                        accept="image/png, image/jpeg" 
                         ref={fileInputRef} 
                         style={{ display: 'none' }} 
                         onChange={handleFileSelect}
