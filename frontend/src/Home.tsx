@@ -2,18 +2,55 @@ import "./Home.css";
 import "./components/Accordion.css";
 import Accordion from "./components/Accordion";
 import Template from "./Template";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Loading from "./components/Loading";
+import { API_BASE_URL } from './config';
 
 function Home() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const [inputText, setInputText] = useState<string>("");
+    const [outputText, setOutputText] = useState<string>("");
 
     const handleButtonClick = () => {
         setIsLoading(true);
         setTimeout(() => {
             setIsLoading(false);
         }, 5400);
+    };
+
+    const handleTextSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setOutputText("");
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/transform_text`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                body: JSON.stringify({ text: inputText }),
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            await new Promise(resolve => setTimeout(resolve, 1000)); /* Wait for 1 second */
+            
+            setOutputText(data.output);
+            setInputText(data.output);
+        } catch (error) {
+            console.error("Error transforming text:", error);
+            setOutputText("Error: Failed to transform text. Check console for details.");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     if (isLoading) {
@@ -31,6 +68,23 @@ function Home() {
                 </div>
                 <div className="centering">
                     <button className="button" onClick={handleButtonClick}>Test</button>
+                </div>
+                <div className="centering">
+                    <form onSubmit={handleTextSubmit}>
+                        <input
+                            type="text"
+                            value={inputText}
+                            onChange={(e) => setInputText(e.target.value)}
+                            placeholder="Enter prompt for AI"
+                        />
+                        <button 
+                            type="submit" 
+                            className="button"
+                        >
+                            Submit Text
+                        </button>
+                    </form>
+                    {outputText && <p className="output-text">Output Text: {outputText}</p>}
                 </div>
                 <div className="accordion">
                     <Accordion 
