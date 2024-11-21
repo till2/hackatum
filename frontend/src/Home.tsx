@@ -2,7 +2,7 @@ import "./Home.css";
 import "./components/Accordion.css";
 import Accordion from "./components/Accordion";
 import Template from "./Template";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Loading from "./components/Loading";
 import { API_BASE_URL } from './config';
 
@@ -12,6 +12,10 @@ function Home() {
 
     const [inputText, setInputText] = useState<string>("");
     const [outputText, setOutputText] = useState<string>("");
+
+    const [inputImage, setInputImage] = useState<string | null>(null);
+    const [outputImage, setOutputImage] = useState<string | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleButtonClick = () => {
         setIsLoading(true);
@@ -53,6 +57,55 @@ function Home() {
         }
     };
 
+    const handleFileChange = async (file: File) => {
+        setInputImage(URL.createObjectURL(file));
+        setIsLoading(true);
+        setOutputImage(null);
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/upload_image`, {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const blob = await response.blob();
+            const imageUrl = URL.createObjectURL(blob);
+            setOutputImage(imageUrl);
+        } catch (error) {
+            console.error("Error uploading image:", error);
+            setOutputImage(null);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const files = e.dataTransfer.files;
+        if (files && files[0]) {
+            handleFileChange(files[0]);
+        }
+    };
+
+    const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            handleFileChange(e.target.files[0]);
+        }
+    };
+
     if (isLoading) {
         return <Loading />;
     }
@@ -85,6 +138,35 @@ function Home() {
                         </button>
                     </form>
                     {outputText && <p className="output-text">Output Text: {outputText}</p>}
+                </div>
+                <div className="centering upload-section">
+                    <div 
+                        className="drag-drop-area" 
+                        onDragOver={handleDragOver} 
+                        onDrop={handleDrop}
+                        onClick={() => fileInputRef.current?.click()}
+                    >
+                        <p>Drag and drop an image here, or click to select a file</p>
+                    </div>
+                    <input 
+                        type="file" 
+                        accept="image/*" 
+                        ref={fileInputRef} 
+                        style={{ display: 'none' }} 
+                        onChange={handleFileSelect}
+                    />
+                    {inputImage && (
+                        <div className="image-display">
+                            <h3>Input Image:</h3>
+                            <img src={inputImage} alt="Input" className="uploaded-image" />
+                        </div>
+                    )}
+                    {outputImage && (
+                        <div className="image-display">
+                            <h3>Output Image:</h3>
+                            <img src={outputImage} alt="Output" className="uploaded-image" />
+                        </div>
+                    )}
                 </div>
                 <div className="accordion">
                     <Accordion 

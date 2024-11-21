@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Form
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, Form, File, UploadFile, HTTPException
+from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Annotated
+import io
 
 class DemoParams(BaseModel):
     img: bytes
@@ -37,7 +38,7 @@ async def demo(picture: Annotated[str, Form()], hparam1: Annotated[int, Form()],
     return FileResponse("cat.png")
 
 @app.get("/demo")
-async def demo():
+async def demo_get():
     return FileResponse("cat.png")
 
 @app.post("/transform_text")
@@ -51,3 +52,16 @@ async def transform_text(input: TextInput):
     except Exception as e:
         print(f"Error processing request: {str(e)}")
         raise
+
+@app.post("/upload_image")
+async def upload_image(file: UploadFile = File(...)):
+    """
+    Endpoint to handle image upload. Currently, it echoes back the uploaded image.
+    """
+    print(f"Received file: {file.filename}, Content-Type: {file.content_type}")
+    try:
+        contents = await file.read()
+        return StreamingResponse(io.BytesIO(contents), media_type=file.content_type)
+    except Exception as e:
+        print(f"Error processing uploaded image: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to process the image.")
