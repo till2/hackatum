@@ -10,8 +10,8 @@
     flex-direction: row;
     justify-content: space-between;
     cursor: pointer;
-    border-bottom: 1px solid white;
-    /* background-color: var(--second-color);*/
+    font-weight: bold;
+    font-size: larger;
 }
 
 .accordion-header.accdordion-status:hover {
@@ -34,6 +34,22 @@
 
 .accordion-content {
     background-color: var(--third-color);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    opacity: 0;
+    padding: 0;
+    transition: all 0.3s ease-out;
+}
+
+.accordion-content.active {
+    max-height: 300px;
+    opacity: 1;
+    padding: 10px;
+}
+
+.accordion-item {
+    border-bottom: 1px solid white;
 }
 
 @media screen and (max-width: 700px) {

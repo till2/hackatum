@@ -1,18 +1,26 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
-const Accordion = ({ title, content }: { title: string; content: string }) => {
-    const [isActive, setIsActive] = useState(false);
+interface AccordionProps {
+  title: string;
+  content: string;
+  isActive: boolean;
+  index: number;
+  setActiveIndex: Dispatch<SetStateAction<number | null>>;
+}
 
+const Accordion = ({ title, content, isActive, index, setActiveIndex }: AccordionProps) => {
     return (
         <div className="accordion-item">
             <div
                 className="accordion-header"
-                onClick={() => setIsActive(!isActive)}
+                onClick={() => setActiveIndex(isActive ? null : index)}
             >
                 <div className="accordion-title">{title}</div>
                 <div className="accordion-status">{isActive ? "-" : "+"}</div>
             </div>
-            {isActive && <div className="accordion-content">{content}</div>}
+            <div className={`accordion-content ${isActive ? 'active' : ''}`} style={{ textAlign: 'left', marginLeft: '5px', backgroundColor: '#0f0f0f' }}>
+                {content}
+            </div>
         </div>
     );
 };

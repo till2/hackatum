@@ -32,7 +32,6 @@ async def root():
 
 @app.post("/demo")
 async def demo(picture: Annotated[str, Form()], hparam1: Annotated[int, Form()], hparam2: Annotated[float, Form()], hparam3: Annotated[int, Form()]):
-
     return FileResponse("cat.png")
 
 @app.get("/demo")

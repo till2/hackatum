@@ -8,3 +8,4 @@ COPY . .
 EXPOSE 5000
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 CMD ["fastapi" , "run", "--host"]
+
