@@ -1,12 +1,12 @@
+import React from "react";
 import "./BlogEntry.css";
 
-const BlogEntry = ({
-    title,
-    children,
-}: {
+interface BlogEntryProps {
     title: string;
-    children: JSX.Element[];
-}) => {
+    children: React.ReactNode;
+}
+
+const BlogEntry: React.FC<BlogEntryProps> = ({ title, children }) => {
     return (
         <div className="blogEntry">
             <h2 className="blogTitle">{title}</h2>
