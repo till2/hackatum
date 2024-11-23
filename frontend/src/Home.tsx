@@ -141,7 +141,7 @@ function Home() {
                             type="submit"
                             className="button"
                         >
-                            Submit Text
+                            Submit Text 🚀
                         </button>
                     </form>
                     {outputText && <p className="output-text">Output Text: {outputText}</p>}
@@ -169,7 +169,7 @@ function Home() {
                         }}
                         onClick={() => fileInputRef.current?.click()}
                     >
-                        <p>Drag and drop an image here, or click to select a file</p>
+                        <p>Drop an image here, or click to select one</p>
                     </div>
                     <input 
                         type="file" 
