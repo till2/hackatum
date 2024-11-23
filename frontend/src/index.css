@@ -1,10 +1,14 @@
 :root {
-    --first-color: #0f0f0f;
-    --second-color: #1a1a1a;
-    --third-color: #242424;
+    --first-color: #ffffff;
+    --second-color: #df7e2f;
+    --third-color: #f5f5f5;
     --fourth-color: #181818;
-    --orange: #ff7e67;
-    --text-color: white;
+    --orange: #df7e2f;
+    --orange-2: #c7702a;
+    --dark-orange: #b85c1c;
+    --dark-orange-2: #964b17;
+    --text-color: #333333;
+    --text-color-light: #ffffff;
 
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -56,11 +60,10 @@ h1 {
     line-height: 1.1;
 }
 
-
 .button {
-    box-shadow: 6px 6px var(--third-color);
-    background-color: var(--fourth-color);
-    color: var(--text-color);
+    color: var(--text-color-light);
+    box-shadow: 6px 6px var(--dark-orange);
+    background-color: var(--orange);
     translate: -6px -6px;
     margin: 20px;
     /* border: 7px solid rgb(100, 32, 32); */
@@ -68,35 +71,35 @@ h1 {
     border-radius: 3px;
     outline: 0;
     cursor: pointer;
+    height: 3rem;
     transition:
         translate 0.1s cubic-bezier(0.075, 0.82, 0.155, 1),
         box-shadow 0.1s cubic-bezier(0.075, 0.82, 0.155, 1),
         background-color 0.1s cubic-bezier(0.075, 0.82, 0.155, 1),
         scale 0.3s cubic-bezier(0.075, 0.82, 0.155, 1);
     box-sizing: border-box;
-    box-shadow: 6px 6px #242424;
     justify-self: center;
     width: 20vw;
 }
 
 .button:disabled {
     opacity: 0.5;
-    box-shadow: 0px 0px rgb(36, 36, 36);
+    box-shadow: 0px 0px var(--dark-orange-2);
     translate: 0px 0px;
     pointer-events: none;
 }
 
 .button:hover {
-    box-shadow: 4px 4px rgb(36, 36, 36);
+    box-shadow: 4px 4px var(--dark-orange-2);
     translate: -4px -4px;
-    background-color: rgb(22, 22, 22);
+    background-color: var(--orange-2);
 }
 
 .button:active {
     /* scale: 0.92; */
-    box-shadow: 0px 0px rgb(36, 36, 36);
+    box-shadow: 0px 0px var(--dark-orange-2);
     translate: 0px 0px;
-    background-color: rgb(20, 20, 20);
+    background-color: var(--orange-2);
 }
 
 .centering {
