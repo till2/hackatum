@@ -1,5 +1,5 @@
 import Logo from "./Logo";
-import ETHLogo from "../../assets/logo-eth-white-1.png";
+import MovingTUMorrowBanner from "../../assets/movingtumorrow_banner_cropped.png";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const Header = () => {
     return (
         <div className="header">
             <Link to="/">
-                <Logo src={ETHLogo} width="200px" />
+                <Logo src={MovingTUMorrowBanner} width="200px" />
             </Link>
             <Link style={{ margin: "20px" }} to={link}>{linkText}</Link>
         </div>
