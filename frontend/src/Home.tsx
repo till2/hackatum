@@ -2,9 +2,8 @@ import "./Home.css";
 import "./components/Accordion.css";
 import Accordion from "./components/Accordion";
 import Template from "./Template";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Loading from "./components/Loading";
-import Maps from "./components/Maps";
 import { API_BASE_URL } from "./config";
 import MapsAndOptions from "./components/MapsAndOptions";
 
@@ -13,20 +12,6 @@ function Home() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const [inputText, setInputText] = useState<string>("");
-    const [outputText, setOutputText] = useState<string>("");
-
-    const [inputImage, setInputImage] = useState<string | null>(null);
-    const [outputImage, setOutputImage] = useState<string | null>(null);
-    const fileInputRef = useRef<HTMLInputElement>(null);
-
-    const [invalidDrop, setInvalidDrop] = useState<boolean>(false);
-
-    const handleButtonClick = () => {
-        setIsLoading(true);
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 5400);
-    };
 
     const handleTextSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -56,68 +41,10 @@ function Home() {
             setInputText(data.output);
         } catch (error) {
             console.error("Error transforming text:", error);
-            setOutputText(
-                "Error: Failed to transform text. Check console for details.",
-            );
         } finally {
             setIsLoading(false);
         }
     };
-
-    const handleFileChange = async (file: File) => {
-        setInputImage(URL.createObjectURL(file));
-        setIsLoading(true);
-        setOutputImage(null);
-
-        const formData = new FormData();
-        formData.append("file", file);
-
-        try {
-            const response = await fetch(`${API_BASE_URL}/upload_image`, {
-                method: "POST",
-                body: formData,
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const blob = await response.blob();
-            const imageUrl = URL.createObjectURL(blob);
-            setOutputImage(imageUrl);
-        } catch (error) {
-            console.error("Error uploading image:", error);
-            setOutputImage(null);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-    };
-
-    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const files = e.dataTransfer.files;
-        if (files && files[0]) {
-            if (files[0].type.startsWith("image/")) {
-                handleFileChange(files[0]);
-            } else {
-                setInvalidDrop(true);
-                setTimeout(() => setInvalidDrop(false), 1000);
-            }
-        }
-    };
-
-    const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            handleFileChange(e.target.files[0]);
-        }
-    };
-
 
     return (
         <Template>
@@ -136,7 +63,7 @@ function Home() {
                     </form>
                 </div>
                 <div>
-                    <MapsAndOptions />
+                    <MapsAndOptions setInputText={setInputText} />
                 </div>
                 <div className="accordion">
                     <Accordion
