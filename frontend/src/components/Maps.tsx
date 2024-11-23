@@ -27,7 +27,7 @@ const Maps = () => {
     return (
         <div className="custom-marker">
 
-        <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}> 
+        <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
             <MarkerHandler/>
         </APIProvider>
 
@@ -64,7 +64,7 @@ const MarkerHandler = () => {
         <>
         {realEstateListings.length != 0 &&
         <Map
-            style={{ width: "50vw", height: "100vh" }}
+            style={{ width: "80vw", height: "100vh" }}
             defaultCenter={{ lat: realEstateListings[0].details.latitude, lng: realEstateListings[0].details.longitude }}
             defaultZoom={15}
             gestureHandling={"greedy"}
