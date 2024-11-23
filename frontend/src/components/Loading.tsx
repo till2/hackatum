@@ -4,10 +4,13 @@ import dogImage from "../../assets/dog.png";
 
 const Loading: React.FC = () => {
     return (
-        <div className="loading-container">
+        <>
+            Loading...
+            {/*<div className="loading-container">
             <img src={dogImage} alt="Rotating Dog" className="rotating-dog" />
-        </div>
+        </div>*/}
+        </>
     );
 };
 
-export default Loading; 
+export default Loading;

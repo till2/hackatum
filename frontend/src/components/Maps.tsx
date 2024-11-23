@@ -7,7 +7,7 @@ import {
     Marker,
     ControlPosition,
     MapControl,
-    
+
   } from '@vis.gl/react-google-maps';
 
 import {Polyline} from './drawings/polyline';
@@ -26,9 +26,14 @@ import './Maps.css';
 const Maps = () => {
     return (
         <div className="custom-marker">
-
-        <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}> 
-            <MarkerHandler/>
+        <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+            <Map
+                style={{ width: "70vw", height: "100vh"}}
+                defaultCenter={{ lat: 22.54992, lng: 0 }}
+                defaultZoom={3}
+                gestureHandling={"greedy"}
+                disableDefaultUI={true}
+            />
         </APIProvider>
 
         </div>
@@ -41,11 +46,11 @@ export async function loadRealEstateListing(): Promise<RealEstateListing[]> {
 
     // call backend, get results in current location.
     const url = new URL('../../data/real-estate-listing.json', import.meta.url);
-  
+
     const listings = (await fetch(url).then(res =>
       res.json()
     )) as RealEstateListing[];
-    
+
     listings.forEach(listing => listing.images = [frontImage, bedroomImage, backImage]);
 
     return listings;
@@ -54,7 +59,7 @@ export async function loadRealEstateListing(): Promise<RealEstateListing[]> {
 const MarkerHandler = () => {
     const [select, setSelect] = useState<google.maps.LatLngLiteral | null>(null);
     const [realEstateListings, setRealEstateListing] = useState<RealEstateListing[]>([]);
-    
+
     useEffect(() => {
         loadRealEstateListing().then(data => {
           setRealEstateListing(data);
@@ -85,7 +90,7 @@ const MarkerHandler = () => {
 const DrawingExample = (props: {select: google.maps.LatLngLiteral | null, setSelect: React.Dispatch<React.SetStateAction<google.maps.LatLngLiteral | null>>}) => {
     return (
         <>
-            
+
             {/* <Marker
                 position={center}
                 draggable
