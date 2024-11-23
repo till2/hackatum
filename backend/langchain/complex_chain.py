@@ -59,6 +59,43 @@ extraction_prompt = PromptTemplate(
     """
 )
 
+housing_facts_prompt = PromptTemplate(
+    input_variables=["facts", "previous_housing_facts"],
+    template="""Based on the general facts, extract and categorize location-relevant information for finding a suitable home.
+    Consider previous housing facts and update with new information.
+
+    Previous housing facts: {previous_housing_facts}
+    Current facts: {facts}
+    
+    You must respond with valid JSON only, in exactly this format:
+    {{
+        "education": ["TUM Garching Campus"],
+        "family": ["Dresdner Straße Munich"],
+        "work": ["Google Munich Safety Engineering Center"],
+        "hobbies": ["Climbing Factory"],
+        "lifestyle": ["Museum", "Art Gallery"]
+    }}
+    
+    If you know any specific details, e.g. the location where the grandparents live, add it to the corresponding category
+    in a way that we can input it into a valid google maps search (here, Dresdner Straße Munich is the grandparents' address).
+    As a bad example, "grandparents" is not a valid location. Also "climbing" is valid because google maps 
+    will return climbing gyms. But "cycling" is not valid because google maps will likely just return cycling stores.
+    => You can judge what makes a valid location by what you would search on google maps.
+            
+    Rules:
+    - Each category should contain specific, searchable locations
+    - Work locations should be very specific (exact company location)
+    - Only include facts that are relevant for housing search
+    - Lists can be empty if no relevant information is available
+    - Ignore facts that don't fit into any category
+    - If you are unsure about a fact, rather leave it out than guessing
+    - Make locations as specific as possible while staying truthful to the facts
+    - Don't write generic entries like "company XYZ" or "school XYZ"
+    - If you don't know the exact location just write "university" or leave it empty if it wouldn't return useful map search results
+    Don't write ```json or anything else, just the JSON object.
+    """
+)
+
 emoji_prompt = PromptTemplate(
     input_variables=["lifestyles"],
     template="""Based on these three possible lifestyles, generate 1-3 distinct emojis for each lifestyle that best represent it visually.
@@ -88,22 +125,28 @@ emoji_prompt = PromptTemplate(
 )
 
 # Create chains
-"""
-situation -> parallel(update key facts, generate possible lifestyles) -> generate emojis for lifestyles
-"""
 extraction_chain = extraction_prompt | model
 lifestyle_chain = lifestyle_generator_prompt | model
 emoji_chain = emoji_prompt | model
+housing_facts_chain = housing_facts_prompt | model
 
 # State memory
 memory = ChatMessageHistory()
+housing_memory = ChatMessageHistory()
 
 def get_previous_facts():
     messages = memory.messages
     if not messages:
         return "{}"
-    
-    # Get the last AI message which contains facts
+    for message in reversed(messages):
+        if message.type == "ai":
+            return message.content
+    return "{}"
+
+def get_previous_housing_facts():
+    messages = housing_memory.messages
+    if not messages:
+        return "{}"
     for message in reversed(messages):
         if message.type == "ai":
             return message.content
@@ -111,9 +154,10 @@ def get_previous_facts():
 
 def generate_lifestyles(situation: str):
     previous_facts = get_previous_facts()
+    previous_housing_facts = get_previous_housing_facts()
     
-    # Create parallel chain with extraction getting previous facts
-    parallel_chain = RunnableParallel(
+    # First parallel chain for facts and lifestyles
+    first_parallel = RunnableParallel(
         lifestyles=lifestyle_chain,
         facts={
             "previous_facts": lambda x: x["previous_facts"],
@@ -121,29 +165,45 @@ def generate_lifestyles(situation: str):
         } | extraction_chain
     )
     
-    results = parallel_chain.invoke({
+    first_results = first_parallel.invoke({
         "previous_facts": previous_facts,
         "situation": situation,
     })
     
-    # Generate emojis based on the lifestyles
-    emoji_results = emoji_chain.invoke({"lifestyles": results["lifestyles"]})
+    # Second parallel chain for emojis and housing facts
+    second_parallel = RunnableParallel(
+        emojis={"lifestyles": lambda x: x["lifestyles"]} | emoji_chain,
+        housing_facts={
+            "facts": lambda x: x["facts"],
+            "previous_housing_facts": lambda x: x["previous_housing_facts"]
+        } | housing_facts_chain
+    )
+    
+    second_results = second_parallel.invoke({
+        "lifestyles": first_results["lifestyles"],
+        "facts": first_results["facts"],
+        "previous_housing_facts": previous_housing_facts
+    })
     
     print("--------------- RESULTS ---------------")
-    print("Facts: ", results["facts"])
-    print("Lifestyles: ", results["lifestyles"])
-    print("Emojis: ", emoji_results)
+    print("Facts: ", first_results["facts"])
+    print("Lifestyles: ", first_results["lifestyles"])
+    print("Emojis: ", second_results["emojis"])
+    print("Housing Facts: ", second_results["housing_facts"])
     
-    # Store the interaction in memory
+    # Store the interactions in memory
     memory.add_user_message(situation)
-    memory.add_ai_message(results["facts"])
+    memory.add_ai_message(first_results["facts"])
+    housing_memory.add_user_message(first_results["facts"])
+    housing_memory.add_ai_message(second_results["housing_facts"])
 
     # Parse the string results into JSON
     try:
-        lifestyles = json.loads(results["lifestyles"])
-        facts = json.loads(results["facts"])
-        emojis = json.loads(emoji_results)
-        return lifestyles, facts, emojis
+        lifestyles = json.loads(first_results["lifestyles"])
+        facts = json.loads(first_results["facts"])
+        emojis = json.loads(second_results["emojis"])
+        housing_facts = json.loads(second_results["housing_facts"])
+        return lifestyles, facts, emojis, housing_facts
     except json.JSONDecodeError:
         return {"error": "Failed to parse response into JSON"}
 
@@ -160,12 +220,13 @@ def main():
                 print(f"Using default input 2: {default_input_2}")
                 user_input = default_input_2
 
-            lifestyles, facts, emojis = generate_lifestyles(user_input)
+            lifestyles, facts, emojis, housing_facts = generate_lifestyles(user_input)
             
             print("--------------- JSON -----------------")
             print("Facts: ", facts)
             print("Lifestyles: ", lifestyles)
             print("Emojis: ", emojis)
+            print("Housing Facts: ", housing_facts)
             
         except KeyboardInterrupt:
             print("\nExiting program.")
