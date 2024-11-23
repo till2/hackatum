@@ -6,12 +6,21 @@ import { useState } from "react";
 import Loading from "./components/Loading";
 import { API_BASE_URL } from "./config";
 import MapsAndOptions from "./components/MapsAndOptions";
+import { Dict } from "./types";
+
 
 function Home() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const [inputText, setInputText] = useState<string>("");
+    const [lifestyles, setLifestyles] = useState<Dict>({});
+
+    const [facts, setFacts] = useState<Dict>({});
+
+    const [factCategories, setFactCategories] = useState<Dict>({});
+
+    const [emojis, setEmojis] = useState<Dict>({});
 
     const handleTextSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -19,26 +28,33 @@ function Home() {
         // setOutputText("");
 
         try {
-            const response = await fetch(`${API_BASE_URL}/api/transform_text`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
+            const response = await fetch(
+                `${API_BASE_URL}/api/lifeplanner_request`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                    },
+                    body: JSON.stringify({ text: inputText }),
                 },
-                body: JSON.stringify({ text: inputText }),
-            });
+            );
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
             const data = await response.json();
+            console.log("Data:", data);
 
             await new Promise((resolve) =>
                 setTimeout(resolve, 1000),
             ); /* Wait for 1 second */
 
-            setInputText(data.output);
+            setLifestyles(data.lifestyles);
+            setFacts(data.facts);
+            setFactCategories(data.fact_categories);
+            setEmojis(data.emojis);
         } catch (error) {
             console.error("Error transforming text:", error);
         } finally {
@@ -63,7 +79,10 @@ function Home() {
                     </form>
                 </div>
                 <div>
-                    <MapsAndOptions setInputText={setInputText} />
+                    <MapsAndOptions
+                        setInputText={setInputText}
+                        lifestyles={lifestyles}
+                    />
                 </div>
                 <div className="accordion">
                     <Accordion

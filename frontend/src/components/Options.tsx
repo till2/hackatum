@@ -1,12 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import OptionsEntry from "./OptionsEntry";
 import "./Options.css";
+import { DictLifestyle } from "../types";
 
 const Options = ({
     setInputText,
+    lifestyles,
 }: {
     setInputText: React.Dispatch<React.SetStateAction<string>>;
+    lifestyles: DictLifestyle;
 }) => {
+
+    lifestyles
+
     const [textAreas, setTextAreas] = useState([
         {
             id: 1,

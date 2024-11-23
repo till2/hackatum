@@ -1,12 +1,13 @@
-from fastapi import FastAPI, Form, File, UploadFile, HTTPException
-from fastapi.responses import FileResponse, StreamingResponse
-from fastapi import FastAPI, Form
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from typing import Annotated
 import io
+from typing import Annotated
+
+from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
+from langchain_api import complex_chain as lang
+from pydantic import BaseModel
+
 
 class DemoParams(BaseModel):
     img: bytes
@@ -14,8 +15,13 @@ class DemoParams(BaseModel):
     hparam2: float
     hparam3: bool
 
+
 class TextInput(BaseModel):
     text: str
+
+
+global state
+state = {}
 
 app = FastAPI()
 
@@ -32,25 +38,41 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all HTTP headers
 )
 
+
 @app.post("/api/demo")
-async def demo(picture: Annotated[str, Form()], hparam1: Annotated[int, Form()], hparam2: Annotated[float, Form()], hparam3: Annotated[int, Form()]):
+async def demo(
+    picture: Annotated[str, Form()],
+    hparam1: Annotated[int, Form()],
+    hparam2: Annotated[float, Form()],
+    hparam3: Annotated[int, Form()],
+):
     return FileResponse("cat.png")
+
 
 @app.get("/api/demo")
 async def demo():
     return FileResponse("cat.png")
 
-@app.post("/api/transform_text")
-async def transform_text(input: TextInput):
-    print("Received request to /transform_text")
-    print(f"Input data: {input}")
-    try:
-        output_text = input.text[::-1]
-        print(f"Successfully processed. Returning: {output_text}")
-        return {"output": output_text}
-    except Exception as e:
-        print(f"Error processing request: {str(e)}")
-        raise
+
+@app.post("/api/lifeplanner_request")
+async def lifeplanner_request(request: Request, input: TextInput):
+    if request.client.host not in state:
+        state[request.client.host] = lang.setup_memory()
+
+    print(state)
+    # try:
+    lifestyles, facts, fact_categories, emojis, housing_facts = (
+        lang.generate_lifestyles(**state[request.client.host], situation=input.text)
+    )
+    return {
+        "lifestyles": lifestyles,
+        "facts": facts,
+        "fact_categories": fact_categories,
+        "emojis": emojis,
+    }
+    # except Exception as e:
+    #     return {"error": str(e)}
+
 
 @app.post("/api/upload_image")
 async def upload_image(file: UploadFile = File(...)):
@@ -64,5 +86,6 @@ async def upload_image(file: UploadFile = File(...)):
     except Exception as e:
         print(f"Error processing uploaded image: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to process the image.")
+
 
 app.mount("/", StaticFiles(directory="static", html=True), name="frontend")

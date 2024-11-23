@@ -1,14 +1,15 @@
 import Maps from "./Maps";
 import Options from "./Options";
 import "./MapsAndOptions.css";
-import { useEffect } from "react";
+import { DictLifestyle } from "../types.ts";
 
 const MapsAndOptions = ({
     setInputText,
+    lifestyles,
 }: {
     setInputText: React.Dispatch<React.SetStateAction<string>>;
+    lifestyles: DictLifestyle;
 }) => {
-    useEffect(() => {console.log(setInputText)}, []);
     return (
         <div className="mapsAndOptions">
             <Maps />
