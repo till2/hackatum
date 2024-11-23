@@ -1,25 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Options.css";
 
 interface OptionsEntryProps {
     title: string;
     children: React.ReactElement;
-    setInputText: React.Dispatch<React.SetStateAction<string>>;
+    toggleReadOnly: (id: number) => void;
+    textAreaId: number;
+    rejectChanges: (id: number) => void;
 }
 
 const OptionsEntry: React.FC<OptionsEntryProps> = ({
     title,
-    setInputText,
     children,
+    toggleReadOnly,
+    textAreaId,
+    rejectChanges
 }) => {
-    const handleClick = () => {
-        setInputText(children.props.children.props.children.props.children);
-    };
+    const [readOnly, setReadOnly] = useState(true);
     return (
-        <button className="optionsEntry" onClick={handleClick}>
-            <h2 className="optionsTitle">{title}</h2>
+        <div className="optionsEntry">
+            <div className="optionsHeader">
+                <h2 className="optionsTitle">{title}</h2>
+                {readOnly ? (
+                    <div>
+                        <button
+                            onClick={() => {
+                                toggleReadOnly(textAreaId);
+                                setReadOnly(!readOnly);
+                            }}
+                        >
+                            Modify
+                        </button>
+                        <button>Apply</button>
+                    </div>
+                ) : (
+                    <div>
+                        <button onClick={() => rejectChanges(textAreaId)}>Reject</button>
+                        <button>Accept</button>
+                    </div>
+                )}
+            </div>
             <div className="optionsContent">{children}</div>
-        </button>
+        </div>
     );
 };
 
