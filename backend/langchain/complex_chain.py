@@ -19,13 +19,17 @@ lifestyle_generator_prompt = PromptTemplate(
     Current situation: {situation}
     
     You must respond with valid JSON only, in exactly this format:
-    {{"1": "lifestyle 1 description", "2": "lifestyle 2 description", "3": "lifestyle 3 description"}}
-    
+    {{"1": {{"1": "aspect 1", "2": "aspect 2", "3": "aspect 3", "4": "aspect 4", "5": "aspect 5"}},
+     "2": {{"1": "aspect 1", "2": "aspect 2", "3": "aspect 3", "4": "aspect 4"}},
+     "3": {{"1": "aspect 1", "2": "aspect 2", "3": "aspect 3"}}}}
+     
     Don't write ```json or anything else, just the JSON object.
     ---
     Example:
     User: I am a student living in Berlin. I want to move to a bigger apartment that is close to my uni.
-    Response: {{"1": "remote work, 2 kids, yoga instructor", "2": "digital nomad, single, travel blogger", "3": "startup founder, married, city life"}}
+    Response: {{"1": {{"1": "remote work", "2": "2 kids", "3": "yoga teacher", "4": "suburbs", "5": "consultant"}}, 
+               "2": {{"1": "digital nomad", "2": "single", "3": "travel blogger", "4": "crypto trader"}}, 
+               "3": {{"1": "startup founder", "2": "married", "3": "city life"}}}}
     ---
     """
 )
@@ -75,8 +79,10 @@ emoji_prompt = PromptTemplate(
     Don't write ```json or anything else, just the JSON object.
     ---
     Example:
-    Lifestyles: {{"1": "remote work, 2 kids, yoga instructor", "2": "digital nomad, single, travel blogger", "3": "startup founder, married, city life"}}
-    Response: {{"1": {{"1": "💻", "2": "👶", "3": "🧘"}}, "2": {{"1": "🌎", "2": "📝"}}, "3": {{"1": "💼", "2": "💑", "3": "🌆"}}}}
+    Lifestyles: {{"1": {{"1": "remote work", "2": "parent of 2 kids", "3": "yoga instructor", "4": "suburban house", "5": "part-time consultant"}},
+                 "2": {{"1": "digital nomad", "2": "single", "3": "travel blogger", "4": "cryptocurrency investor"}},
+                 "3": {{"1": "startup founder", "2": "married", "3": "city life"}}}}
+    Response: {{"1": {{"1": "💻", "2": "👶", "3": "🏡"}}, "2": {{"1": "🌎", "2": "💻", "3": "📝"}}, "3": {{"1": "💼", "2": "💑", "3": "🌆"}}}}
     ---
     """
 )
