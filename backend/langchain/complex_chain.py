@@ -47,7 +47,7 @@ extraction_prompt = PromptTemplate(
     Combine previous and new facts, prioritizing the most relevant information.
     If the old facts don't make sense anymore given the new situation, remove them.
     If they are still relevant (e.g. where they live etc.), keep or update them depending on the new situation. 
-    You can infer the most likely facts.
+    You can infer the most likely facts. Also if the user inputs irrelevant information, you can ignore it.
     But don't make up completely new facts that are not mentioned in the situation.
     Don't write ```json or anything else, just the JSON object.
     ---
