@@ -6,15 +6,23 @@ interface OptionsEntryProps {
     children: React.ReactElement;
     toggleReadOnly: (id: number) => void;
     textAreaId: number;
-    rejectChanges: (id: number) => void;
+    oldText: string;
+    changeText: (id: number, newValue: string) => void;
+    setOldText: (newValue: string) => void;
+    text: string;
+    setInputText: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const OptionsEntry: React.FC<OptionsEntryProps> = ({
     title,
     children,
     toggleReadOnly,
+    oldText,
     textAreaId,
-    rejectChanges
+    changeText,
+    setOldText,
+    text,
+    setInputText,
 }) => {
     const [readOnly, setReadOnly] = useState(true);
     return (
@@ -27,16 +35,34 @@ const OptionsEntry: React.FC<OptionsEntryProps> = ({
                             onClick={() => {
                                 toggleReadOnly(textAreaId);
                                 setReadOnly(!readOnly);
+                                setOldText(text);
                             }}
                         >
                             Modify
                         </button>
-                        <button>Apply</button>
+                        <button onClick={() => setInputText(text)}>
+                            Apply
+                        </button>
                     </div>
                 ) : (
                     <div>
-                        <button onClick={() => rejectChanges(textAreaId)}>Reject</button>
-                        <button>Accept</button>
+                        <button
+                            onClick={() => {
+                                setReadOnly(!readOnly);
+                                toggleReadOnly(textAreaId);
+                                changeText(textAreaId, oldText);
+                            }}
+                        >
+                            Reject
+                        </button>
+                        <button
+                            onClick={() => {
+                                setReadOnly(!readOnly);
+                                toggleReadOnly(textAreaId);
+                            }}
+                        >
+                            Accept
+                        </button>
                     </div>
                 )}
             </div>

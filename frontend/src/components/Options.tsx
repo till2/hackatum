@@ -26,6 +26,7 @@ id est laborum.
         { id: 3, value: "This is text area 3", readOnly: true },
     ]);
     const textAreaRefs = useRef<HTMLTextAreaElement[]>([]);
+    const [oldText, setOldText] = useState<string>("");
 
     const toggleReadOnly = (id: number) => {
         setTextAreas((prevTextAreas) =>
@@ -45,16 +46,12 @@ id est laborum.
                     : textArea,
             ),
         );
-    };
 
-    const rejectChanges = (id: number) => {
-        setTextAreas((prevTextAreas) =>
-            prevTextAreas.map((textArea) =>
-                textArea.id === id
-                    ? { ...textArea, value: textArea.value, readOnly: true }
-                    : textArea,
-            ),
-        );
+        textAreaRefs.current.forEach((textarea) => {
+            if (textarea) {
+                adjustHeight(textarea);
+            }
+        });
     };
 
     const handleChange = (id: number, newValue: string) => {
@@ -80,14 +77,6 @@ id est laborum.
                 adjustHeight(textarea);
             }
         });
-    }, []);
-
-    useEffect(() => {
-        textAreaRefs.current.forEach((textarea, index) => {
-            if (textarea) {
-                textarea.value = textAreas[index].value;
-        }
-        });
     }, [textAreas]);
 
     return (
@@ -95,18 +84,23 @@ id est laborum.
             <div className="options">
                 <ul>
                     {textAreas.map((textArea, index) => (
-                        <li>
+                        <li key={index}>
                             <OptionsEntry
                                 title="Test"
                                 toggleReadOnly={toggleReadOnly}
                                 textAreaId={textArea.id}
+                                text={textArea.value}
+                                oldText={oldText}
+                                setOldText={setOldText}
+                                changeText={changeText}
+                                setInputText={setInputText}
                             >
                                 <div key={textArea.id} className="optionsText">
                                     <textarea
                                         ref={(el) =>
                                             el
                                                 ? (textAreaRefs.current[index] =
-                                                    el)
+                                                      el)
                                                 : null
                                         }
                                         value={textArea.value}
