@@ -4,6 +4,7 @@ import Accordion from "./components/Accordion";
 import Template from "./Template";
 import { useState, useRef } from "react";
 import Loading from "./components/Loading";
+import Maps from "./components/Maps";
 import { API_BASE_URL } from './config';
 
 function Home() {
@@ -121,10 +122,10 @@ function Home() {
         <Template>
             <div>
                 <div className="centering">
-                    <img src="http://127.0.0.1:8000/demo" alt="Cat Image" />
+                    <img src="http://127.0.0.1:8000/api/demo" alt="Cat Image" />
                 </div>
                 <div className="centering">
-                    <img src="http://127.0.0.1:8000/demo" alt="Cat Image" />
+                    <img src="http://127.0.0.1:8000/api/demo" alt="Cat Image" />
                 </div>
                 <div className="centering">
                     <button className="button" onClick={handleButtonClick}>Test</button>
@@ -147,8 +148,8 @@ function Home() {
                     {outputText && <p className="output-text">Output Text: {outputText}</p>}
                 </div>
                 <div className="centering upload-section">
-                    <div 
-                        className={`drag-drop-area ${invalidDrop ? 'invalid-drop' : ''}`} 
+                    <div
+                        className={`drag-drop-area ${invalidDrop ? 'invalid-drop' : ''}`}
                         onDragOver={(e) => {
                             e.preventDefault();
                             const items = e.dataTransfer.items;
@@ -171,11 +172,11 @@ function Home() {
                     >
                         <p>Drop an image here, or click to select one</p>
                     </div>
-                    <input 
-                        type="file" 
-                        accept="image/png, image/jpeg" 
-                        ref={fileInputRef} 
-                        style={{ display: 'none' }} 
+                    <input
+                        type="file"
+                        accept="image/png, image/jpeg"
+                        ref={fileInputRef}
+                        style={{ display: 'none' }}
                         onChange={handleFileSelect}
                     />
                     {inputImage && (
@@ -190,6 +191,9 @@ function Home() {
                             <img src={outputImage} alt="Output" className="uploaded-image" />
                         </div>
                     )}
+                </div>
+                <div>
+                <Maps/>
                 </div>
                 <div className="accordion">
                     <Accordion
