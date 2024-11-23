@@ -33,3 +33,12 @@ export interface ListingDetails {
     img_prompt_back: string;
     img_prompt_bedroom: string;
   }
+
+
+export interface PlaceOfInterest {
+    education: string[],
+    family: string[],
+    work:string[],
+    hobbies:string[],
+    lifestyle:string[]
+  }

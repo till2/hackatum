@@ -75,8 +75,8 @@
   
   .custom-marker .extended .gallery-navigation {
     opacity: 1;
-    visibility: visible;
-  
+    visibility: hidden;
+    
+
     transition: opacity 0.3s ease-in;
   }
-  
