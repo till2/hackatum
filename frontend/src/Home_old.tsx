@@ -5,8 +5,7 @@ import Template from "./Template";
 import { useState, useRef } from "react";
 import Loading from "./components/Loading";
 import Maps from "./components/Maps";
-import { API_BASE_URL } from "./config";
-import MapsAndOptions from "./components/MapsAndOptions";
+import { API_BASE_URL } from './config';
 
 function Home() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -31,14 +30,14 @@ function Home() {
     const handleTextSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
-        // setOutputText("");
+        setOutputText("");
 
         try {
             const response = await fetch(`${API_BASE_URL}/api/transform_text`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Accept: "application/json",
+                    "Accept": "application/json",
                 },
                 body: JSON.stringify({ text: inputText }),
             });
@@ -49,16 +48,13 @@ function Home() {
 
             const data = await response.json();
 
-            await new Promise((resolve) =>
-                setTimeout(resolve, 1000),
-            ); /* Wait for 1 second */
+            await new Promise(resolve => setTimeout(resolve, 1000)); /* Wait for 1 second */
 
+            setOutputText(data.output);
             setInputText(data.output);
         } catch (error) {
             console.error("Error transforming text:", error);
-            setOutputText(
-                "Error: Failed to transform text. Check console for details.",
-            );
+            setOutputText("Error: Failed to transform text. Check console for details.");
         } finally {
             setIsLoading(false);
         }
@@ -70,7 +66,7 @@ function Home() {
         setOutputImage(null);
 
         const formData = new FormData();
-        formData.append("file", file);
+        formData.append('file', file);
 
         try {
             const response = await fetch(`${API_BASE_URL}/upload_image`, {
@@ -103,7 +99,7 @@ function Home() {
         e.stopPropagation();
         const files = e.dataTransfer.files;
         if (files && files[0]) {
-            if (files[0].type.startsWith("image/")) {
+            if (files[0].type.startsWith('image/')) {
                 handleFileChange(files[0]);
             } else {
                 setInvalidDrop(true);
@@ -118,25 +114,86 @@ function Home() {
         }
     };
 
+    if (isLoading) {
+        return <Loading />;
+    }
 
     return (
         <Template>
             <div>
                 <div className="centering">
+                    <img src="http://127.0.0.1:8000/api/demo" alt="Cat Image" />
+                </div>
+                <div className="centering">
+                    <img src="http://127.0.0.1:8000/api/demo" alt="Cat Image" />
+                </div>
+                <div className="centering">
+                    <button className="button" onClick={handleButtonClick}>Test</button>
+                </div>
+                <div className="centering">
                     <form onSubmit={handleTextSubmit}>
-                        <textarea
-                            className="textarea"
+                        <input
+                            type="text"
                             value={inputText}
                             onChange={(e) => setInputText(e.target.value)}
                             placeholder="Enter prompt for AI 🔥"
                         />
-                        <button type="submit" className="button">
-                            {isLoading ? <Loading /> : "Submit Text 🚀"}
+                        <button
+                            type="submit"
+                            className="button"
+                        >
+                            Submit Text 🚀
                         </button>
                     </form>
+                    {outputText && <p className="output-text">Output Text: {outputText}</p>}
+                </div>
+                <div className="centering upload-section">
+                    <div
+                        className={`drag-drop-area ${invalidDrop ? 'invalid-drop' : ''}`}
+                        onDragOver={(e) => {
+                            e.preventDefault();
+                            const items = e.dataTransfer.items;
+                            if (items && items[0] && items[0].type.startsWith('image/')) {
+                                handleDragOver(e);
+                            }
+                        }}
+                        onDrop={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const files = e.dataTransfer.files;
+                            if (files && files[0] && files[0].type.startsWith('image/')) {
+                                handleDrop(e);
+                            } else {
+                                setInvalidDrop(true);
+                                setTimeout(() => setInvalidDrop(false), 1000);
+                            }
+                        }}
+                        onClick={() => fileInputRef.current?.click()}
+                    >
+                        <p>Drop an image here, or click to select one</p>
+                    </div>
+                    <input
+                        type="file"
+                        accept="image/png, image/jpeg"
+                        ref={fileInputRef}
+                        style={{ display: 'none' }}
+                        onChange={handleFileSelect}
+                    />
+                    {inputImage && (
+                        <div className="image-display">
+                            <h3>Input Image:</h3>
+                            <img src={inputImage} alt="Input" className="uploaded-image" />
+                        </div>
+                    )}
+                    {outputImage && (
+                        <div className="image-display">
+                            <h3>Output Image:</h3>
+                            <img src={outputImage} alt="Output" className="uploaded-image" />
+                        </div>
+                    )}
                 </div>
                 <div>
-                    <MapsAndOptions setInputText={setInputText} />
+                <Maps/>
                 </div>
                 <div className="accordion">
                     <Accordion
