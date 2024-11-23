@@ -15,12 +15,14 @@ interface Props {
   realEstateListing: RealEstateListing;
   select: RealEstateListing | null
   setSelect: React.Dispatch<React.SetStateAction<RealEstateListing | null>>;
+  setHover: React.Dispatch<React.SetStateAction<RealEstateListing | null>>;
 }
 
 export const CustomMarker: FunctionComponent<Props> = ({
   realEstateListing,
   select,
   setSelect,
+  setHover,
 }) => {
   const [hovered, setHovered] = useState(false);
   const position = {
@@ -38,6 +40,17 @@ export const CustomMarker: FunctionComponent<Props> = ({
       setSelect(listing);
 
     }
+  }
+
+  const handleHover = (listing: RealEstateListing, state: boolean) =>{
+    if (!state) {
+      setHover(null)
+    }
+    else {
+      setHover(listing)
+    }
+    setHovered(state)
+    
   }
   
   const renderCustomPin = () => {
@@ -73,8 +86,8 @@ export const CustomMarker: FunctionComponent<Props> = ({
       <AdvancedMarker
         position={position}
         title={'Marker for real estate.'}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+        onMouseEnter={() => handleHover(realEstateListing, true)}
+        onMouseLeave={() => handleHover(realEstateListing, false)}
         className={classNames('real-estate-marker', {clicked, hovered})}
         onClick={() => handleClick(realEstateListing)}>
         {renderCustomPin()}

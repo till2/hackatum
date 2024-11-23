@@ -35,10 +35,18 @@ export interface ListingDetails {
   }
 
 
-export interface PlaceOfInterest {
+export interface PlaceOfInterest_ {
     education: string[],
     family: string[],
     work:string[],
     hobbies:string[],
     lifestyle:string[]
+  }
+
+
+export interface PlaceOfInterest {
+    displayName: string,
+    key: string,
+    value: string,
+    location:any,
   }
