@@ -28,6 +28,7 @@
 .options li:first-child {
     margin-top: 5px;
 }
+
 .options li:last-child {
     margin-bottom: 10px;
 }
@@ -43,17 +44,16 @@
 }
 
 .optionsEntry {
-    all: unset;
     background-color: var(--third-color);
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 0.5rem;
     border-radius: 8px;
+    min-width: 90%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .optionsEntry:hover {
-    cursor: pointer;
     box-shadow: 0 4px 8px var(--dark-orange-2);
 }
 
@@ -81,10 +81,37 @@
 
 .optionsText {
     flex: 1;
+    display: inline-block;
 }
 
 .optionsText p {
     margin: 0 0 1rem 0;
     overflow: hidden;
     text-align: left;
+}
+
+.optionsText textarea {
+    all: unset;
+    width: 100%;
+    overflow: hidden;
+    text-wrap: wrap;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.optionsText textarea:read-only {
+    cursor: not-allowed;
+}
+
+.optionsText textarea:focus {
+    outline: none;
+    /* Remove focus outline */
+}
+
+.optionsHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }

@@ -136,7 +136,7 @@ function Home() {
                     </form>
                 </div>
                 <div>
-                    <MapsAndOptions setInputText={setInputText} />
+                    <MapsAndOptions />
                 </div>
                 <div className="accordion">
                     <Accordion

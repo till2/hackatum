@@ -2,15 +2,11 @@ import Maps from "./Maps";
 import Options from "./Options";
 import "./MapsAndOptions.css";
 
-const MapsAndOptions = ({
-    setInputText,
-}: {
-    setInputText: React.Dispatch<React.SetStateAction<string>>;
-}) => {
+const MapsAndOptions = () => {
     return (
         <div className="mapsAndOptions">
-            <Maps style={{}} />
-            <Options setInputText={setInputText} />
+            <Maps />
+            <Options />
         </div>
     );
 };
