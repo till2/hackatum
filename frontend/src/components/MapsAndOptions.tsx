@@ -9,7 +9,7 @@ const MapsAndOptions = ({
 }) => {
     return (
         <div className="mapsAndOptions">
-            <Maps />
+            <Maps style={{}} />
             <Options setInputText={setInputText} />
         </div>
     );

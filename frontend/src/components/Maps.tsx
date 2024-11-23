@@ -64,7 +64,7 @@ const MarkerHandler = () => {
         <>
         {realEstateListings.length != 0 &&
         <Map
-            style={{ width: "80vw", height: "100vh" }}
+            style={{ width: "100%", height: "calc(100% - 15px)", borderRadius: "8px", overflow: "hidden", marginTop: "5px" }}
             defaultCenter={{ lat: realEstateListings[0].details.latitude, lng: realEstateListings[0].details.longitude }}
             defaultZoom={15}
             gestureHandling={"greedy"}

@@ -1,5 +1,6 @@
 import React from "react";
 import OptionsEntry from "./OptionsEntry";
+import "./Options.css";
 
 const Options = ({setInputText} : {setInputText: React.Dispatch<React.SetStateAction<string>>}) => {
     return (
