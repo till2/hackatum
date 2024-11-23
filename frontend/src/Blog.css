@@ -37,10 +37,9 @@
 }
 
 .blogEntry img {
-    padding-top: 0.3rem;
     width: 100%;
     max-width: 300px;
     height: auto;
     display: block;
-    margin: 0 auto 1rem;
+    margin: 0.1rem auto 1rem;
 }
