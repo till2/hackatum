@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "react-drag-drop-files": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.2"
   }
 }

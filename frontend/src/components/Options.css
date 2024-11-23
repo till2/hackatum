@@ -1,0 +1,88 @@
+.optionsContainer {
+    width: 30%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: scroll;
+}
+
+.options {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0rem;
+}
+
+.options ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.options li:first-child {
+    margin-top: 5px;
+}
+.options li:last-child {
+    margin-bottom: 10px;
+}
+
+.options li {
+    margin-top: 0.75rem;
+}
+
+.optionsEntry p {
+    padding-left: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.optionsEntry {
+    all: unset;
+    background-color: var(--third-color);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.optionsEntry:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 8px var(--dark-orange-2);
+}
+
+.optionsTitle {
+    color: var(--text-color);
+    margin: 0 0 0 0;
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+.optionsContent {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    max-width: 95%;
+    /* Text width */
+}
+
+.optionsEntryContent {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.optionsText {
+    flex: 1;
+}
+
+.optionsText p {
+    margin: 0 0 1rem 0;
+    overflow: hidden;
+    text-align: left;
+}

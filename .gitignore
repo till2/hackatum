@@ -30,3 +30,4 @@ node_modules
 .vite
 
 __pycache__
+.env
