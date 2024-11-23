@@ -59,6 +59,46 @@ extraction_prompt = PromptTemplate(
     """
 )
 
+fact_classifier_prompt = PromptTemplate(
+    input_variables=["facts"],
+    template="""Classify each fact into one of these predefined categories: "education", "family", "work", "hobbies", "lifestyle", "other".
+    Choose the most appropriate category for each fact based on these guidelines:
+    
+    Only classify facts that are mentioned in the user's situation. If a fact is not mentioned in the situation, it should be classified as "other".
+    
+    - education: Facts about schooling, university, studying
+    - family: Facts about relationships, children, parents, significant other
+    - work: Facts about jobs and career
+    - hobbies: Facts about recreational activities (like sports)
+    - lifestyle: Facts about living situation, daily habits, preferences (like bars, restaurants, museums, etc.)
+    - other: Facts that don't clearly fit the above categories (if you are unsure, rather classify as "other")
+
+    If a fact could fit multiple categories, choose the one that is most central to the fact's meaning.
+    For example: "wants to study close to family" should be classified as "family" since the main focus is on family.
+
+    Facts: {facts}
+    
+    You must respond with valid JSON only, in exactly this format:
+    {{"1": "education", "2": "lifestyle", "3": "work"}}
+    
+    Constraints:
+    - Each fact must be classified into exactly one category
+    - The value must be exactly one of: "education", "family", "work", "hobbies", "lifestyle", "other"
+    - The key must be the fact number (index) from the input
+    - The value must be a lowercase string
+    - The keys must match the fact numbers from the input
+    - Do not add explanations or classifications for facts that don't exist in the input
+    - Multiple facts can be classified into the same category
+    
+    Don't write ```json or anything else, just the JSON object.
+    ---
+    Example:
+    Facts: {{"1": "student in Berlin", "2": "seeking bigger apartment", "3": "wants to be close to uni", "4": "likes to travel", "5": "works at Google", "6": "likes dogs"}}
+    Response: {{"1": "education", "2": "lifestyle", "3": "education", "4": "lifestyle", "5": "work", "6": "other"}}
+    ---
+    """
+)
+
 housing_facts_prompt = PromptTemplate(
     input_variables=["facts", "previous_housing_facts"],
     template="""Based on the general facts, extract and categorize location-relevant information for finding a suitable home.
@@ -129,6 +169,7 @@ extraction_chain = extraction_prompt | model
 lifestyle_chain = lifestyle_generator_prompt | model
 emoji_chain = emoji_prompt | model
 housing_facts_chain = housing_facts_prompt | model
+fact_classifier_chain = fact_classifier_prompt | model
 
 # State memory
 memory = ChatMessageHistory()
@@ -176,7 +217,8 @@ def generate_lifestyles(situation: str):
         housing_facts={
             "facts": lambda x: x["facts"],
             "previous_housing_facts": lambda x: x["previous_housing_facts"]
-        } | housing_facts_chain
+        } | housing_facts_chain,
+        fact_categories={"facts": lambda x: x["facts"]} | fact_classifier_chain
     )
     
     second_results = second_parallel.invoke({
@@ -187,6 +229,7 @@ def generate_lifestyles(situation: str):
     
     print("--------------- RESULTS ---------------")
     print("Facts: ", first_results["facts"])
+    print("Fact Categories: ", second_results["fact_categories"])
     print("Lifestyles: ", first_results["lifestyles"])
     print("Emojis: ", second_results["emojis"])
     print("Housing Facts: ", second_results["housing_facts"])
@@ -201,9 +244,10 @@ def generate_lifestyles(situation: str):
     try:
         lifestyles = json.loads(first_results["lifestyles"])
         facts = json.loads(first_results["facts"])
+        fact_categories = json.loads(second_results["fact_categories"])
         emojis = json.loads(second_results["emojis"])
         housing_facts = json.loads(second_results["housing_facts"])
-        return lifestyles, facts, emojis, housing_facts
+        return lifestyles, facts, fact_categories, emojis, housing_facts
     except json.JSONDecodeError:
         return {"error": "Failed to parse response into JSON"}
 
@@ -220,10 +264,11 @@ def main():
                 print(f"Using default input 2: {default_input_2}")
                 user_input = default_input_2
 
-            lifestyles, facts, emojis, housing_facts = generate_lifestyles(user_input)
+            lifestyles, facts, fact_categories, emojis, housing_facts = generate_lifestyles(user_input)
             
             print("--------------- JSON -----------------")
             print("Facts: ", facts)
+            print("Fact Categories: ", fact_categories)
             print("Lifestyles: ", lifestyles)
             print("Emojis: ", emojis)
             print("Housing Facts: ", housing_facts)
