@@ -13,18 +13,33 @@ import './custom_marker.css';
 
 interface Props {
   realEstateListing: RealEstateListing;
+  select: RealEstateListing | null
+  setSelect: React.Dispatch<React.SetStateAction<RealEstateListing | null>>;
 }
 
 export const CustomMarker: FunctionComponent<Props> = ({
-  realEstateListing
+  realEstateListing,
+  select,
+  setSelect,
 }) => {
-  const [clicked, setClicked] = useState(false);
   const [hovered, setHovered] = useState(false);
   const position = {
     lat: realEstateListing.details.latitude,
     lng: realEstateListing.details.longitude
   };
 
+  const handleClick = (listing: RealEstateListing) =>{
+
+    if (listing === select){
+
+      setSelect(null);
+    }
+    else {
+      setSelect(listing);
+
+    }
+  }
+  
   const renderCustomPin = () => {
     return (
       <>
@@ -36,9 +51,9 @@ export const CustomMarker: FunctionComponent<Props> = ({
           <div className="image-container">
             <RealEstateGallery
               images={realEstateListing.images}
-              isExtended={clicked}
+              isExtended={select === realEstateListing}
             />
-            <span className="icon">
+            <span className="icon" style={{zIndex: 0}}>
               <RealEstateIcon />
             </span>
           </div>
@@ -51,17 +66,20 @@ export const CustomMarker: FunctionComponent<Props> = ({
     );
   };
 
+  const clicked = select === realEstateListing;
   return (
-    <>
+    <div className="marker-parent">
+
       <AdvancedMarker
         position={position}
-        title={'AdvancedMarker with custom html content.'}
+        title={'Marker for real estate.'}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className={classNames('real-estate-marker', {clicked, hovered})}
-        onClick={() => setClicked(!clicked)}>
+        onClick={() => handleClick(realEstateListing)}>
         {renderCustomPin()}
       </AdvancedMarker>
-    </>
+
+    </div>
   );
 };

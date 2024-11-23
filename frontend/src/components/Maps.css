@@ -46,3 +46,7 @@
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
+
+.yNHHyP-marker-view {
+    z-index: 100;
+}
