@@ -26,14 +26,9 @@ import './Maps.css';
 const Maps = () => {
     return (
         <div className="custom-marker">
-        <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-            <Map
-                style={{ width: "70vw", height: "100vh"}}
-                defaultCenter={{ lat: 22.54992, lng: 0 }}
-                defaultZoom={3}
-                gestureHandling={"greedy"}
-                disableDefaultUI={true}
-            />
+
+        <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}> 
+            <MarkerHandler/>
         </APIProvider>
 
         </div>
@@ -77,7 +72,7 @@ const MarkerHandler = () => {
             disableDefaultUI={true}
             >
 
-                <DrawingExample origin={select} targets={realEstateListings} setSelect={setSelect}/>
+                {/* <DrawingExample origin={select} targets={realEstateListings} setSelect={setSelect}/> */}
 
             </Map>}
         {/* <PoiMarkers pois={locations} setSelect={setSelect}/> */}
