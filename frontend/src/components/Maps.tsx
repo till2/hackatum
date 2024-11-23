@@ -52,7 +52,7 @@ export async function loadRealEstateListing(): Promise<RealEstateListing[]> {
   }
 
 const MarkerHandler = () => {
-    const [select, setSelect] = useState<google.maps.LatLngLiteral | null>(null);
+    const [select, setSelect] = useState<RealEstateListing | null>(null);
     const [realEstateListings, setRealEstateListing] = useState<RealEstateListing[]>([]);
     
     useEffect(() => {
@@ -60,7 +60,6 @@ const MarkerHandler = () => {
           setRealEstateListing(data);
         });
       }, []);
-    console.log(realEstateListings)
     return (
         <>
         {realEstateListings.length != 0 &&
@@ -73,7 +72,7 @@ const MarkerHandler = () => {
             disableDefaultUI={true}
             >
 
-                {/* <DrawingExample select={select} setSelect={setSelect}/> */}
+                <DrawingExample origin={select} targets={realEstateListings} setSelect={setSelect}/>
 
             </Map>}
         {/* <PoiMarkers pois={locations} setSelect={setSelect}/> */}
@@ -82,7 +81,7 @@ const MarkerHandler = () => {
     )
 }
 
-const DrawingExample = (props: {select: google.maps.LatLngLiteral | null, setSelect: React.Dispatch<React.SetStateAction<google.maps.LatLngLiteral | null>>}) => {
+const DrawingExample = (props: {origin: RealEstateListing | null, targets: RealEstateListing[], setSelect: React.Dispatch<React.SetStateAction<RealEstateListing | null>>}) => {
     return (
         <>
             
@@ -98,8 +97,8 @@ const DrawingExample = (props: {select: google.maps.LatLngLiteral | null, setSel
                 strokeColor={'#00'}
                 path={flightPlanCoordinates}
                 /> */}
-            {props.select !== null ? (
-            <MakeLines center={props.select} ends={flightPlanCoordinates} />
+            {props.origin !== null ? (
+                <MakeLines center={{lat: props.origin.details.latitude, lng: props.origin.details.longitude}} ends={props.targets.map(target => ({lat: target.details.latitude, lng: target.details.longitude}))} />
             ) : null}
       </>
     );
@@ -115,7 +114,7 @@ const DisplayMarkers = (props: {listings: RealEstateListing[]}) => {
     return (
       <>
         {props.listings.map( (listing: RealEstateListing) => (
-          <CustomMarker realEstateListing={listing} />
+          <CustomMarker key={listing.uuid} realEstateListing={listing} onMouseEnter={() => select(listing)}/>
         ))}
       </>
     );
