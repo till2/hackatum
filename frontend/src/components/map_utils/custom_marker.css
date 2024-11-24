@@ -186,3 +186,7 @@
     visibility: visible;
   }
 }
+
+.gm-style-iw button[title="Close"] {
+  display: none !important;
+}

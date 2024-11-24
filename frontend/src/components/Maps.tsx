@@ -109,8 +109,9 @@ const MarkerHandler = ({
                     mapId="DEMO_MAP_ID"
                     disableDefaultUI={true}
                     onClick={() => setSelect(null)}
-                >
-                    <DrawLines origin={hover} targets={placeOfInterest} />
+                > 
+                {!select && (
+                    <DrawLines origin={hover} targets={placeOfInterest} />)}
                 </Map>
             )}
             {/* <PoiMarkers pois={locations} setSelect={setSelect}/> */}
@@ -120,7 +121,7 @@ const MarkerHandler = ({
                 setSelect={setSelect}
                 setHover={setHover}
             />
-           <DisplayPOI pois={placeOfInterest} select={selectPOI} setSelect={setSelectPOI}/>
+           <DisplayPOI pois={placeOfInterest} select={select} selectPOI={selectPOI} setSelectPOI={setSelectPOI}/>
 
         </>
     );
@@ -164,7 +165,7 @@ const DrawLines = (props: {
 //     console.log(center)
 //     select = center;
 // }
-//@ts-ignore
+// @ts-ignore
 async function FindPlaces(
     lib,
     query: PlaceOfInterest_,
@@ -217,7 +218,7 @@ async function FindPlaces(
 async function QueryPlaces(lib, key, value) {
     const request = {
         textQuery: value,
-        fields: ["displayName", "location"],
+        fields: ["displayName", "location", "formattedAddress"],
         locationBias: { lat: 48.132379, lng: 11.57 },
         language: "en-US",
         maxResultCount: 2,
@@ -279,12 +280,13 @@ const DisplayRealEstateMarkers = (props: {
 };
 
 // }
-const DisplayPOI = (props: {pois: PlaceOfInterest[], select: PlaceOfInterest | null, setSelect: React.Dispatch<React.SetStateAction<PlaceOfInterest | null>>}) => {
+const DisplayPOI = (props: {pois: PlaceOfInterest[], select: RealEstateListing | null, selectPOI: PlaceOfInterest | null, setSelectPOI: React.Dispatch<React.SetStateAction<PlaceOfInterest | null>>}) => {
   return (
       <>
-      {props.pois.map( (poi: PlaceOfInterest, idx: number) => (
-            <PoiMarker key={idx} poi={poi} select={props.select} setSelect={props.setSelect}/>
-        ))}
+      {props.pois.map( (poi: PlaceOfInterest, idx: number) =>
+        !props.select ? (
+            <PoiMarker key={idx} poi={poi} select={props.selectPOI} setSelect={props.setSelectPOI}/>
+        ) : null)}
       </>
     );
   };

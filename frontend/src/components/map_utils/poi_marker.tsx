@@ -1,22 +1,16 @@
 import React, {FunctionComponent, useState} from 'react';
-import {AdvancedMarker} from '@vis.gl/react-google-maps';
-import classNames from 'classnames';
+import {AdvancedMarker, InfoWindow, useAdvancedMarkerRef} from '@vis.gl/react-google-maps';
 
-import {RealEstateListingDetails} from './listing_details';
-import {RealEstateGallery} from './gallery';
-import {RealEstateIcon} from '../../../data/icons/real-estate-icon';
 
 import {PlaceOfInterest} from './types';
 
 import './custom_marker.css';
-import { LiaBasketballBallSolid } from "react-icons/lia";
 import { TbBallVolleyball } from "react-icons/tb";
 import { PiWine } from "react-icons/pi";
 import { PiStudent } from "react-icons/pi";
-import { TfiBriefcase } from "react-icons/tfi";
-import { SlBriefcase } from "react-icons/sl";
 import { RiParentLine } from "react-icons/ri";
 
+import { GiBriefcase } from "react-icons/gi";
 
 
 interface Props {
@@ -36,6 +30,7 @@ export const PoiMarker: FunctionComponent<Props> = ({
   setSelect,
 }) => {
   const [hovered, setHovered] = useState(false);
+  const [markerRef, marker] = useAdvancedMarkerRef();
   const position = {
     lat: poi.location.lat,
     lng: poi.location.lng
@@ -71,6 +66,7 @@ const POIDetails: FunctionComponent<DetailProps> = ({
   
 
   const renderCustomPin = () => {
+
     return (
       <>
         <div className="custom-pin">
@@ -91,7 +87,7 @@ const POIDetails: FunctionComponent<DetailProps> = ({
                     <PiStudent style={{background: "green", width: "27", height: "27", marginTop: 2, color: "white", borderRadius: "16px"}} />
                 )};
                 {(poi.key === "work") && (
-                    <SlBriefcase style={{background: "orange", width: "27", height: "27", marginTop: 2, color: "white", borderRadius: "16px"}} />
+                    <GiBriefcase style={{background: "orange", width: "27", height: "27", marginTop: 2, color: "white", borderRadius: "16px"}} />
                 )};
                 {(poi.key === "family") && (
                     <RiParentLine style={{background: "red", width: "27", height: "27", marginTop: 2, color: "white", borderRadius: "16px"}} />
@@ -104,21 +100,25 @@ const POIDetails: FunctionComponent<DetailProps> = ({
 
         <div className="tip" />
       </>
-    );
+      );
   };
-  const clicked = select === poi;
   return (
     <div className="marker-parent">
 
       <AdvancedMarker
         position={position}
+        ref={markerRef}
         title={'Marker for real estate.'}
-        // onMouseEnter={() => setHovered(true)}
-        // onMouseLeave={() => setHovered(false)}
-        className={classNames('real-estate-marker', {clicked, hovered})}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         onClick={() => handleClick(poi)}>
         {renderCustomPin()}
       </AdvancedMarker>
+        {hovered && (
+            <InfoWindow anchor={marker}>
+              <div style={{ fontSize: '14px', fontWeight: 'bold' }}>{poi.displayName}<br/></div> <div>{poi.formattedAddress}</div>
+            </InfoWindow>
+          )}
 
     </div>
   );
