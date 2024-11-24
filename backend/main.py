@@ -59,19 +59,18 @@ async def lifeplanner_request(request: Request, input: TextInput):
     if request.client.host not in state:
         state[request.client.host] = lang.setup_memory()
 
-    print(state)
-    # try:
-    lifestyles, facts, fact_categories, emojis, housing_facts = (
-        lang.generate_lifestyles(**state[request.client.host], situation=input.text)
-    )
-    return {
-        "lifestyles": lifestyles,
-        "facts": facts,
-        "fact_categories": fact_categories,
-        "emojis": emojis,
-    }
-    # except Exception as e:
-    #     return {"error": str(e)}
+    try:
+        lifestyles, facts, fact_categories, emojis, housing_facts = (
+            lang.generate_lifestyles(**state[request.client.host], situation=input.text)
+        )
+        return {
+            "lifestyles": lifestyles,
+            "facts": facts,
+            "fact_categories": fact_categories,
+            "emojis": emojis,
+        }
+    except Exception as e:
+        return {"error": str(e)}
 
 
 @app.post("/api/upload_image")
