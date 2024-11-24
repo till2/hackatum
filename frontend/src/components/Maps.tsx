@@ -100,7 +100,7 @@ const MarkerHandler = ({
   useEffect(() => {
       if (!places || !map) return;
       FindPlaces(places, placeOfInterest_[0], setPlaceOfInterest);
-  }, [places, map, placeOfInterest, placeOfInterest_]);
+  }, [placeOfInterest_]);
 
   useEffect(() => { }, [select]);
   return (
