@@ -26,6 +26,7 @@ import {
   PlaceOfInterest_,
 } from "./map_utils/types";
 import { CustomMarker } from "./map_utils/custom_marker";
+import { PoiMarker } from "./map_utils/poi_marker";
 
 import "./Maps.css";
 
@@ -73,6 +74,8 @@ const MarkerHandler = ({
   placesOfInterest: PlaceOfInterest_;
 }) => {
   const [select, setSelect] = useState<RealEstateListing | null>(null);
+  const [selectPOI, setSelectPOI] = useState<PlaceOfInterest | null>(null);
+
   const [hover, setHover] = useState<RealEstateListing | null>(null);
   const [realEstateListings, setRealEstateListing] = useState<
       RealEstateListing[]
@@ -134,7 +137,7 @@ const MarkerHandler = ({
               setSelect={setSelect}
               setHover={setHover}
           />
-          <DisplayPOI pois={placeOfInterest} />
+        <DisplayPOI pois={placeOfInterest} select={selectPOI} setSelect={setSelectPOI}/>
       </>
   );
 };
@@ -228,40 +231,36 @@ async function FindPlaces(
 
 //@ts-ignore
 async function QueryPlaces(lib, key, value) {
-  const request = {
-      textQuery: value,
-      fields: ["displayName", "location"],
-      locationBias: { lat: 48.132379, lng: 11.57 },
-      language: "en-US",
-      maxResultCount: 2,
-      region: "de",
-      useStrictTypeFiltering: false,
-  };
 
-  const { places } = await lib.Place.searchByText(request);
-  if (places.length) {
+
+    const request = {
+        textQuery: value,
+        fields: ["displayName", "location", "formattedAddress"],
+        locationBias: { lat: 48.132379, lng: 11.57 },
+        language: "en-US",
+        maxResultCount: 2,
+        region: "de",
+        useStrictTypeFiltering: false,
+    };
+
+    const {places} = await lib.Place.searchByText(request);
+    if (places.length) {
+
       // Loop through and get all the results.
       const pois: PlaceOfInterest[] = [];
       //@ts-ignore
       places.forEach((place) => {
+
           // console.log(place.location.lat());
           // console.log(place.location.lng());
           // console.log(place.displayName);
-          pois.push({
-              displayName: place.displayName,
-              key: key,
-              value: value,
-              location: {
-                  lat: place.location.lat(),
-                  lng: place.location.lng(),
-              },
-          });
+          pois.push({displayName: place.displayName, formattedAddress: place.formattedAddress, key: key, value: value, location: {lat: place.location.lat(), lng: place.location.lng()}});
       });
-
+      
       return pois;
   } else {
-      console.log("No results");
-      return null;
+      console.log('No results');
+      return null
   }
 }
 
@@ -316,18 +315,16 @@ const DisplayRealEstateMarkers = (props: {
   );
 };
 
-// }
-const DisplayPOI = (props: { pois: PlaceOfInterest[] }) => {
+
+const DisplayPOI = (props: {pois: PlaceOfInterest[], select: PlaceOfInterest | null, setSelect: React.Dispatch<React.SetStateAction<PlaceOfInterest | null>>}) => {
   return (
       <>
-          {props.pois.map((poi: PlaceOfInterest, idx: number) => (
-              <MarkerWithInfowindow key={idx} poi={poi}>
-                  {" "}
-              </MarkerWithInfowindow>
-          ))}
+      {props.pois.map( (poi: PlaceOfInterest, idx: number) => (
+            <PoiMarker key={idx} poi={poi} select={props.select} setSelect={props.setSelect}/>
+        ))}
       </>
-  );
-};
+    );
+  };
 
 const MakeLines = ({
   center,
