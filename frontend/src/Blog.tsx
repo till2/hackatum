@@ -53,6 +53,7 @@ const Blog: React.FC = () => {
                                         alt="Dog"
                                         ref={imgRef}
                                         className={`dog-blog-image ${isRotating ? 'continuous-rotate' : ''}`}
+                                        style={{ width: "80px", height: "auto", padding: "25px", borderRadius: "8px" }}
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
                                     />
