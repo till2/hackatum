@@ -39,7 +39,7 @@ const Maps = ({ placesOfInterest, startLocation }: { placesOfInterest: PlaceOfIn
 
 // var select: google.maps.LatLngLiteral | null = null;
 
-export async function loadRealEstateListing(): Promise<RealEstateListing[]> {
+export async function loadRealEstateListing(startLocation: google.maps.LatLngLiteral): Promise<RealEstateListing[]> {
     // call backend, get results in current location.
     const url = new URL("../../data/real-estate-listing.json", import.meta.url);
 
@@ -47,12 +47,23 @@ export async function loadRealEstateListing(): Promise<RealEstateListing[]> {
         res.json(),
     )) as RealEstateListing[];
 
-    listings.forEach(
+    const list: RealEstateListing[] = []; 
+    for (let i = 0; i < 50; i++) {
+      const randomElement = structuredClone(listings[Math.floor(Math.random() * listings.length)]);
+      const randomLat = startLocation.lat + ((Math.random() > 0.5) ? 1: -1) * Math.random() / 13;
+      const randomLng = startLocation.lng + ((Math.random() > 0.5) ? 1: -1) * Math.random() / 13;
+      randomElement.details.latitude = randomLat;
+      randomElement.details.longitude = randomLng;
+      list.push(randomElement);
+    }
+
+    list.forEach(
         (listing) => (listing.images = [frontImage, bedroomImage, backImage]),
     );
-
-    return listings;
+    console.log(list);
+    return list;
 }
+
 
 const MarkerHandler = ({
     placesOfInterest,
@@ -77,7 +88,7 @@ const MarkerHandler = ({
     const places = useMapsLibrary("places");
 
     useEffect(() => {
-        loadRealEstateListing().then((data) => {
+        loadRealEstateListing(startLocation).then((data) => {
             setRealEstateListing(data);
         });
     }, []);
@@ -223,7 +234,7 @@ async function QueryPlaces(lib, key, value, startLocation) {
         fields: ["displayName", "location", "formattedAddress"],
         locationBias: startLocation,
         language: "en-US",
-        maxResultCount: 2,
+        maxResultCount: 32,
         region: "de",
         useStrictTypeFiltering: false,
     };
@@ -266,10 +277,10 @@ const DisplayRealEstateMarkers = (props: {
     useEffect(() => {}, [props.select]);
     return (
         <>
-            {props.listings.map((listing: RealEstateListing) =>
+            {props.listings.map((listing: RealEstateListing, idx) =>
                 !props.select || props.select == listing ? (
                     <CustomMarker
-                        key={listing.uuid}
+                        key={idx}
                         realEstateListing={listing}
                         select={props.select}
                         setSelect={props.setSelect}
@@ -304,13 +315,14 @@ const MakeLines = ({
     return (
         <>
             {ends.map((end, index) => (
+              Math.sqrt(Math.pow(center.lat - end.lat, 2) + Math.pow(center.lng - end.lng, 2)) < 0.15 && (
                 <Polyline
                     key={index}
                     strokeWeight={3}
                     strokeColor={"#FFA500"}
                     path={[center, end]}
                 />
-            ))}
+            )))}
         </>
     );
 };
