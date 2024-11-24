@@ -6,21 +6,31 @@ import { useState } from "react";
 import Loading from "./components/Loading";
 import { API_BASE_URL } from "./config";
 import MapsAndOptions from "./components/MapsAndOptions";
-import { Dict } from "./types";
-
+import {
+    DictLifestyle,
+    DictFacts,
+    DictEmojis,
+    DictHousingFacts,
+    DictFactCategories,
+} from "./types.ts";
 
 function Home() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const [inputText, setInputText] = useState<string>("");
-    const [lifestyles, setLifestyles] = useState<Dict>({});
 
-    const [facts, setFacts] = useState<Dict>({});
+    const [lifestyles, setLifestyles] = useState<DictLifestyle>({});
 
-    const [factCategories, setFactCategories] = useState<Dict>({});
+    const [facts, setFacts] = useState<DictFacts>({});
 
-    const [emojis, setEmojis] = useState<Dict>({});
+    const [factCategories, setFactCategories] = useState<DictFactCategories>(
+        {},
+    );
+
+    const [emojis, setEmojis] = useState<DictEmojis>({});
+
+    const [housingFacts, setHousingFacts] = useState<DictHousingFacts>({});
 
     const handleTextSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -45,7 +55,6 @@ function Home() {
             }
 
             const data = await response.json();
-            console.log("Data:", data);
 
             await new Promise((resolve) =>
                 setTimeout(resolve, 1000),
@@ -55,6 +64,7 @@ function Home() {
             setFacts(data.facts);
             setFactCategories(data.fact_categories);
             setEmojis(data.emojis);
+            setHousingFacts(data.housing_facts);
         } catch (error) {
             console.error("Error transforming text:", error);
         } finally {
@@ -79,10 +89,18 @@ function Home() {
                     </form>
                 </div>
                 <div>
-                    <MapsAndOptions
-                        setInputText={setInputText}
-                        lifestyles={lifestyles}
-                    />
+                    {Object.keys(lifestyles).length !== 0 ? (
+                        <MapsAndOptions
+                            setInputText={setInputText}
+                            lifestyles={lifestyles}
+                            emojis={emojis}
+                            factCategories={factCategories}
+                            dictFacts={facts}
+                            housingFacts={housingFacts}
+                        />
+                    ) : (
+                        <></>
+                    )}
                 </div>
                 <div className="accordion">
                     <Accordion
