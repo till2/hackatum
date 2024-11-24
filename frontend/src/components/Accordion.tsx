@@ -18,7 +18,7 @@ const Accordion = ({ title, content, isActive, index, setActiveIndex }: Accordio
                 <div className="accordion-title">{title}</div>
                 <div className="accordion-status">{isActive ? "-" : "+"}</div>
             </div>
-            <div className={`accordion-content ${isActive ? 'active' : ''}`} style={{ textAlign: 'left', marginLeft: '5px', backgroundColor: '#0f0f0f' }}>
+            <div className={`accordion-content ${isActive ? 'active' : ''}`} style={{ textAlign: 'left', marginLeft: '5px', backgroundColor: 'var(--first-color)' }}>
                 {content}
             </div>
         </div>
