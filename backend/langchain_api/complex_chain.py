@@ -38,6 +38,8 @@ lifestyle_generator_prompt = PromptTemplate(
 extraction_prompt = PromptTemplate(
     input_variables=["situation", "previous_facts"],
     template="""Extract and update key facts from the situation description. Consider previous facts and add/update with new information.
+    The facts will later be used to find relevant flats or houses, so make sure to enhance the input with housing-relevant facts
+    that fit to the user's situation. But also keep the general facts that are not housing-relevant.
 
     Previous facts: {previous_facts}
     Current situation: {situation}
@@ -45,11 +47,27 @@ extraction_prompt = PromptTemplate(
     You must respond with valid JSON only, in exactly this format:
     {{"1": "fact 1", "2": "fact 2", "3": "fact 3"}}
 
+    Rules:
     Combine previous and new facts, prioritizing the most relevant information.
     If the old facts don't make sense anymore given the new situation, remove them.
     If they are still relevant (e.g. where they live etc.), keep or update them depending on the new situation.
     You can infer the most likely facts. Also if the user inputs irrelevant information, you can ignore it.
+    
+    Enhancement task:
+    Add a new fact if the user mentions a fact that is not present as a 'housing-relevant' fact.
+    For example, if the user mentions that they want to move to a new city, add a new fact for that city.
     But don't make up completely new facts that are not mentioned in the situation.
+    
+    An example of a good enhancement:
+    User: I am a student living in Berlin. I want to move to a bigger apartment that is close to my uni.
+    Response: {{"1": "student in Berlin", "2": "seeking bigger apartment", "3": "wants to be close to uni", "4": "searching for new apartment in Berlin"}}
+    
+    Another good example for an enhancement:
+    User: We are a newly married couple with 2 kids and we want to move to the city center near TUM.
+    Response: {{"1": "married couple", "2": "2 kids", "3": "searching for a 4-person apartment in munich city center", "4": "want to live close to TUM", "6": "need kindergarten nearby", "7": "need primary school nearby"}}
+    
+    Notice that kindergarten and school are not mentioned in the situation, but they are added as relevant housing-relevant facts.
+    
     Don't write ```json or anything else, just the JSON object.
     ---
     Example:
