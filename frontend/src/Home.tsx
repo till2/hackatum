@@ -13,6 +13,7 @@ import {
     DictHousingFacts,
     DictFactCategories,
 } from "./types.ts";
+import classNames from "classnames";
 
 function Home() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -84,15 +85,25 @@ function Home() {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     };
 
-    const [placeholderIdx, setPlaceholderIdx] = useState(
-        generateRandomNumber(0, placeholders.length - 1),
+    const [placeholder, setPlaceholder] = useState(
+        placeholders[generateRandomNumber(0, placeholders.length - 1)],
     );
+
+    const [fadeClass, setFadeClass] = useState<string>("fade-in");
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setPlaceholderIdx(
-                (prevIndex) => (prevIndex + 1) % placeholders.length,
-            );
+            setFadeClass("fade-out");
+            setTimeout(() => {
+                setPlaceholder(
+                    (prev) => {
+                        const currentIndex = placeholders.indexOf(prev);
+                        const nextIndex = (currentIndex + 1) % placeholders.length
+                        return placeholders[nextIndex];
+                    }
+                );
+                setFadeClass("fade-in");
+            }, 500);
         }, 5000);
 
         return () => clearInterval(interval);
@@ -117,15 +128,19 @@ function Home() {
                     >
                         <div className="textareaContainer">
                             <textarea
-                                className="textarea"
+                                className={classNames("textarea", fadeClass)}
                                 value={inputText}
                                 onChange={(e) => setInputText(e.target.value)}
-                                placeholder={placeholders[placeholderIdx]}
+                                placeholder={placeholder}
                                 onKeyDown={handleKeyDown}
                             />
                         </div>
                         <button type="submit" className="button">
-                            {isLoading ? <Loading /> : "Find the home to your lifestyle 🚀"}
+                            {isLoading ? (
+                                <Loading />
+                            ) : (
+                                "Find the home to your lifestyle 🚀"
+                            )}
                         </button>
                     </form>
                 </div>
