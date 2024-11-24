@@ -44,7 +44,6 @@ const MapsAndOptions = ({
         ];
 
         // Create a new object with the valid keys
-        console.log(obj);
         const result: Partial<PlaceOfInterest_> = {};
 
         for (const key of validKeys) {
@@ -74,27 +73,7 @@ const MapsAndOptions = ({
         setPlacesofInterest(convertToPlaceOfInterest(housingFacts));
     }, [housingFacts]);
 
-    const input = document.getElementsByTagName("input")[0];
 
-// focus on the input element
-    input.focus();
-
-    // add event listeners to the input element
-    input.addEventListener('keypress', (event) => {
-    console.log("You have pressed key: ", event.key);
-    });
-
-    input.addEventListener('keydown', (event) => {
-    console.log(`key: ${event.key} has been pressed down`);
-    });
-
-    input.addEventListener('keyup', (event) => {
-    console.log(`key: ${event.key} has been released`);
-    });
-
-    console.log("ddd")
-    // dispatch keyboard events
-    input.dispatchEvent(new KeyboardEvent('keydown',  {'key':'e'}));
     return (
         <div className="mapsAndOptions">
             <Maps placesOfInterest={placesOfInterest} startLocation={startLocation}/>
