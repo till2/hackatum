@@ -210,36 +210,36 @@ function Home() {
                                 </form>
                                 <div className="accordion">
                                     <Accordion
-                                        title="How to play?"
-                                        content="Upload an image of anything and our AI model will try to extract its most important features! The model analyzes features and characteristics to find good features."
+                                        title="How does it work? 🎯"
+                                        content="Tell us about your current situation and dreams! Our AI life planner will guide you through different future scenarios to help you discover what truly matters in your next home. No more endless scrolling through property listings - we'll match you with homes that fit your lifestyle, both now and in the future."
                                         isActive={activeIndex === 0}
                                         index={0}
                                         setActiveIndex={setActiveIndex}
                                     />
                                     <Accordion
-                                        title="How is the data processed?"
-                                        content="When you upload an image, our computer vision model extracts features and computes an output embedding. We use state-of-the-art deep learning techniques to ensure accurate results while keeping your data private and secure (no OpenAI calls!)."
+                                        title="What makes this special? ✨"
+                                        content="We're improving house hunting by combining our LLM-powered life planner with financial- and housing data. This way, we can get straight to matching you with affordable homes. Our interactive map visualizer shows you everything about nearby kindergartens, distance to your family, education, hobbies and your favorite sports facilities!"
                                         isActive={activeIndex === 1}
                                         index={1}
                                         setActiveIndex={setActiveIndex}
                                     />
                                     <Accordion
-                                        title="When can I try again?"
-                                        content="You can upload and match as many images as you'd like (almost)! There's no limit on the number of attempts (almost). Each upload will generate a new output based on the specific features detected in that image."
+                                        title="Tech Stack? 🚀"
+                                        content="We're using LangChain with Google Vertex AI for interactive life planning, FastAPI for our backend, and React with TypeScript for a smooth frontend experience. Our system integrates and processes multiple data sources to provide accurate housing recommendations."
                                         isActive={activeIndex === 2}
                                         index={2}
                                         setActiveIndex={setActiveIndex}
                                     />
                                     <Accordion
-                                        title="Project Details"
-                                        content="This project was created during HackaTUM 2024, combining computer vision and factor graphs to create a fun interactive project. We used Python with FastAPI for the backend, React for the frontend, and state-of-the-art vision language models for object detection."
+                                        title="The Challenge 🎯"
+                                        content="Built during HackaTUM 2024 for the Interhyp challenge, we're tackling the complex problem of matching people with their perfect homes to help improve the housing situation in Germany. Our solution goes beyond simple property listings by understanding users' life trajectories and financial situations to make meaningful recommendations."
                                         isActive={activeIndex === 3}
                                         index={3}
                                         setActiveIndex={setActiveIndex}
                                     />
                                     <Accordion
-                                        title="Who built this?"
-                                        content="We are a team of students from ETH Zürich and HPI who developed this project during HackaTUM 2023. We're passionate about computer vision and wanted to create something fun and interactive that showcases the possibilities of AI technology."
+                                        title="Meet the Hackers! 👋"
+                                        content="We're Artiom Gesp, Constantin Kühne and Till Zemann, a team of students from ETH Zürich and Hasso Plattner Institute, studying Math, ML and Data Engineering. Built in two (almost) sleepless days during HackaTUM 2024s, this project made us all be frontend devs for a weekend to build some visualizations and Google Maps integrations. If you would like to chat about the project, you can connect with us via LinkedIn."
                                         isActive={activeIndex === 4}
                                         index={4}
                                         setActiveIndex={setActiveIndex}
