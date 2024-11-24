@@ -231,7 +231,7 @@ function Home() {
                     }}>
                         <img src={BackgroundImage} alt="Background" style={{
                         width: "auto",
-                        height: "100%",
+                        height: "85vh",
                         margin: "0 0 0 100px",
                         /* cut image diagonally */
                         clipPath: "polygon(20% 0, 100% 0, 100% 100%, 0 100%)",
