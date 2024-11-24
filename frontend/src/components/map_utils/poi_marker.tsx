@@ -14,6 +14,9 @@ import { TbBallVolleyball } from "react-icons/tb";
 import { PiWine } from "react-icons/pi";
 import { PiStudent } from "react-icons/pi";
 import { TfiBriefcase } from "react-icons/tfi";
+import { SlBriefcase } from "react-icons/sl";
+import { RiParentLine } from "react-icons/ri";
+
 
 
 interface Props {
@@ -75,26 +78,26 @@ const POIDetails: FunctionComponent<DetailProps> = ({
             <span className="material-symbols-outlined"> close </span>
           </button>
 
-          {/* <div className="image-container"> */}
+          <div>
                 <span className="icon" style={{zIndex: 0}}>
                 {(poi.key === "lifestyle") && (
-                    <PiWine style={{background: "blue", width: "27", height: "27", marginTop: 2, color: "white"}} />
+                    <PiWine style={{background: "blue", width: "27", height: "27", marginTop: 2, color: "white", borderRadius: "16px", transform: "translateY(6px)"}} />
                 )};
                 {(poi.key === "hobbies") && (
-                    <TbBallVolleyball style={{background: "yellow", width: "27", height: "27", marginTop: 2, color: "white"}} />
+                    <TbBallVolleyball style={{background: "purple", width: "27", height: "27", marginTop: 2, color: "white", borderRadius: "16px"}} />
                     
                 )};
                 {(poi.key === "education") && (
-                    <PiStudent style={{background: "green", width: "27", height: "27", marginTop: 2, color: "white"}} />
+                    <PiStudent style={{background: "green", width: "27", height: "27", marginTop: 2, color: "white", borderRadius: "16px"}} />
                 )};
                 {(poi.key === "work") && (
-                    <TfiBriefcase style={{background: "orange", width: "27", height: "27", marginTop: 2, color: "white"}} />
+                    <SlBriefcase style={{background: "orange", width: "27", height: "27", marginTop: 2, color: "white", borderRadius: "16px"}} />
                 )};
                 {(poi.key === "family") && (
-                    <TfiBriefcase style={{background: "red", width: "27", height: "27", marginTop: 2, color: "white"}} />
+                    <RiParentLine style={{background: "red", width: "27", height: "27", marginTop: 2, color: "white", borderRadius: "16px"}} />
                 )};
                 </span>
-          {/* </div> */}
+          </div>
 
           <POIDetails address={poi.formattedAddress} displayName={poi.displayName}/>
         </div>
@@ -110,8 +113,8 @@ const POIDetails: FunctionComponent<DetailProps> = ({
       <AdvancedMarker
         position={position}
         title={'Marker for real estate.'}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+        // onMouseEnter={() => setHovered(true)}
+        // onMouseLeave={() => setHovered(false)}
         className={classNames('real-estate-marker', {clicked, hovered})}
         onClick={() => handleClick(poi)}>
         {renderCustomPin()}
