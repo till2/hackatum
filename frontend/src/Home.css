@@ -64,11 +64,11 @@
 .textarea {
     all: unset;
     margin: 0;
-    padding: 0;
     font: inherit;
     background: var(--third-color);
     padding: 1rem;
-    width: 80vw;
+    width: 70vw;
+    border-radius: 8px;
 }
 
 .textareaContainer {

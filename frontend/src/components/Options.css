@@ -97,6 +97,7 @@
     text-wrap: wrap;
     word-wrap: break-word;
     white-space: pre-wrap;
+    text-align: justify;
 }
 
 .optionsText textarea:read-only {
@@ -114,4 +115,16 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+}
+
+.badButton {
+    background-color: var(--red);
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
+.goodButton {
+    background-color: var(--green);
+    cursor: pointer;
+    margin-right: 1rem;
 }
