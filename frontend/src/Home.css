@@ -67,3 +67,45 @@
     font: inherit;
 
 }
+
+.input-location {
+    width: 60%;
+}
+
+
+/* Reset some default styles */
+/* body, html, #root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+} */
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.content {
+    flex: 1;
+    background-color: #f0f0f0; /* Background for the left section */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+}
+
+.image {
+    flex: 1;
+    background: url('your-image.jpg') no-repeat center center/cover;
+}
+
+
+.centerring {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

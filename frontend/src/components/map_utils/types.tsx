@@ -46,6 +46,7 @@ export interface PlaceOfInterest_ {
 
 export interface PlaceOfInterest {
     displayName: string,
+    formattedAddress: string,
     key: string,
     value: string,
     location:any,

@@ -23,6 +23,7 @@ import bedroomImage from '../../data/images/bedroom.jpg';
 import backImage from '../../data/images/back.jpg';
 import {RealEstateListing, PlaceOfInterest, PlaceOfInterest_} from './map_utils/types';
 import {CustomMarker} from './map_utils/custom_marker';
+import {PoiMarker} from './map_utils/poi_marker';
 
 import './Maps.css';
 
@@ -69,7 +70,9 @@ export async function loadPlaceOfInterest(): Promise<PlaceOfInterest_[]> {
 
 const MarkerHandler = () => {
     const [select, setSelect] = useState<RealEstateListing | null>(null);
+    const [selectPOI, setSelectPOI] = useState<PlaceOfInterest | null>(null);
     const [hover, setHover] = useState<RealEstateListing | null>(null);
+
     const [realEstateListings, setRealEstateListing] = useState<RealEstateListing[]>([]);
     const [placeOfInterest_, setPlaceOfInterest_] = useState<PlaceOfInterest_[]>([]);
     const [placeOfInterest, setPlaceOfInterest] = useState<PlaceOfInterest[]>([]);;
@@ -97,6 +100,7 @@ const MarkerHandler = () => {
     }, [places, map]);
     
     useEffect(() => {}, [select]);
+    useEffect(() => {}, [selectPOI]);
     return (
         <>
         {realEstateListings.length != 0 &&
@@ -115,14 +119,12 @@ const MarkerHandler = () => {
             </Map>}
         {/* <PoiMarkers pois={locations} setSelect={setSelect}/> */}
         <DisplayRealEstateMarkers listings={realEstateListings} select={select} setSelect={setSelect} setHover={setHover}/>
-        <DisplayPOI pois={placeOfInterest}/>
+        <DisplayPOI pois={placeOfInterest} select={selectPOI} setSelect={setSelectPOI}/>
         </>
     )
 }
 
 const DrawLines = (props: {origin: RealEstateListing | null, targets: PlaceOfInterest[]}) => {
-  console.log(props)
-  console.log(props.targets)
   return (
         <>
             {/* <Marker
@@ -188,7 +190,7 @@ async function QueryPlaces(lib, key, value) {
 
     const request = {
         textQuery: value,
-        fields: ["displayName", "location"],
+        fields: ["displayName", "location", "formattedAddress"],
         locationBias: { lat: 48.132379, lng: 11.57 },
         language: "en-US",
         maxResultCount: 2,
@@ -207,7 +209,7 @@ async function QueryPlaces(lib, key, value) {
           // console.log(place.location.lat());
           // console.log(place.location.lng());
           // console.log(place.displayName);
-          pois.push({displayName: place.displayName, key: key, value: value, location: {lat: place.location.lat(), lng: place.location.lng()}});
+          pois.push({displayName: place.displayName, formattedAddress: place.formattedAddress, key: key, value: value, location: {lat: place.location.lat(), lng: place.location.lng()}});
       });
       
       return pois;
@@ -259,11 +261,11 @@ const DisplayRealEstateMarkers = (props: {listings: RealEstateListing[], select:
   };
 
   // }
-const DisplayPOI = (props: {pois: PlaceOfInterest[]}) => {
+const DisplayPOI = (props: {pois: PlaceOfInterest[], select: PlaceOfInterest | null, setSelect: React.Dispatch<React.SetStateAction<PlaceOfInterest | null>>}) => {
   return (
       <>
       {props.pois.map( (poi: PlaceOfInterest, idx: number) => (
-            <MarkerWithInfowindow key={idx} poi={poi}> </MarkerWithInfowindow>
+            <PoiMarker key={idx} poi={poi} select={props.select} setSelect={props.setSelect}/>
         ))}
       </>
     );
@@ -272,9 +274,9 @@ const DisplayPOI = (props: {pois: PlaceOfInterest[]}) => {
 const MakeLines = ({ center, ends }: { center: google.maps.LatLngLiteral, ends: google.maps.LatLngLiteral[] }) => {
     return (
       <>
-        {ends.map((end) => (
+        {ends.map((end, index) => (
           <Polyline
-            // key={index}
+            key={index}
             strokeWeight={3}
             strokeColor={'#FFA500'}
             path={[

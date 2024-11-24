@@ -6,11 +6,10 @@ import {RealEstateListingDetails} from './listing_details';
 import {RealEstateGallery} from './gallery';
 import {RealEstateIcon} from '../../../data/icons/real-estate-icon';
 
+
 import {RealEstateListing} from './types';
 
 import './custom_marker.css';
-
-
 interface Props {
   realEstateListing: RealEstateListing;
   select: RealEstateListing | null
@@ -66,8 +65,8 @@ export const CustomMarker: FunctionComponent<Props> = ({
               images={realEstateListing.images}
               isExtended={select === realEstateListing}
             />
-            <span className="icon" style={{zIndex: 0}}>
-              <RealEstateIcon />
+            <span className="icon" style={{background: "white", visibility: "visible"}}>
+              <RealEstateIcon/>
             </span>
           </div>
 

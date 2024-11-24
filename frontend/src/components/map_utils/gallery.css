@@ -12,7 +12,7 @@
     position: absolute;
     inset: 0;
     opacity: 0;
-    visibility: hidden;
+    visibility: visible;
     padding: 16px 8px;
   
     display: flex;
@@ -75,7 +75,7 @@
   
   .custom-marker .extended .gallery-navigation {
     opacity: 1;
-    visibility: hidden;
+    visibility: visible;
     
 
     transition: opacity 0.3s ease-in;

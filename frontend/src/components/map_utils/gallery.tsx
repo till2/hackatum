@@ -7,6 +7,7 @@ interface Props {
   isExtended: boolean;
 }
 
+
 export const RealEstateGallery: FunctionComponent<Props> = ({
   images,
   isExtended = false
