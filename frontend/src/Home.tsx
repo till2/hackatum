@@ -250,7 +250,6 @@ function Home() {
                         </>
                     </Template>
                 </FullpageSection>
-                {console.log(lifestyles)}
                 {loadedOnce ? (
                     <FullpageSection>
                         <Template>
