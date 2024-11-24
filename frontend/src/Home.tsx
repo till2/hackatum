@@ -18,8 +18,11 @@ import Fullpage, {
     FullPageSections,
     FullpageSection,
 } from "@ap.cx/react-fullpage";
-
+import BackgroundImage from "../assets/photos/negative-space-chicago-modern-house-2048x1365.jpg";
 import Select from 'react-select'
+import Logo from "./components/Logo.tsx";
+import MovingTUMorrowBanner from "../assets/movingtumorrow_banner_cropped.png";
+
 
 const options = [
   { value: {lat: 48.132379, lng: 11.576168}, label: 'Munich' },
@@ -187,8 +190,13 @@ function Home() {
         <Fullpage>
             <FullPageSections>
                 <FullpageSection>
-                <Template>
-                    <div style={{width: "50%", margin: "auto"}}>
+                <Template disableLogo={true}>
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+                    
+                    <div style={{width: "50%", display: "flex", flexDirection: "row", justifyContent: "center", minWidth: "10rem", margin: "0 0 0 300px"}}>
+                        <div style={{width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+                            <img src={MovingTUMorrowBanner} alt="Logo" style={{width: "100%", height: "100%", margin: "0 0 0 0", transform: "translateY(-200px)"}} />
+                        <h1 style={{fontSize: "3rem", margin: "0 0 1rem 0", transform: "translateY(-100px)", width: "900px", textAlign: "center"}}>What is the city of your dreams? ✨ </h1>
                         <Select defaultValue={options[0]} options={options} styles={{
                                     control: (baseStyles, state) => ({
                                         ...baseStyles,
@@ -197,6 +205,8 @@ function Home() {
                                         height: '80px',
                                         // justifyItems: 'center',
                                         // margin: "auto",
+                                        minWidth: "40rem",
+                                        transform: "translateY(-100px)"
                                     }),
                                     menu: (provided) => ({
                                         ...provided,
@@ -206,18 +216,34 @@ function Home() {
                                         // display: "flex",
                                         // // justifyContent: "center"
                                         // alignitems: 'center'
+                                        transform: "translateY(-100px)"
                                     }),
                                 }}
                                 onChange={(choice) => setStartLocation(choice.value)}/>
 
-
+                                </div>
+                    </div>
+                    <div style={{
+                        width: "100%",
+                        height: "89vh",
+                        overflow: "hidden"
+                    }}>
+                        <img src={BackgroundImage} alt="Background" style={{
+                        width: "100%",
+                        height: "100%",
+                        margin: "0 0 0 100px",
+                        /* cut image diagonally */
+                        clipPath: "polygon(20% 0, 100% 0, 100% 100%, 0 100%)",
+                    }} />
+                    </div>
                     </div>
                 </Template>
                 </FullpageSection>
                 <FullpageSection>
-                    <Template>
+                    <Template disableLogo={false}>
                         <>
                             <div className="centering">
+                            <h1 style={{fontSize: "3rem", margin: "0 0 1rem 0", textAlign: "center"}}>Tell us about yourself! <br/> What are your hobbies? How do you spent time with family?</h1>
                                 <form
                                     onSubmit={(e) => {
                                         e.preventDefault();
@@ -290,7 +316,7 @@ function Home() {
                 </FullpageSection>
                 {loadedOnce ? (
                     <FullpageSection>
-                        <Template>
+                        <Template disableLogo={false}>
                             <div>
                                 <form
                                     onSubmit={(e) => {
