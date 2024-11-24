@@ -68,6 +68,7 @@ async def lifeplanner_request(request: Request, input: TextInput):
             "facts": facts,
             "fact_categories": fact_categories,
             "emojis": emojis,
+            "housing_facts": housing_facts,
         }
     except Exception as e:
         return {"error": str(e)}

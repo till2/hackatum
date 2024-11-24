@@ -60,11 +60,13 @@ function Home() {
                 setTimeout(resolve, 1000),
             ); /* Wait for 1 second */
 
+            console.log("Data ", data);
             setLifestyles(data.lifestyles);
             setFacts(data.facts);
             setFactCategories(data.fact_categories);
             setEmojis(data.emojis);
             setHousingFacts(data.housing_facts);
+
         } catch (error) {
             console.error("Error transforming text:", error);
         } finally {
