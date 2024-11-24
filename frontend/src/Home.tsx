@@ -30,6 +30,7 @@ const options = [
 function Home() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [loadedOnce, setLoadedOnce] = useState<boolean>(false);
 
     const [inputText, setInputText] = useState<string>("");
 
@@ -79,6 +80,7 @@ function Home() {
             setFactCategories(data.fact_categories);
             setEmojis(data.emojis);
             setHousingFacts(data.housing_facts);
+            setLoadedOnce(true)
         } catch (error) {
             console.error("Error transforming text:", error);
         } finally {
@@ -286,7 +288,7 @@ function Home() {
                         </>
                     </Template>
                 </FullpageSection>
-                {Object.keys(lifestyles).length !== 0 ? (
+                {loadedOnce ? (
                     <FullpageSection>
                         <Template>
                             <div>
