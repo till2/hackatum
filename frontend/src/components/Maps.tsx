@@ -338,9 +338,9 @@ const MakeLines = ({
 }) => {
   return (
       <>
-          {ends.map((end) => (
+          {ends.map((end, index) => (
               <Polyline
-                  // key={index}
+                  key={index}
                   strokeWeight={3}
                   strokeColor={"#FFA500"}
                   path={[center, end]}
