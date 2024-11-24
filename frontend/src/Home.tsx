@@ -15,8 +15,7 @@ import {
 } from "./types.ts";
 import classNames from "classnames";
 import Fullpage, {
-    FullPageSections,
-    FullpageSection,
+    FullPageSections, FullpageSection,
 } from "@ap.cx/react-fullpage";
 
 function Home() {
@@ -64,7 +63,6 @@ function Home() {
                 setTimeout(resolve, 1000),
             ); /* Wait for 1 second */
 
-            console.log("Data ", data);
             setLifestyles(data.lifestyles);
             setFacts(data.facts);
             setFactCategories(data.fact_categories);
