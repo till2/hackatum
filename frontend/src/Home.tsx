@@ -77,12 +77,14 @@ function Home() {
             <div>
                 <div className="centering">
                     <form onSubmit={handleTextSubmit}>
-                        <textarea
-                            className="textarea"
-                            value={inputText}
-                            onChange={(e) => setInputText(e.target.value)}
-                            placeholder="Enter prompt for AI 🔥"
-                        />
+                        <div className="textareaContainer">
+                            <textarea
+                                className="textarea"
+                                value={inputText}
+                                onChange={(e) => setInputText(e.target.value)}
+                                placeholder="Enter prompt for AI 🔥"
+                            />
+                        </div>
                         <button type="submit" className="button">
                             {isLoading ? <Loading /> : "Submit Text 🚀"}
                         </button>
