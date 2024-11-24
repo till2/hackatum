@@ -75,8 +75,8 @@ function Home() {
         "Find your forever home in just 5 minutes... 🏡",
         "The home you always imagined is just 5 decisions away... 💫",
         "Discover which home best fits to your lifestyle before lunchtime... 🌴",
-        "Explore your future home in... 🚀",
-        "Discover where you can put down your roots in 3 easy steps... 🫚",
+        "Explore your future home in less than 7 minutes... 🚀",
+        "Discover where you can put down your roots in 3 easy steps... 🎋",
         "Your dream home is just 10 clicks away... 🌟",
     ];
 
@@ -101,7 +101,7 @@ function Home() {
     const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (event.shiftKey && event.key === "Enter") {
             event.preventDefault();
-            handleTextSubmit()
+            handleTextSubmit();
         }
     };
 
@@ -109,7 +109,12 @@ function Home() {
         <Template>
             <div>
                 <div className="centering">
-                    <form onSubmit={(e) => {e.preventDefault(); handleTextSubmit()}}>
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            handleTextSubmit();
+                        }}
+                    >
                         <div className="textareaContainer">
                             <textarea
                                 className="textarea"
@@ -120,7 +125,7 @@ function Home() {
                             />
                         </div>
                         <button type="submit" className="button">
-                            {isLoading ? <Loading /> : "Submit Text 🚀"}
+                            {isLoading ? <Loading /> : "Find the home to your lifestyle 🚀"}
                         </button>
                     </form>
                 </div>
