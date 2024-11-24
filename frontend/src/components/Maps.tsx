@@ -98,6 +98,9 @@ const MarkerHandler = ({
 
   useEffect(() => {
       setPlaceOfInterest_([placesOfInterest]);
+  }, []);
+  useEffect(() => {
+      setPlaceOfInterest_([placesOfInterest]);
   }, [placesOfInterest]);
 
   useEffect(() => {
