@@ -19,6 +19,14 @@ import Fullpage, {
     FullpageSection,
 } from "@ap.cx/react-fullpage";
 
+import Select from 'react-select'
+
+const options = [
+  { value: {lat: 48.132379, lng: 11.576168}, label: 'Munich' },
+  { value: {lat: 50.11655996176288, lng: 8.678104088043295}, label: 'Frankfurt' },
+  { value: {lat: 52.51258040821299, lng: 13.421978545254927}, label: 'Berlin' }
+]
+
 function Home() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -33,6 +41,8 @@ function Home() {
     const [factCategories, setFactCategories] = useState<DictFactCategories>(
         {},
     );
+
+    const [startLocation, setStartLocation] = useState({lat: 48.132379, lng: 11.576168})
 
     const [emojis, setEmojis] = useState<DictEmojis>({});
 
@@ -177,6 +187,34 @@ function Home() {
         <Fullpage>
             <FullPageSections>
                 <FullpageSection>
+                <Template>
+                    <div style={{width: "50%", margin: "auto"}}>
+                        <Select defaultValue={options[0]} options={options} styles={{
+                                    control: (baseStyles, state) => ({
+                                        ...baseStyles,
+                                        borderColor: state.isFocused ? 'grey' : 'orange',
+                                        // width: '50%',
+                                        height: '80px',
+                                        // justifyItems: 'center',
+                                        // margin: "auto",
+                                    }),
+                                    menu: (provided) => ({
+                                        ...provided,
+                                        // background: 'transparent',
+                                        // width: '50%',
+                                        // margin: "auto",
+                                        // display: "flex",
+                                        // // justifyContent: "center"
+                                        // alignitems: 'center'
+                                    }),
+                                }}
+                                onChange={(choice) => setStartLocation(choice.value)}/>
+
+
+                    </div>
+                </Template>
+                </FullpageSection>
+                <FullpageSection>
                     <Template>
                         <>
                             <div className="centering">
@@ -309,6 +347,7 @@ function Home() {
                                     factCategories={factCategories}
                                     dictFacts={facts}
                                     housingFacts={housingFacts}
+                                    startLocation={startLocation}
                                 />
                             </div>
                         </Template>

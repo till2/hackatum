@@ -1,0 +1,73 @@
+[
+    {
+        "education": ["TUM"],
+        "family": ["kindergarten", "school"],
+        "work": [],
+        "hobbies": ["bouldering", "swimming"],
+        "lifestyle": ["supermarket", "restaurant", "gym"]
+    },
+    {
+        "education": ["LMU"],
+        "family": [],
+        "work": ["Google Munich"],
+        "hobbies": ["cycling", "jogging"],
+        "lifestyle": ["cafe", "bar", "fitness center"]
+    },
+    {
+        "education": [],
+        "family": ["elementary school", "high school"],
+        "work": ["Microsoft Munich"],
+        "hobbies": ["reading", "painting"],
+        "lifestyle": ["park", "library", "shopping mall"]
+    },
+    {
+        "education": ["Hochschule München"],
+        "family": ["nursery", "school"],
+        "work": [],
+        "hobbies": ["hiking", "yoga"],
+        "lifestyle": ["pharmacy", "bakery", "cinema"]
+    },
+    {
+        "education": [],
+        "family": [],
+        "work": ["BMW Group"],
+        "hobbies": ["gardening", "rock climbing"],
+        "lifestyle": ["spa", "organic store", "marketplace"]
+    },
+    {
+        "education": ["Munich Business School"],
+        "family": ["preschool", "elementary school"],
+        "work": [],
+        "hobbies": ["photography", "jogging"],
+        "lifestyle": ["restaurant", "theater", "lake"]
+    },
+    {
+        "education": [],
+        "family": ["childcare", "high school"],
+        "work": ["Apple Munich"],
+        "hobbies": ["tennis", "volunteering"],
+        "lifestyle": ["zoo", "bookstore", "brewery"]
+    },
+    {
+        "education": ["LMU"],
+        "family": [],
+        "work": [],
+        "hobbies": ["birdwatching", "sketching"],
+        "lifestyle": ["community gym", "art gallery", "forest trail"]
+    },
+    {
+        "education": [],
+        "family": ["middle school", "university"],
+        "work": ["Intel Munich"],
+        "hobbies": ["soccer", "running"],
+        "lifestyle": ["cocktail lounge", "city garden", "climbing wall"]
+    },
+    {
+        "education": ["TUM"],
+        "family": [],
+        "work": [],
+        "hobbies": ["fishing", "piano playing"],
+        "lifestyle": ["nightclub", "riverfront", "cultural center"]
+    }
+    
+]
