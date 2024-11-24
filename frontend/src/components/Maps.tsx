@@ -234,7 +234,7 @@ async function QueryPlaces(lib, key, value, startLocation) {
         fields: ["displayName", "location", "formattedAddress"],
         locationBias: startLocation,
         language: "en-US",
-        maxResultCount: 32,
+        maxResultCount: 16,
         region: "de",
         useStrictTypeFiltering: false,
     };

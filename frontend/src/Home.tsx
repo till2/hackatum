@@ -23,7 +23,6 @@ import Select from 'react-select'
 import Logo from "./components/Logo.tsx";
 import MovingTUMorrowBanner from "../assets/movingtumorrow_banner_cropped.png";
 
-
 const options = [
   { value: {lat: 48.132379, lng: 11.576168}, label: 'Munich' },
   { value: {lat: 50.11655996176288, lng: 8.678104088043295}, label: 'Frankfurt' },
@@ -185,6 +184,7 @@ function Home() {
             handleTextSubmit();
         }
     };
+    
 
     return (
         <Fullpage>
@@ -205,7 +205,7 @@ function Home() {
                                         height: '80px',
                                         // justifyItems: 'center',
                                         // margin: "auto",
-                                        minWidth: "40rem",
+                                        minWidth: "48rem",
                                         transform: "translateY(-100px)"
                                     }),
                                     menu: (provided) => ({

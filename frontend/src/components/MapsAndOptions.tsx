@@ -10,6 +10,8 @@ import {
 } from "../types.ts";
 import { useEffect, useState } from "react";
 import { PlaceOfInterest_ } from "./map_utils/types.tsx";
+import ChatBot from 'react-chatbotify'
+import "./chatbot.css"
 
 const MapsAndOptions = ({
     setInputText,
@@ -60,10 +62,39 @@ const MapsAndOptions = ({
         lifestyle: [],
     });
 
+
+    const flow = {
+        "start": {
+          "message": "Hello! \nI am TumTum, your friendly personal assistant. Would you like to do some brainstorming to make sure your next home is really perfect? \nOr do you need help with understanding some obscure admninistrative detail? The German bureaucracy can be a bit of a maze, but I'm here to help you navigate it!",
+        }
+      }
+
     useEffect(() => {
         console.log("Housing Facts ", housingFacts);
         setPlacesofInterest(convertToPlaceOfInterest(housingFacts));
     }, [housingFacts]);
+
+    const input = document.getElementsByTagName("input")[0];
+
+// focus on the input element
+    input.focus();
+
+    // add event listeners to the input element
+    input.addEventListener('keypress', (event) => {
+    console.log("You have pressed key: ", event.key);
+    });
+
+    input.addEventListener('keydown', (event) => {
+    console.log(`key: ${event.key} has been pressed down`);
+    });
+
+    input.addEventListener('keyup', (event) => {
+    console.log(`key: ${event.key} has been released`);
+    });
+
+    console.log("ddd")
+    // dispatch keyboard events
+    input.dispatchEvent(new KeyboardEvent('keydown',  {'key':'e'}));
     return (
         <div className="mapsAndOptions">
             <Maps placesOfInterest={placesOfInterest} startLocation={startLocation}/>
@@ -75,7 +106,9 @@ const MapsAndOptions = ({
                 dictFacts={dictFacts}
                 housingFacts={housingFacts}
             />
+        <ChatBot flow={flow}/>
         </div>
+        
     );
 };
 export default MapsAndOptions;
