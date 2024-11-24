@@ -1,9 +1,44 @@
-import "./Blog.css";
-import "./components/Accordion.css";
-import Template from "./Template";
-import BlogEntry from "./components/BlogEntry";
+import React, { useState, MouseEvent, useRef, useEffect } from 'react';
+import './Blog.css';
+import './components/Accordion.css';
+import Template from './Template';
+import BlogEntry from './components/BlogEntry';
 
-function Blog() {
+const Blog: React.FC = () => {
+    const [isHovered, setIsHovered] = useState<boolean>(false);
+    const [isRotating, setIsRotating] = useState<boolean>(false);
+    const imgRef = useRef<HTMLImageElement>(null);
+
+    const handleMouseEnter = (event: MouseEvent<HTMLImageElement>) => {
+        setIsHovered(true);
+        if (!isRotating) {
+            setIsRotating(true);
+        }
+    };
+
+    const handleMouseLeave = (event: MouseEvent<HTMLImageElement>) => {
+        setIsHovered(false);
+    };
+
+    const handleAnimationEnd = () => {
+        if (!isHovered) {
+            setIsRotating(false);
+        }
+    };
+
+    useEffect(() => {
+        const imgElement = imgRef.current;
+        if (imgElement) {
+            imgElement.addEventListener('animationend', handleAnimationEnd);
+        }
+
+        return () => {
+            if (imgElement) {
+                imgElement.removeEventListener('animationend', handleAnimationEnd);
+            }
+        };
+    }, [isHovered]);
+
     return (
         <Template>
             <div className="blogContainer">
@@ -15,8 +50,11 @@ function Blog() {
                                 <div className="blogEntryContent">
                                     <img
                                         src="../../assets/dog.png"
-                                        alt="Merle (Dog)"
-                                        style={{ width: "80px", height: "auto", padding: "25px", borderRadius: "8px" }}
+                                        alt="Dog"
+                                        ref={imgRef}
+                                        className={`dog-blog-image ${isRotating ? 'continuous-rotate' : ''}`}
+                                        onMouseEnter={handleMouseEnter}
+                                        onMouseLeave={handleMouseLeave}
                                     />
                                     <div className="blogText">
                                         <p style={{ paddingTop: "20px" }}>
@@ -160,6 +198,6 @@ function Blog() {
             </div>
         </Template>
     );
-}
+};
 
 export default Blog;
