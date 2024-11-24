@@ -2,7 +2,7 @@ import "./Home.css";
 import "./components/Accordion.css";
 import Accordion from "./components/Accordion";
 import Template from "./Template";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Loading from "./components/Loading";
 import { API_BASE_URL } from "./config";
 import MapsAndOptions from "./components/MapsAndOptions";
@@ -13,6 +13,7 @@ import {
     DictHousingFacts,
     DictFactCategories,
 } from "./types.ts";
+import classNames from "classnames";
 
 function Home() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -32,8 +33,7 @@ function Home() {
 
     const [housingFacts, setHousingFacts] = useState<DictHousingFacts>({});
 
-    const handleTextSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const handleTextSubmit = async () => {
         setIsLoading(true);
         // setOutputText("");
 
@@ -72,21 +72,75 @@ function Home() {
         }
     };
 
+    const placeholders = [
+        "Find your forever home in just 5 minutes... 🏡",
+        "The home you always imagined is just 5 decisions away... 💫",
+        "Discover which home best fits to your lifestyle before lunchtime... 🌴",
+        "Explore your future home in less than 7 minutes... 🚀",
+        "Discover where you can put down your roots in 3 easy steps... 🎋",
+        "Your dream home is just 10 clicks away... 🌟",
+    ];
+
+    const generateRandomNumber = (min: number, max: number) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+
+    const [placeholder, setPlaceholder] = useState(
+        placeholders[generateRandomNumber(0, placeholders.length - 1)],
+    );
+
+    const [fadeClass, setFadeClass] = useState<string>("fade-in");
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setFadeClass("fade-out");
+            setTimeout(() => {
+                setPlaceholder(
+                    (prev) => {
+                        const currentIndex = placeholders.indexOf(prev);
+                        const nextIndex = (currentIndex + 1) % placeholders.length
+                        return placeholders[nextIndex];
+                    }
+                );
+                setFadeClass("fade-in");
+            }, 500);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, [placeholders.length]);
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (event.shiftKey && event.key === "Enter") {
+            event.preventDefault();
+            handleTextSubmit();
+        }
+    };
+
     return (
         <Template>
             <div>
                 <div className="centering">
-                    <form onSubmit={handleTextSubmit}>
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            handleTextSubmit();
+                        }}
+                    >
                         <div className="textareaContainer">
                             <textarea
-                                className="textarea"
+                                className={classNames("textarea", fadeClass)}
                                 value={inputText}
                                 onChange={(e) => setInputText(e.target.value)}
-                                placeholder="Enter prompt for AI 🔥"
+                                placeholder={placeholder}
+                                onKeyDown={handleKeyDown}
                             />
                         </div>
                         <button type="submit" className="button">
-                            {isLoading ? <Loading /> : "Submit Text 🚀"}
+                            {isLoading ? (
+                                <Loading />
+                            ) : (
+                                "Find the home to your lifestyle 🚀"
+                            )}
                         </button>
                     </form>
                 </div>
