@@ -25,11 +25,13 @@ import { PoiMarker } from "./map_utils/poi_marker";
 
 import "./Maps.css";
 
-const Maps = ({ placesOfInterest }: { placesOfInterest: PlaceOfInterest_ }) => {
+const Maps = ({ placesOfInterest, startLocation }: { placesOfInterest: PlaceOfInterest_, startLocation: google.maps.LatLngLiteral}) => {
+    useEffect(() => {}, [startLocation]);
     return (
+
         <div className="custom-marker">
             <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-                <MarkerHandler placesOfInterest={placesOfInterest} />
+                <MarkerHandler placesOfInterest={placesOfInterest} startLocation={startLocation}/>
             </APIProvider>
         </div>
     );
@@ -54,8 +56,9 @@ export async function loadRealEstateListing(): Promise<RealEstateListing[]> {
 
 const MarkerHandler = ({
     placesOfInterest,
+    startLocation
 }: {
-    placesOfInterest: PlaceOfInterest_;
+    placesOfInterest: PlaceOfInterest_, startLocation: google.maps.LatLngLiteral;
 }) => {
     const [select, setSelect] = useState<RealEstateListing | null>(null);
     const [selectPOI, setSelectPOI] = useState<PlaceOfInterest | null>(null);
@@ -85,7 +88,7 @@ const MarkerHandler = ({
 
     useEffect(() => {
         if (!places || !map) return;
-        FindPlaces(places, placeOfInterest_[0], setPlaceOfInterest);
+        FindPlaces(places, placeOfInterest_[0], setPlaceOfInterest, startLocation);
     }, [placeOfInterest_, placesOfInterest, places, map]);
 
     useEffect(() => {}, [select]);
@@ -100,10 +103,8 @@ const MarkerHandler = ({
                         overflow: "hidden",
                         marginTop: "5px",
                     }}
-                    defaultCenter={{
-                        lat: realEstateListings[0].details.latitude,
-                        lng: realEstateListings[0].details.longitude,
-                    }}
+                    defaultCenter={startLocation}
+                    // center={startLocation}
                     defaultZoom={15}
                     gestureHandling={"greedy"}
                     mapId="DEMO_MAP_ID"
@@ -170,9 +171,10 @@ async function FindPlaces(
     lib,
     query: PlaceOfInterest_,
     seter: React.Dispatch<React.SetStateAction<PlaceOfInterest[]>>,
+    startLocation: google.maps.LatLngLiteral,
 ) {
     query.education.forEach((q) => {
-        QueryPlaces(lib, "education", q).then((places) => {
+        QueryPlaces(lib, "education", q, startLocation).then((places) => {
             if (places)
                 seter((old_state) => {
                     return [...old_state, ...places];
@@ -180,7 +182,7 @@ async function FindPlaces(
         });
     });
     query.work.forEach((q) => {
-        QueryPlaces(lib, "work", q).then((places) => {
+        QueryPlaces(lib, "work", q, startLocation).then((places) => {
             if (places)
                 seter((old_state) => {
                     return [...old_state, ...places];
@@ -188,7 +190,7 @@ async function FindPlaces(
         });
     });
     query.lifestyle.forEach((q) => {
-        QueryPlaces(lib, "lifestyle", q).then((places) => {
+        QueryPlaces(lib, "lifestyle", q, startLocation).then((places) => {
             if (places)
                 seter((old_state) => {
                     return [...old_state, ...places];
@@ -196,7 +198,7 @@ async function FindPlaces(
         });
     });
     query.family.forEach((q) => {
-        QueryPlaces(lib, "family", q).then((places) => {
+        QueryPlaces(lib, "family", q, startLocation).then((places) => {
             if (places)
                 seter((old_state) => {
                     return [...old_state, ...places];
@@ -205,7 +207,7 @@ async function FindPlaces(
     });
 
     query.hobbies.forEach((q) => {
-        QueryPlaces(lib, "hobbies", q).then((places) => {
+        QueryPlaces(lib, "hobbies", q, startLocation).then((places) => {
             if (places)
                 seter((old_state) => {
                     return [...old_state, ...places];
@@ -215,11 +217,11 @@ async function FindPlaces(
 }
 
 //@ts-ignore
-async function QueryPlaces(lib, key, value) {
+async function QueryPlaces(lib, key, value, startLocation) {
     const request = {
         textQuery: value,
         fields: ["displayName", "location", "formattedAddress"],
-        locationBias: { lat: 48.132379, lng: 11.57 },
+        locationBias: startLocation,
         language: "en-US",
         maxResultCount: 2,
         region: "de",

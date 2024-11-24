@@ -18,6 +18,7 @@ const MapsAndOptions = ({
     factCategories,
     dictFacts,
     housingFacts,
+    startLocation
 }: {
     setInputText: React.Dispatch<React.SetStateAction<string>>;
     lifestyles: DictLifestyle;
@@ -25,6 +26,7 @@ const MapsAndOptions = ({
     factCategories: DictFactCategories;
     dictFacts: DictFacts;
     housingFacts: DictHousingFacts;
+    startLocation: google.maps.LatLngLiteral;
 }) => {
 
     function convertToPlaceOfInterest(obj: {
@@ -64,7 +66,7 @@ const MapsAndOptions = ({
     }, [housingFacts]);
     return (
         <div className="mapsAndOptions">
-            <Maps placesOfInterest={placesOfInterest} />
+            <Maps placesOfInterest={placesOfInterest} startLocation={startLocation}/>
             <Options
                 setInputText={setInputText}
                 lifestyles={lifestyles}
