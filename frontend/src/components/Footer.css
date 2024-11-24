@@ -1,0 +1,12 @@
+.footer {
+    justify-self: flex-end;
+    display: flex;
+    justify-content: center;
+    background-color: var(--fourth-color);
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+    padding: 0px;
+    padding-top: 5px;
+    gap: 2rem; /* Space between logos */
+}

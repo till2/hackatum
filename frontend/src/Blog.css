@@ -1,0 +1,69 @@
+.blogContainer {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.blog {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.blog h1 {
+    margin-bottom: 2rem;
+}
+
+.blog ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.blog li {
+    margin-bottom: 2rem;
+}
+
+.blogEntry p {
+    padding-left: 1rem;
+    margin: 0;
+    text-align: left;
+}
+
+.blogEntry img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 0.1rem auto 1rem;
+}
+
+.dog-blog-image {
+    transition: transform 2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-origin: 50% 50%;
+}
+
+.dog-blog-image.continuous-rotate {
+    animation: rotate 2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Optional: Ensuring smooth transition when rotation stops */
+.dog-blog-image:not(.continuous-rotate) {
+    /* Retain the last transformed state or reset smoothly */
+    transform: rotate(0deg);
+}

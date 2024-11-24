@@ -1,0 +1,9 @@
+.mapsAndOptions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    height: 70vh;
+    width: 80vw;
+}
