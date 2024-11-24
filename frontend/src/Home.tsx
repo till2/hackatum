@@ -191,8 +191,8 @@ function Home() {
             <FullPageSections>
                 <FullpageSection>
                 <Template disableLogo={true}>
-                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
-                    
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", height: "100%"}}>
+
                     <div style={{width: "50%", display: "flex", flexDirection: "row", justifyContent: "center", minWidth: "10rem", margin: "0 0 0 300px"}}>
                         <div style={{width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                             <img src={MovingTUMorrowBanner} alt="Logo" style={{width: "100%", height: "100%", margin: "0 0 0 0", transform: "translateY(-200px)"}} />
@@ -224,13 +224,14 @@ function Home() {
                                 </div>
                     </div>
                     <div style={{
-                        width: "100%",
-                        height: "89vh",
+                        width: "auto",
+                        height: "100%",
+                        margin: 0,
                         overflow: "hidden"
                     }}>
                         <img src={BackgroundImage} alt="Background" style={{
-                        width: "100%",
-                        height: "100%",
+                        width: "auto",
+                        height: "85vh",
                         margin: "0 0 0 100px",
                         /* cut image diagonally */
                         clipPath: "polygon(20% 0, 100% 0, 100% 100%, 0 100%)",
