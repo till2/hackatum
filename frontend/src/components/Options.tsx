@@ -1,30 +1,70 @@
 import React, { useEffect, useRef, useState } from "react";
 import OptionsEntry from "./OptionsEntry";
 import "./Options.css";
+import {
+    DictLifestyle,
+    DictEmojis,
+    DictFactCategories,
+    DictFacts,
+    DictHousingFacts,
+} from "../types.ts";
+
+type TextAreas = {
+    id: number;
+    value: string;
+    readOnly: boolean;
+    emojis: string;
+}[];
 
 const Options = ({
     setInputText,
+    lifestyles,
+    emojis,
+    factCategories,
+    dictFacts,
+    housingFacts,
 }: {
     setInputText: React.Dispatch<React.SetStateAction<string>>;
+    lifestyles: DictLifestyle;
+    emojis: DictEmojis;
+    factCategories: DictFactCategories;
+    dictFacts: DictFacts;
+    housingFacts: DictHousingFacts;
 }) => {
-    const [textAreas, setTextAreas] = useState([
-        {
-            id: 1,
-            value: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-nostrud exercitation ullamco laboris
-nisi ut aliquip ex ea commodo consequat.
-Duis aute irure dolor in reprehenderit
-in voluptate velit esse cillum dolore eu
-fugiat nulla pariatur. Excepteur sint
-occaecat cupidatat non proident, sunt in
-culpa qui officia deserunt mollit anim
-id est laborum.
-`,
-            readOnly: true,
-        },
-        { id: 2, value: "This is text area 2", readOnly: true },
-        { id: 3, value: "This is text area 3", readOnly: true },
-    ]);
+    const [textAreas, setTextAreas] = useState<TextAreas>([]);
+
+    useEffect(() => {
+        const textAreasStart: TextAreas = [];
+        if (Object.keys(lifestyles).length === 0) {
+            return;
+        }
+        let y = 1;
+        Object.entries(lifestyles).forEach(([key, value]) => {
+            let newValue = "";
+            const numberEntries = Object.keys(value).length;
+            let i = 0;
+            let emojisArray = Object.values(emojis[y]);
+
+            Object.values(value).forEach((value) => {
+                if (i === numberEntries - 1) {
+                    newValue += value;
+                    return;
+                }
+                newValue += `${value}, `;
+                i++;
+            });
+
+            textAreasStart.push({
+                id: parseInt(key),
+                value: newValue,
+                readOnly: true,
+                emojis: emojisArray.join(""),
+            });
+            y++
+        });
+        setTextAreas(textAreasStart);
+    }, [lifestyles, emojis]);
+
     const textAreaRefs = useRef<HTMLTextAreaElement[]>([]);
     const [oldText, setOldText] = useState<string>("");
 
@@ -86,7 +126,7 @@ id est laborum.
                     {textAreas.map((textArea, index) => (
                         <li key={index}>
                             <OptionsEntry
-                                title="Test"
+                                title={textArea.emojis}
                                 toggleReadOnly={toggleReadOnly}
                                 textAreaId={textArea.id}
                                 text={textArea.value}

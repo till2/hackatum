@@ -31,7 +31,7 @@ const OptionsEntry: React.FC<OptionsEntryProps> = ({
                 <h2 className="optionsTitle">{title}</h2>
                 {readOnly ? (
                     <div>
-                        <button
+                        <button className="badButton"
                             onClick={() => {
                                 toggleReadOnly(textAreaId);
                                 setReadOnly(!readOnly);
@@ -40,13 +40,13 @@ const OptionsEntry: React.FC<OptionsEntryProps> = ({
                         >
                             Modify
                         </button>
-                        <button onClick={() => setInputText(text)}>
+                        <button className="goodButton" onClick={() => setInputText(text)}>
                             Apply
                         </button>
                     </div>
                 ) : (
                     <div>
-                        <button
+                        <button className="badButton"
                             onClick={() => {
                                 setReadOnly(!readOnly);
                                 toggleReadOnly(textAreaId);
@@ -55,7 +55,7 @@ const OptionsEntry: React.FC<OptionsEntryProps> = ({
                         >
                             Reject
                         </button>
-                        <button
+                        <button className="goodButton"
                             onClick={() => {
                                 setReadOnly(!readOnly);
                                 toggleReadOnly(textAreaId);

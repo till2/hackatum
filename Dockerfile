@@ -17,5 +17,5 @@ COPY ./backend .
 COPY --from=frontend-builder /app/frontend/dist ./static
 EXPOSE 8000
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--workers", "1", "--host", "0.0.0.0", "--port", "8000"]
 

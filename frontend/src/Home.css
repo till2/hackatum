@@ -21,7 +21,8 @@
 }
 
 .drag-drop-area:hover {
-    background-color: #353333; /* f9f9f9 */
+    background-color: #353333;
+    /* f9f9f9 */
     transform: scale(0.95);
     transition: transform 0.2s ease-in-out;
 }
@@ -49,11 +50,13 @@
         background-color: #cc2a2a;
         transform: scale(1);
     }
+
     50% {
         border-color: #ffffff;
         background-color: #282222;
         transform: scale(0.95);
     }
+
     100% {
         border-color: #ffffff;
         background-color: #0f0f0f;
@@ -62,10 +65,34 @@
 }
 
 .textarea {
+    all: unset;
     margin: 0;
-    padding: 0;
     font: inherit;
+    background: var(--third-color);
+    padding: 1rem;
+    width: 70vw;
+    border-radius: 8px;
+}
 
+.textarea::placeholder {
+    transition:
+        opacity 0.5s ease-in-out,
+        transform 0.5s ease-in-out;
+    opacity: 1;
+}
+
+.textarea.fade-out::placeholder {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.textarea.fade-in::placeholder {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.textareaContainer {
+    margin-top: 1rem;
 }
 
 .input-location {

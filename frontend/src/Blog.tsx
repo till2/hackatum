@@ -1,9 +1,44 @@
-import "./Blog.css";
-import "./components/Accordion.css";
-import Template from "./Template";
-import BlogEntry from "./components/BlogEntry";
+import React, { useState, MouseEvent, useRef, useEffect } from 'react';
+import './Blog.css';
+import './components/Accordion.css';
+import Template from './Template';
+import BlogEntry from './components/BlogEntry';
 
-function Blog() {
+const Blog: React.FC = () => {
+    const [isHovered, setIsHovered] = useState<boolean>(false);
+    const [isRotating, setIsRotating] = useState<boolean>(false);
+    const imgRef = useRef<HTMLImageElement>(null);
+
+    const handleMouseEnter = (event: MouseEvent<HTMLImageElement>) => {
+        setIsHovered(true);
+        if (!isRotating) {
+            setIsRotating(true);
+        }
+    };
+
+    const handleMouseLeave = (event: MouseEvent<HTMLImageElement>) => {
+        setIsHovered(false);
+    };
+
+    const handleAnimationEnd = () => {
+        if (!isHovered) {
+            setIsRotating(false);
+        }
+    };
+
+    useEffect(() => {
+        const imgElement = imgRef.current;
+        if (imgElement) {
+            imgElement.addEventListener('animationend', handleAnimationEnd);
+        }
+
+        return () => {
+            if (imgElement) {
+                imgElement.removeEventListener('animationend', handleAnimationEnd);
+            }
+        };
+    }, [isHovered]);
+
     return (
         <Template>
             <div className="blogContainer">
@@ -15,8 +50,12 @@ function Blog() {
                                 <div className="blogEntryContent">
                                     <img
                                         src="../../assets/dog.png"
-                                        alt="Merle (Dog)"
-                                        style={{ width: "80px", height: "auto", padding: "25px" }}
+                                        alt="Dog"
+                                        ref={imgRef}
+                                        className={`dog-blog-image ${isRotating ? 'continuous-rotate' : ''}`}
+                                        style={{ width: "80px", height: "auto", padding: "25px", borderRadius: "8px" }}
+                                        onMouseEnter={handleMouseEnter}
+                                        onMouseLeave={handleMouseLeave}
                                     />
                                     <div className="blogText">
                                         <p style={{ paddingTop: "20px" }}>
@@ -31,11 +70,29 @@ function Blog() {
                             </BlogEntry>
                         </li>
                         <li>
-                            <BlogEntry title="First Stop: Marienplatz">
+                            <BlogEntry title="[Fri @ 11:00] - Breakfast Time">
+                                <div className="blogEntryContent">
+                                    <img
+                                        src="../../assets/blog/breakfast.jpg"
+                                        alt="Team Breakfast"
+                                        style={{ minWidth: "200px", borderRadius: "8px" }}
+                                    />
+                                    <div className="blogText">
+                                        <p>
+                                            Constantin recommended this café near our place ☕️ - Nothing beats planning a hackathon 
+                                            project over fresh coffee and warm croissants. Also, we're definitely gonna need that energy later! 
+                                        </p>
+                                    </div>
+                                </div>
+                            </BlogEntry>
+                        </li>
+                        <li>
+                            <BlogEntry title="[Fri @ 13:00] - Next Stop: Marienplatz">
                                 <div className="blogEntryContent">
                                     <img
                                         src="../../assets/blog/marienplatz.jpg"
                                         alt="Marienplatz Munich"
+                                        style={{ minWidth: "150px", borderRadius: "8px" }}
                                     />
                                     <div className="blogText">
                                         <p>
@@ -48,27 +105,12 @@ function Blog() {
                             </BlogEntry>
                         </li>
                         <li>
-                            <BlogEntry title="Breakfast Time">
-                                <div className="blogEntryContent">
-                                    <img
-                                        src="../../assets/blog/breakfast.jpg"
-                                        alt="Team Breakfast"
-                                    />
-                                    <div className="blogText">
-                                        <p>
-                                            Constantin recommended this café near our place ☕️ - Nothing beats planning a hackathon 
-                                            project over fresh coffee and warm croissants. Also, we're definitely gonna need that energy later! 
-                                        </p>
-                                    </div>
-                                </div>
-                            </BlogEntry>
-                        </li>
-                        <li>
-                            <BlogEntry title="Made it to the Hackathon!">
+                            <BlogEntry title="[Fri @ 16:30] - Made it to the Hackathon!">
                                 <div className="blogEntryContent">
                                     <img
                                         src="../../assets/blog/arrival.jpg"
                                         alt="Hackathon Arrival"
+                                        style={{ width: "250px", borderRadius: "8px" }}
                                     />
                                     <div className="blogText">
                                         <p>
@@ -80,11 +122,12 @@ function Blog() {
                             </BlogEntry>
                         </li>
                         <li>
-                            <BlogEntry title="Opening Ceremony">
+                            <BlogEntry title="[Fri @ 17:00] - Opening Ceremony">
                                 <div className="blogEntryContent">
                                     <img
                                         src="../../assets/blog/opening_ceremony.jpg"
                                         alt="Opening Ceremony"
+                                        style={{ minWidth: "200px", borderRadius: "8px" }}
                                     />
                                     <div className="blogText">
                                         <p>
@@ -97,15 +140,16 @@ function Blog() {
                             </BlogEntry>
                         </li>
                         <li>
-                            <BlogEntry title="Coding Night">
+                            <BlogEntry title="[Sat @ 03:00] - Coding Night">
                                 <div className="blogEntryContent">
                                     <img
                                         src="../../assets/blog/hacking.jpg"
                                         alt="Team Hacking"
+                                        style={{ minWidth: "200px", borderRadius: "8px" }}
                                     />
                                     <div className="blogText">
                                         <p>
-                                            4 hours in and already deep into CSS formatting ☕️
+                                            A couple of hours in and already deep into CSS formatting ☕️
                                             We're setting up a basic React frontend and start exploring langgraph. 
                                             Also debugging some buttons for an hour though - send help. 
                                         </p>
@@ -114,11 +158,12 @@ function Blog() {
                             </BlogEntry>
                         </li>
                         <li>
-                            <BlogEntry title="Power Nap">
+                            <BlogEntry title="[Sat @ 05:00] - Power Nap">
                                 <div className="blogEntryContent">
                                     <img
                                         src="../../assets/blog/sleep.jpg"
                                         alt="Taking a Break"
+                                        style={{ minWidth: "200px", borderRadius: "8px" }}
                                     />
                                     <div className="blogText">
                                         <p>
@@ -130,11 +175,30 @@ function Blog() {
                                 </div>
                             </BlogEntry>
                         </li>
+                        <li>
+                            <BlogEntry title="[Sat @ 20:00] - Concert Break">
+                                <div className="blogEntryContent">
+                                    <img
+                                        src="../../assets/blog/concert.jpg"
+                                        alt="Concert Break"
+                                        style={{ minWidth: "200px", borderRadius: "8px" }}
+                                    />
+                                    <div className="blogText">
+                                        <p>
+                                            Taking a well-deserved break :) We bought tickets to a concert by ENNIO happening nearby 
+                                            and decided to take 4 hours off from coding to enjoy some epic bass. We basically spent 
+                                            our sleeping time budget for today on the concert, but it was well worth it!
+                                            Sometimes the best ideas come when you step away from the keyboard for a bit and drink some beer.
+                                        </p>
+                                    </div>
+                                </div>
+                            </BlogEntry>
+                        </li>
                     </ul>
                 </div>
             </div>
         </Template>
     );
-}
+};
 
 export default Blog;
